@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://alicetinkaya76.github.io/ita/sitemap.xml
