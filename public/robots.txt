@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://alicetinkaya76.github.io/islamic-historiography-atlas-v2/sitemap.xml

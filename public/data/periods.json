@@ -1,0 +1,394 @@
+{
+  "periods": [
+    {
+      "id": "formation",
+      "century_min": 7,
+      "century_max": 10,
+      "color": "#1565C0",
+      "schools": [
+        {
+          "id": "medina",
+          "key_scholars_ids": [
+            "AU_00037",
+            "AU_00038",
+            "AU_00044"
+          ],
+          "tr": {
+            "name": "Medine Ekolü",
+            "desc": "Hz. Peygamber'in şehri Medine, İslam tarihyazımının ilk merkezi olmuştur. Urve b. Zübeyr, İbn Şihâb ez-Zührî ve İbn İshâk gibi isimler bu ekolün öncüleridir."
+          },
+          "en": {
+            "name": "Medinan School",
+            "desc": "Medina, the city of the Prophet, became the first center of Islamic historiography. Scholars such as ʿUrwa b. al-Zubayr, Ibn Shihāb al-Zuhrī, and Ibn Isḥāq pioneered this school."
+          }
+        },
+        {
+          "id": "kufa",
+          "key_scholars_ids": [
+            "AU_00001",
+            "AU_00002"
+          ],
+          "tr": {
+            "name": "Kûfe Ekolü",
+            "desc": "Kûfe, Irak'ın en önemli ilim merkezlerinden biri olarak erken dönem tarihyazımına önemli katkılar sağlamıştır. Ebû Mihnef ve Seyf b. Ömer gibi tarihçiler bu ekolün temsilcileridir."
+          },
+          "en": {
+            "name": "Kufan School",
+            "desc": "Kufa, one of Iraq's most important centers of learning, made significant contributions to early historiography. Historians such as Abū Mikhnaf and Sayf b. ʿUmar represent this school."
+          }
+        }
+      ],
+      "genres": [
+        "siyer_megazi",
+        "genel_tarih",
+        "tabakat",
+        "sehir_tarihi"
+      ],
+      "key_scholars_ids": [
+        "AU_00044",
+        "AU_00039",
+        "AU_00045",
+        "AU_00037"
+      ],
+      "tr": {
+        "name": "Teşekkül Dönemi",
+        "subtitle": "7–10. Yüzyıl",
+        "summary": "Müslümanlarda tarih yazıcılığı, Hz. Peygamber'in hayatını konu alan siyer-meğâzî çalışmalarıyla başlamış, zamanla ensâb, tabakat ve genel tarih türlerine doğru genişlemiştir. Medine ve Kûfe bu dönemin iki temel ilim merkezi olmuştur. Taberî'nin Târîhu'l-ümem ve'l-mülûk adlı eseri, bu dönemin en kapsamlı sentez çalışması olarak öne çıkmaktadır.",
+        "detailed": "İslam tarihyazımının teşekkül dönemi, 7. yüzyılın ortalarından 10. yüzyılın sonlarına kadar uzanan yaklaşık üç asırlık bir süreyi kapsamaktadır. Bu dönemde tarih, ilahi, tabii ve insani gerçekliğin oluşturduğu tecrübeler manzumesinin toplamı olarak kaleme alınmaya başlanmıştır. Tarih yazıcılığının planı ve yöntemi ortaya konmuş ve İslam tarihçiliği kendine has metodu ile mebdei, mevzuu, mesâili ve amacı olan bir ilim dalı olarak tebellür etmiştir.\n\nMüslümanlar tarihyazımını insanlığın nasıl var olduğu, ne halde olduğu ve gelecekte ne durumda olacağı şeklinde üç tarihî hal üzerinden açıklamıştır: \"Nereden geldik?\", \"Neredeyiz?\" ve \"Nereye gidiyoruz?\" Bu yaklaşım, \"Longue durée\" bakış açısı ile yaratılıştan ahirete uzanan bütünlük üzere bir tasavvur ortaya koymuştur.\n\nMedine ekolü Hz. Peygamber'in şehri olması dolayısıyla ilk tarihî bilgilerin toplandığı merkez olmuştur. Urve b. Zübeyr (ö. 712), Eban b. Osman (ö. 723), İbn Şihâb ez-Zührî (ö. 742) ve İbn İshâk (ö. 767) bu ekolün öncü isimleridir. Kûfe ekolü ise Irak'ın siyasi ve ilmî merkezi olarak özellikle fütûhât ve ensâb alanlarında öne çıkmıştır. Ebû Mihnef (ö. 774) ve Seyf b. Ömer gibi tarihçiler bu ekolün temsilcileridir.\n\n4./10. yüzyıla geldiğimizde İslam tarih yazıcılığı dört ana tür ile bir disiplin olarak teşekkülünü gerçekleştirmiştir: (1) Siyer ve Meğâzî, (2) Genel Tarihler, (3) Hususi Tarihler (tabakât, ensâb, biyografi), (4) Şehir/Bölge Tarihleri. Bu sayede Müslümanlar dünya tarihinde tarihyazımına çağ atlatmışlardır."
+      },
+      "en": {
+        "name": "Formation Period",
+        "subtitle": "7th–10th Century",
+        "summary": "Islamic historiography began with sīra-maghāzī works on the Prophet's life, gradually expanding into genealogy, biographical dictionaries, and universal history. Medina and Kufa were the two main scholarly centers of this era. al-Ṭabarī's Tārīkh al-umam wa-l-mulūk stands as the most comprehensive synthesis of the period.",
+        "detailed": "The formation period of Islamic historiography spans roughly three centuries, from the mid-7th to the late 10th century. During this time, history began to be written as a sum of experiences constituted by divine, natural, and human realities. The plan and methodology of historical writing was established, and Islamic historiography crystallized as a discipline with its own method, subject matter, issues, and purpose.\n\nMuslims explained historiography through three historical states of humanity: how humanity came into being, its current condition, and its future state—\"Where did we come from?\", \"Where are we?\", and \"Where are we going?\" This approach presented a vision of wholeness from creation to the hereafter through a \"Longue durée\" perspective.\n\nThe Medinan school, centered in the Prophet's city, became the first hub for collecting historical information. ʿUrwa b. al-Zubayr (d. 712), Abān b. ʿUthmān (d. 723), Ibn Shihāb al-Zuhrī (d. 742), and Ibn Isḥāq (d. 767) were its pioneers. The Kufan school, as Iraq's political and scholarly center, was distinguished particularly in the fields of futūḥāt and ansāb. Abū Mikhnaf (d. 774) and Sayf b. ʿUmar represent this school.\n\nBy the 4th/10th century, Islamic historiography had completed its formation as a discipline with four main genres: (1) Sīra and Maghāzī, (2) Universal Histories, (3) Specific Histories (ṭabaqāt, ansāb, biography), and (4) City/Regional Histories. In this way, Muslims made a breakthrough in world historiography."
+      }
+    },
+    {
+      "id": "development",
+      "century_min": 11,
+      "century_max": 18,
+      "color": "#2E7D32",
+      "schools": [
+        {
+          "id": "kahire_school",
+          "key_scholars_ids": [
+            "AU_00441",
+            "AU_00429",
+            "AU_00421"
+          ],
+          "tr": {
+            "name": "Kahire Ekolü",
+            "desc": "Eyyûbî ve Memlük saray tarihçiliği, biyografik ansiklopediler (İbn Hallikân, Makrîzî, Süyûtî) ve hıtat geleneğiyle öne çıkan Mısır merkezli tarih yazıcılığı."
+          },
+          "en": {
+            "name": "Cairo School",
+            "desc": "Egypt-centered historiography distinguished by Ayyubid and Mamluk court chronicles, biographical encyclopedias (Ibn Khallikān, al-Maqrīzī, al-Suyūṭī) and the khiṭaṭ tradition."
+          }
+        },
+        {
+          "id": "istanbul_school",
+          "key_scholars_ids": [
+            "AU_02201",
+            "AU_02202"
+          ],
+          "tr": {
+            "name": "İstanbul Ekolü",
+            "desc": "Osmanlı resmî vekâyinâme geleneği, şehnâmecilik, Hoca Saadeddin-Naîmâ-Râşid çizgisinde gelişen saray tarihçiliği ve münşeat edebiyatı."
+          },
+          "en": {
+            "name": "Istanbul School",
+            "desc": "Ottoman official chronicle tradition (vekāyināme), şehnāmecilik, and court historiography developing along the Hoca Saadeddin-Naʿīmā-Rāshid line."
+          }
+        },
+        {
+          "id": "delhi_school",
+          "key_scholars_ids": [
+            "AU_00773",
+            "AU_00746"
+          ],
+          "tr": {
+            "name": "Delhi Ekolü",
+            "desc": "Delhi Sultanlığı ve Bâbürlü saray tarihçiliği: Farsça hakimiyetinde kronikler, hatıratlar (Bâbürnâme) ve tabakat eserleri."
+          },
+          "en": {
+            "name": "Delhi School",
+            "desc": "Delhi Sultanate and Mughal court historiography: chronicles in Persian, memoirs (Bāburnāme), and ṭabaqāt works."
+          }
+        },
+        {
+          "id": "isfahan_school",
+          "key_scholars_ids": [
+            "AU_00026",
+            "AU_00016"
+          ],
+          "tr": {
+            "name": "İsfahan Ekolü",
+            "desc": "Selçuklu-İlhanlı-Safevî tarih yazıcılığı: Cüveynî, Reşîdüddin ve Mîrhând gibi büyük tarihçilerin Farsça evrensel tarih geleneği."
+          },
+          "en": {
+            "name": "Isfahan School",
+            "desc": "Seljuk-Ilkhanid-Safavid historiography: the Persian universal history tradition of great historians like Juvaynī, Rashīd al-Dīn, and Mīrkhwānd."
+          }
+        }
+      ],
+      "genres": [
+        "genel_tarih",
+        "hanedan_tarihi",
+        "tabakat",
+        "cografya",
+        "seyahatname"
+      ],
+      "key_scholars_ids": [
+        "AU_00441",
+        "AU_00421",
+        "AU_00026",
+        "AU_02201",
+        "AU_00773",
+        "AU_01897"
+      ],
+      "tr": {
+        "name": "Gelişim Dönemi",
+        "subtitle": "11–18. Yüzyıl",
+        "summary": "İslam dünyasının siyasi çoğulculuğunun arttığı bu dönemde tarih yazıcılığı bölgesel hanedanlık tarihleri, kapsamlı biyografik sözlükler, coğrafya eserleri ve seyahatnameler ile zenginleşmiştir. Kahire, Bağdat, İstanbul, Delhi ve Semerkant gibi merkezler öne çıkmıştır.",
+        "detailed": "11. yüzyıldan 18. yüzyıla uzanan gelişim döneminde Müslümanlar, farklı havzalarda kurulan Osmanlı (1299-1922), Bâbürlü (1526-1858) ve Safevî (1501-1736) gibi üç büyük imparatorluk üzerinden var olan birikimi dikkate almakla yetinmemiş, ayrıca siyer ve megazî, genel, hususi ve şehir/bölge tarihleri alt kategorileri ile tarihyazım birikimine önemli bir açılım sağlamıştır.\n\nBu dönemde İran havzasında Türk ve Moğol tarih yazıcılığı gündeme gelmiştir. Abbâsîlerin zayıfladığı, İlhanlılar (1256-1353) ile Farsçanın ön plana çıktığı bu süreçte Arapçanın yanı sıra Farsça tarih yazıcılığının ikinci önemli lisanı haline gelmiştir. 16. yüzyılda Safevîlerin İran coğrafyasında siyasî istikrarı tesis etmesi, Şiî tarihyazımı perspektifinden bir yükselişi sağlamıştır.\n\nBalkanlarda ise Osmanlılar sayesinde tarih kaynakları bakımından dünyanın en şanslı bölgelerinden biri olmuştur. İstanbul Osmanlı Arşivi'nde 90 milyondan fazla belge ve yüz binlerce kayıt defterinin önemli bir kısmı bu döneme aittir.\n\nHint Alt Kıtası'nda tarih yazıcılığının Bâbürlülerle zirveye ulaştığı görülmüştür. Özellikle Ekber Şah (1556-1605) döneminden itibaren resmî tarihçiler, dönemin tarihlerini yazarak günümüze kadar ulaştırmışlardır. Bu dönemde mitolojik anlatıdan gerçekçiliğe, sözlü anlatımdan yazılı literatüre, manzum yazımdan mensur yazıma geçiş yaşanmıştır."
+      },
+      "en": {
+        "name": "Development Period",
+        "subtitle": "11th–18th Century",
+        "summary": "As political pluralism increased in the Islamic world, historiography was enriched with regional dynastic histories, comprehensive biographical dictionaries, geographical works, and travelogues. Centers such as Cairo, Baghdad, Istanbul, Delhi, and Samarkand rose to prominence.",
+        "detailed": "During the development period from the 11th to 18th century, Muslims did not merely preserve existing knowledge through three great empires—Ottoman (1299-1922), Mughal (1526-1858), and Safavid (1501-1736)—but also significantly expanded historiographical tradition through sub-categories of sīra, universal, specific, and city/regional histories.\n\nIn the Iranian basin, Turkish and Mongol historiography came to the fore. As the Abbasids weakened and the Ilkhanids (1256-1353) brought Persian to prominence, Farsi became the second major language of historical writing. The Safavid establishment of political stability in Iran in the 16th century enabled a rise in Shiʿi historiography.\n\nIn the Balkans, the Ottoman presence made the region one of the most fortunate in terms of historical sources. More than 90 million documents in Istanbul's Ottoman Archives largely belong to this period.\n\nIn the Indian Subcontinent, historiography reached its zenith with the Mughals. From Akbar's reign (1556-1605) onwards, official historians recorded the history of their era. This period saw transitions from mythological to realistic narrative, oral to written tradition, and verse to prose composition."
+      }
+    },
+    {
+      "id": "contraction",
+      "century_min": 19,
+      "century_max": 21,
+      "color": "#E65100",
+      "schools": [
+        {
+          "id": "ottoman_modernist",
+          "key_scholars_ids": [
+            "AU_02234",
+            "AU_02237",
+            "AU_02238"
+          ],
+          "tr": {
+            "name": "Osmanlı Modernist Ekolü",
+            "desc": "19. yüzyıl Osmanlı tarih yazıcılığında modern yöntemlerin benimsenmesi; biyografik ansiklopediler, arşiv temelli çalışmalar ve Batılı tarihyazım metodolojisinin İslam tarihi malzemesine uygulanması."
+          },
+          "en": {
+            "name": "Ottoman Modernist School",
+            "desc": "Adoption of modern methods in 19th-century Ottoman historiography; biographical encyclopedias, archival studies, and application of Western methodology to Islamic historical materials."
+          }
+        },
+        {
+          "id": "indian_revivalist",
+          "key_scholars_ids": [
+            "AU_00786",
+            "AU_01107"
+          ],
+          "tr": {
+            "name": "Hint İhyâ Ekolü",
+            "desc": "Sömürge döneminde Hint Alt Kıtası'nda İslam tarih yazıcılığının yeniden canlandırılması; hadis ve siyer araştırmalarının ihyâsı, oryantalizm eleştirisi."
+          },
+          "en": {
+            "name": "Indian Revival School",
+            "desc": "Revival of Islamic historiography in the Indian Subcontinent during the colonial period; renewal of hadith and sira studies, critique of Orientalism."
+          }
+        },
+        {
+          "id": "maghreb_nationalist",
+          "key_scholars_ids": [
+            "AU_01848",
+            "AU_01847"
+          ],
+          "tr": {
+            "name": "Mağrib Milliyetçi Ekolü",
+            "desc": "Kuzey Afrika'da sömürge karşıtı hareketlerle birlikte gelişen tarih yazıcılığı; yerel hanedanların ve İslam medeniyetinin savunusu, bölgesel kimlik inşası."
+          },
+          "en": {
+            "name": "Maghreb Nationalist School",
+            "desc": "Historiography developing alongside anti-colonial movements in North Africa; defense of local dynasties and Islamic civilization, construction of regional identity."
+          }
+        }
+      ],
+      "genres": [
+        "modern_arastirma",
+        "genel_tarih"
+      ],
+      "key_scholars_ids": [
+        "AU_00786",
+        "AU_01848",
+        "AU_00125",
+        "AU_01671",
+        "AU_02056"
+      ],
+      "tr": {
+        "name": "Daralma, Dönüşüm ve Çeşitlenme",
+        "subtitle": "19–20. Yüzyıl",
+        "summary": "Sömürgecilik, ulus-devlet oluşumu ve Batılı tarihyazım yöntemlerinin etkisiyle İslam dünyasında geleneksel tarihyazımı daralmış, ancak yeni yöntemler ve yaklaşımlarla dönüşüme uğramıştır. Oryantalizm eleştirisi ve İslam tarihinin yeniden yazılması bu dönemin belirleyici temaları olmuştur.",
+        "detailed": "19. ve 20. yüzyılda Avrupa'nın modernite düşüncesiyle insanın nübüvvet ve yaratıcı ile bağını kopardığı, hümanizm, rasyonalizm, sekülarizm ve ilerlemeciliğe dayalı olarak tarih yazıcılığının yeniden kurgulandığı bir dönem yaşanmıştır. Bu kurguya göre insanlık tarihi, başlangıcından günümüze sadece insanoğlunun—özellikle Batılı insanın—yapıp etmeleri ile husule gelecek şekilde organize edilmiş ve peygambersiz okunur hâle getirilmiştir.\n\nBu meydan okuma İslâm'ın tarihyazım türlerini doğrudan hedef almıştır: siyer ve megaziyi itibarsızlaştırma, genel tarih teklifini gündemden düşürme, hususi tarihleri yalnızca Batılı dönemlendirme içinde anlama ve şehir/bölge tarihlerini Avrupa merkezliğinde hesaba katma. İmparatorluklardan ulus devletlere geçişle birlikte evrensel tarihyazımından ulus devlet tarihyazımına geçiş yaşanmıştır.\n\nBu süreçte Müslüman toplumlarda ulusalcılık üzerinde bir kimlik inşası gerçekleştirilmiştir. Dört ana havzada—Mısır, İran, Balkanlar ve Hint Alt Kıtası—bu daralma ve dönüşüm kendine özgü biçimlerde tezahür etmiştir. Her havzada Müslümanlar \"öteki\"leştirilmiş, çok asırlık tarihyazımı birikimi ile bağları kopartılmıştır.\n\nAncak Macit'in isabetle belirttiği gibi, Müslümanları bu modern daralmadan kurtaracak olan yine İslam tarih yazıcılığı geleneği, tecrübesi ve birikimi olacaktır."
+      },
+      "en": {
+        "name": "Contraction, Transformation & Diversification",
+        "subtitle": "19th–20th Century",
+        "summary": "Under the impact of colonialism, nation-state formation, and Western historiographical methods, traditional Islamic historiography contracted but was also transformed by new methods and approaches. Critique of Orientalism and the rewriting of Islamic history are defining themes of this era.",
+        "detailed": "The 19th and 20th centuries saw European modernity sever humanity's connection with prophethood and the Creator, restructuring historiography based on humanism, rationalism, secularism, and progressivism. Under this framework, human history was organized as if constituted solely by the actions of humans—especially Western humans—and rendered readable without prophets.\n\nThis challenge directly targeted Islamic historiographical genres: discrediting sīra and maghāzī, dropping the universal history proposal from the agenda, understanding specific histories only within Western periodization, and accounting for city/regional histories only within European centrality. The transition from empires to nation-states brought a shift from universal to nation-state historiography.\n\nDuring this process, identity construction based on nationalism was carried out in Muslim societies. In four main basins—Egypt, Iran, the Balkans, and the Indian Subcontinent—this contraction and transformation manifested in distinctive ways. In each basin, Muslims were \"otherized\" and their centuries-old historiographical accumulation was severed.\n\nHowever, as Macit aptly notes, it will be the tradition, experience, and accumulation of Islamic historiography itself that will liberate Muslims from this modern contraction."
+      }
+    }
+  ],
+  "genre_details": [
+    {
+      "id": "siyer_megazi",
+      "key_works_ids": [],
+      "tr": {
+        "name": "Siyer ve Meğâzî",
+        "desc": "Hz. Peygamber'in hayatını ve savaşlarını konu alan eserler. İslam tarihyazımının ilk ve en önemli türüdür."
+      },
+      "en": {
+        "name": "Sīra & Maghāzī",
+        "desc": "Works on the Prophet's life and military campaigns. The first and most important genre of Islamic historiography."
+      }
+    },
+    {
+      "id": "genel_tarih",
+      "key_works_ids": [],
+      "tr": {
+        "name": "Genel Tarih",
+        "desc": "Yaratılıştan veya belirli bir başlangıçtan yazarın dönemine kadar olayları kronolojik olarak aktaran eserler."
+      },
+      "en": {
+        "name": "Universal History",
+        "desc": "Works that narrate events chronologically from creation or a given starting point to the author's own time."
+      }
+    },
+    {
+      "id": "tabakat",
+      "key_works_ids": [],
+      "tr": {
+        "name": "Tabakat / Biyografik Sözlük",
+        "desc": "Belirli bir meslek, mezhep veya dönem mensuplarının biyografilerini nesiller halinde düzenleyen eserler."
+      },
+      "en": {
+        "name": "Biographical Dictionary",
+        "desc": "Works organizing biographies of members of a profession, school, or era into generational layers."
+      }
+    },
+    {
+      "id": "hanedan_tarihi",
+      "key_works_ids": [],
+      "tr": {
+        "name": "Hanedan Tarihi",
+        "desc": "Belirli bir hanedanın tarihini anlatan eserler. Gelişim döneminde en yaygın türdür."
+      },
+      "en": {
+        "name": "Dynastic History",
+        "desc": "Works narrating the history of a particular dynasty. The most common genre of the Development period."
+      }
+    },
+    {
+      "id": "sehir_tarihi",
+      "key_works_ids": [],
+      "tr": {
+        "name": "Şehir / Bölge Tarihi",
+        "desc": "Belirli bir şehrin veya bölgenin tarihini, fethini, faziletlerini, ilim insanlarını ve mekanlarını konu alan eserler."
+      },
+      "en": {
+        "name": "City/Regional History",
+        "desc": "Works covering the history, conquest, virtues, scholars, and landmarks of a particular city or region."
+      }
+    },
+    {
+      "id": "cografya",
+      "key_works_ids": [],
+      "tr": {
+        "name": "Coğrafya",
+        "desc": "İslam dünyasının ve ötesinin fizikî, beşerî ve siyasî coğrafyasını anlatan eserler. Yunan ve Hint kaynaklarından da beslenmiştir."
+      },
+      "en": {
+        "name": "Geography",
+        "desc": "Works describing the physical, human, and political geography of the Islamic world and beyond, also drawing on Greek and Indian sources."
+      }
+    },
+    {
+      "id": "seyahatname",
+      "key_works_ids": [],
+      "tr": {
+        "name": "Seyahatname",
+        "desc": "İlim adamlarının ve seyyahların yolculuklarını, gözlemlerini ve karşılaştıkları toplulukları anlatan eserler."
+      },
+      "en": {
+        "name": "Travelogue",
+        "desc": "Works narrating the journeys, observations, and encountered communities of scholars and travelers."
+      }
+    },
+    {
+      "id": "ensab",
+      "key_works_ids": [],
+      "tr": {
+        "name": "Ensâb / Soyağacı",
+        "desc": "Arap kabilelerinin ve toplulukların soy kütüklerini, nesillerini ve akrabalık bağlarını sistematik olarak düzenleyen eserler."
+      },
+      "en": {
+        "name": "Genealogy (Ansāb)",
+        "desc": "Works systematically organizing the lineages, generations, and kinship ties of Arab tribes and communities."
+      }
+    },
+    {
+      "id": "futuh",
+      "key_works_ids": [],
+      "tr": {
+        "name": "Fütûhât",
+        "desc": "Müslümanların fetih hareketlerini, savaşlarını ve yeni toprakların İslam hakimiyetine girişini anlatan eserler."
+      },
+      "en": {
+        "name": "Conquest Narratives (Futūḥ)",
+        "desc": "Works narrating Muslim conquest movements, battles, and the incorporation of new territories under Islamic rule."
+      }
+    },
+    {
+      "id": "modern_arastirma",
+      "key_works_ids": [],
+      "tr": {
+        "name": "Modern Araştırma",
+        "desc": "19-20. yüzyılda Batılı kaynak eleştirisi yöntemleriyle kaleme alınan çağdaş tarih araştırmaları ve akademik çalışmalar."
+      },
+      "en": {
+        "name": "Modern Research",
+        "desc": "Contemporary historical research and academic studies written with Western source-critical methods in the 19th-20th centuries."
+      }
+    }
+  ],
+  "references": [
+    {
+      "citation": "Macit, A. (2024). Müslümanlarda Tarih Yazıcılığının Teşekkül Dönemi (M. 7.-10. Yüzyıllar). Trabzon İlahiyat Dergisi, 11/1, 95-120.",
+      "doi": "https://doi.org/10.33718/tid.1448396"
+    },
+    {
+      "citation": "Macit, A. (2024). İslam Dünyası Tarihçilikte Modern Daralmayı Aşabilecek mi?. TAV Rapor, Sayı 1.",
+      "isbn": "978-625-98522-4-9"
+    }
+  ],
+  "bibliography": [
+    {
+      "id": "macit_teshekkul_2024",
+      "tr": "Macit, Abdulkadir. \"Müslümanlarda Tarih Yazıcılığının Teşekkül Dönemi (M. 7.-10. Yüzyıllar)\". Trabzon İlahiyat Dergisi 11/1 (2024): 95-120.",
+      "en": "Macit, Abdulkadir. 'Formation Period of Islamic Historiography (7th-10th Centuries B.C.)'. Trabzon Theology Journal 11/1 (2024): 95-120."
+    },
+    {
+      "id": "macit_tav_2024",
+      "tr": "Macit, Abdulkadir. \"İslam Dünyası Tarihçilikte Modern Daralmayı Aşabilecek mi?\". TAV Rapor, Sayı: 1 (Kasım 2024). ISBN 978-625-98522-4-9.",
+      "en": "Macit, Abdulkadir. 'Can the Islamic World Overcome Modern Contraction in Historiography?'. TAV Report, No. 1 (November 2024)."
+    },
+    {
+      "id": "duri_2023",
+      "tr": "Dûrî, Abdülaziz. İslam Tarih Yazıcılığı Müslümanlarda Tarih İlminin Doğuşu. çev. Halil İbrahim Hançabay vd. İstanbul: AlBaraka Yayınları, 2023.",
+      "en": "al-Dūrī, ʿAbd al-ʿAzīz. The Rise of Historical Writing Among the Arabs. Trans. H.I. Hançabay et al. Istanbul: AlBaraka, 2023."
+    },
+    {
+      "id": "woolf_2014",
+      "tr": "Woolf, Daniel. Tarihin Küresel Tarihi. çev. Mehmet Moralı. İstanbul: Alfa Yayıncılık, 2014.",
+      "en": "Woolf, Daniel. A Global History of History. Istanbul: Alfa, 2014."
+    }
+  ]
+}
