@@ -10,7 +10,7 @@ interface SeoProps {
 }
 
 const SITE = 'İTA — İslam Tarihyazım Atlası';
-const BASE = 'https://alicetinkaya76.github.io/islamic-historiography-atlas-v2';
+const BASE = 'https://alicetinkaya76.github.io/ita';
 
 export default function Seo({ title, description, path }: SeoProps) {
   const full = title === SITE ? title : `${title} · İTA`;

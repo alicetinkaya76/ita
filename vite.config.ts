@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   // GitHub Pages base path — MUST match your repository name.
   // Override at build time with: VITE_BASE=/your-repo-name/ npm run build
-  base: process.env.VITE_BASE || '/islamic-historiography-atlas-v2/',
+  base: process.env.VITE_BASE || '/ita/',
   plugins: [
     react(),
     tailwindcss(),
@@ -81,8 +81,8 @@ export default defineConfig({
         theme_color: '#8B4513',
         background_color: '#FAF6F1',
         display: 'standalone',
-        start_url: '/islamic-historiography-atlas-v2/',
-        scope: '/islamic-historiography-atlas-v2/',
+        start_url: '/ita/',
+        scope: '/ita/',
         icons: [
           {
             src: 'pwa-192x192.png',
