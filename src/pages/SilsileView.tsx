@@ -1,6 +1,6 @@
 import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Fuse from 'fuse.js';
 import * as d3 from 'd3';
 import { useAuthors, useRelations, type Author, type Relation } from '../hooks/useData';
@@ -138,6 +138,7 @@ function flattenTree(root: TreeNode, direction: 'left' | 'right', centerY: numbe
 /* ── Main Component ── */
 export default function SilsileView() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { authors, loading: aLoading } = useAuthors();
   const { relations, loading: rLoading } = useRelations();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -327,7 +328,7 @@ export default function SilsileView() {
 
       if (n.authorId) {
         g.on('click', () => {
-          window.location.href = `/scholars/${n.authorId}`;
+          navigate(`/scholars/${n.authorId}`);
         });
         g.on('mouseover', function () {
           d3.select(this).select('circle').attr('r', 9).attr('stroke', accent).attr('stroke-width', 2.5);
@@ -363,10 +364,10 @@ export default function SilsileView() {
       .text(selectedAuthor?.meshur_isim || selectedSlug);
 
     if (selectedAuthor) {
-      cg.on('click', () => { window.location.href = `/scholars/${selectedAuthor.author_id}`; });
+      cg.on('click', () => { navigate(`/scholars/${selectedAuthor.author_id}`); });
     }
 
-  }, [treeData, selectedSlug, selectedAuthor, maxGen, t]);
+  }, [treeData, selectedSlug, selectedAuthor, maxGen, t, navigate]);
 
   if (aLoading || rLoading) return <div className="loading-screen">{t('common.loading')}</div>;
 
