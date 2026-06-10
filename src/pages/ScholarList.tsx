@@ -4,6 +4,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import Fuse from 'fuse.js';
 import { useAuthors } from '../hooks/useData';
 import { HAVZA_COLORS, HAVZA_ORDER } from '../utils/colors';
+import { deathYears } from '../utils/dates';
 import ExportButton from '../components/ui/ExportButton';
 import VirtualTable from '../components/ui/VirtualTable';
 import FilterChips from '../components/ui/FilterChips';
@@ -147,7 +148,7 @@ export default function ScholarList() {
               <div className="mcard-body">
                 <div className="mcard-name">{a.meshur_isim}</div>
                 <div className="mcard-meta">
-                  <span>{a.vefat_yili_m || '?'}</span>
+                  <span>{deathYears(a, t)}</span>
                   <span className="mcard-sep">·</span>
                   <span>{a.sehir || '—'}</span>
                 </div>

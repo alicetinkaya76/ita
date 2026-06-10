@@ -100,7 +100,8 @@
     "dynasty": "Hanedan",
     "city": "Yazılma Şehri",
     "havza": "Havza",
-    "description": "Tanıtım"
+    "description": "Tanıtım",
+    "related": "İlgili Eserler"
   },
   "dashboard": {
     "title": "İslam Tarihyazım Atlası",
@@ -124,7 +125,13 @@
     "filter": "Filtrele",
     "all": "Tümü",
     "more": "daha",
-    "export": "Dışa Aktar"
+    "export": "Dışa Aktar",
+    "h_short": "h.",
+    "m_short": "m.",
+    "cite": "Atıf",
+    "copy": "Kopyala",
+    "copied": "Kopyalandı ✓",
+    "download": "İndir"
   },
   "map": {
     "geocoded": "konumlandırıldı",

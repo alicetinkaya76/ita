@@ -100,7 +100,8 @@
     "dynasty": "Dynasty",
     "city": "City of Composition",
     "havza": "Region",
-    "description": "Description"
+    "description": "Description",
+    "related": "Related Works"
   },
   "dashboard": {
     "title": "Atlas of Islamic Historiography",
@@ -124,7 +125,13 @@
     "filter": "Filter",
     "all": "All",
     "more": "more",
-    "export": "Export"
+    "export": "Export",
+    "h_short": "AH",
+    "m_short": "CE",
+    "cite": "Cite",
+    "copy": "Copy",
+    "copied": "Copied ✓",
+    "download": "Download"
   },
   "map": {
     "geocoded": "geocoded",

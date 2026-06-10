@@ -5,6 +5,7 @@ import Fuse from 'fuse.js';
 import { useAuthors, useWorks, usePeriods, useHistoriography, type Author, type Work } from '../hooks/useData';
 import { HAVZA_COLORS, TYPE_COLORS, PERIOD_COLORS } from '../utils/colors';
 import { prefetchRoute, prefetchChunk } from '../utils/prefetch';
+import { deathYears, hasDeathYear } from '../utils/dates';
 
 /* Pages reachable from the palette (mirrors the navbar routes). */
 const PAGES: { key: string; path: string }[] = [
@@ -155,7 +156,7 @@ export default function CommandPalette() {
           group: 'scholars',
           kind: 'entity',
           label: a.meshur_isim,
-          meta: `${t(`havza_names.${a.havza}`)}${a.vefat_yili_m ? ` · ö. ${a.vefat_yili_m}` : ''}`,
+          meta: `${t(`havza_names.${a.havza}`)}${hasDeathYear(a) ? ` · ö. ${deathYears(a, t)}` : ''}`,
           color: HAVZA_COLORS[a.havza] || '#999',
           prefetch: () => prefetchChunk('scholarDetail'),
           run: () => navigate(`/scholars/${a.author_id}`, { viewTransition: true }),

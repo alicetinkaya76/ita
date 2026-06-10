@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuthors, useWorks, useRelations, usePeriods } from '../hooks/useData';
 import { PERIOD_COLORS, getPeriodId, HAVZA_COLORS } from '../utils/colors';
+import { deathYears, hasDeathYear } from '../utils/dates';
 import * as d3 from 'd3';
 
 interface PeriodStats {
@@ -197,7 +198,7 @@ export default function Periodization() {
                     <Link key={sc.author_id} to={`/scholars/${sc.author_id}`} className="scholar-chip-mini">
                       <span className="chip-dot" style={{ background: HAVZA_COLORS[sc.havza] }} />
                       <span>{sc.meshur_isim}</span>
-                      {sc.vefat_yili_m && <span className="chip-year">ö. {sc.vefat_yili_m}</span>}
+                      {hasDeathYear(sc) && <span className="chip-year">ö. {deathYears(sc, t)}</span>}
                     </Link>
                   ))}
                 </div>

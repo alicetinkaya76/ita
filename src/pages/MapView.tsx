@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, GeoJSON, CircleMarker, Popup } from 'react-leaflet';
 import type { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { deathYears, hasDeathYear } from '../utils/dates';
 import { useAuthors, useCityCoords, useHavzaGeo, type Author, type CityCoords } from '../hooks/useData';
 import { HAVZA_COLORS, HAVZA_COLORS_LIGHT, HAVZA_ORDER, PERIOD_COLORS, PERIOD_RANGES } from '../utils/colors';
 
@@ -212,7 +213,7 @@ export default function MapView() {
                       {c.authors.slice(0, 6).map(a => (
                         <Link key={a.author_id} to={`/scholars/${a.author_id}`} className="popup-scholar-link">
                           {a.meshur_isim}
-                          {a.vefat_yili_m ? <span className="popup-death"> (ö. {a.vefat_yili_m})</span> : ''}
+                          {hasDeathYear(a) ? <span className="popup-death"> (ö. {deathYears(a, t)})</span> : ''}
                         </Link>
                       ))}
                       {c.authors.length > 6 && (
@@ -244,7 +245,7 @@ export default function MapView() {
                 <div>
                   <div className="map-sidebar-name">{a.meshur_isim}</div>
                   <div className="map-sidebar-sub">
-                    {a.vefat_yili_m ? `ö. ${a.vefat_yili_m}` : ''} · {a.eser_sayisi} {t('common.work_count')}
+                    {hasDeathYear(a) ? `ö. ${deathYears(a, t)}` : ''} · {a.eser_sayisi} {t('common.work_count')}
                   </div>
                 </div>
               </Link>

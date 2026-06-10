@@ -2145,3 +2145,30 @@ html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3 {
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
 }
+
+/* ===== Cite button (detail pages) ===== */
+.detail-actions { display: flex; gap: 8px; margin-top: 14px; }
+.cite-wrap { position: relative; display: inline-block; }
+.cite-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  color: var(--text-secondary); font-family: var(--font-body); font-size: 0.82rem;
+  cursor: pointer; transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.cite-btn:hover { border-color: var(--accent-light); color: var(--accent); background: var(--bg-secondary); }
+.cite-btn svg { opacity: 0.85; }
+.cite-dropdown {
+  position: absolute; top: calc(100% + 4px); inset-inline-start: 0; z-index: 50;
+  min-width: 220px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 6px;
+}
+.cite-row { display: flex; align-items: center; gap: 8px; padding: 5px 6px; }
+.cite-fmt { flex: 1; font-family: var(--font-display); font-size: 0.84rem; font-weight: 600; color: var(--text-primary); }
+.cite-action {
+  padding: 4px 10px; background: var(--bg-secondary); border: 1px solid var(--border-light);
+  border-radius: var(--radius); color: var(--text-secondary); font-family: var(--font-body);
+  font-size: 0.76rem; cursor: pointer; transition: all 0.12s; white-space: nowrap;
+}
+.cite-action:hover { color: var(--accent); border-color: var(--accent-light); }
+.cite-action-icon { display: inline-flex; align-items: center; justify-content: center; padding: 4px 7px; }

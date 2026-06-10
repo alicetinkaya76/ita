@@ -3,6 +3,7 @@ import Seo from '../components/Seo';
 import { Link } from 'react-router-dom';
 import { useStats, useAuthors, useWorks } from '../hooks/useData';
 import { HAVZA_COLORS, HAVZA_ORDER, TYPE_COLORS, PERIOD_COLORS, getPeriodId } from '../utils/colors';
+import { deathYears, hasDeathYear } from '../utils/dates';
 import { useMemo } from 'react';
 
 function StatCard({ label, value, sub }: { label: string; value: number | string; sub?: string }) {
@@ -204,7 +205,7 @@ export default function Dashboard() {
                 <div className="chip-info">
                   <span className="chip-name">{s.meshur_isim}</span>
                   <span className="chip-meta">
-                    {s.vefat_yili_m ? `ö. ${s.vefat_yili_m}` : ''} · {t(`havza_names.${s.havza}`)}
+                    {hasDeathYear(s) ? `ö. ${deathYears(s, t)}` : ''} · {t(`havza_names.${s.havza}`)}
                   </span>
                 </div>
               </Link>

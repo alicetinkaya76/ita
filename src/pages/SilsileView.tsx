@@ -4,6 +4,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Fuse from 'fuse.js';
 import * as d3 from 'd3';
 import { useAuthors, useRelations, type Author, type Relation } from '../hooks/useData';
+import { deathYears } from '../utils/dates';
 import { HAVZA_COLORS } from '../utils/colors';
 
 /* ── Types ── */
@@ -328,7 +329,7 @@ export default function SilsileView() {
 
       if (n.authorId) {
         g.on('click', () => {
-          navigate(`/scholars/${n.authorId}`);
+          navigate(`/scholars/${n.authorId}`, { viewTransition: true });
         });
         g.on('mouseover', function () {
           d3.select(this).select('circle').attr('r', 9).attr('stroke', accent).attr('stroke-width', 2.5);
@@ -364,7 +365,7 @@ export default function SilsileView() {
       .text(selectedAuthor?.meshur_isim || selectedSlug);
 
     if (selectedAuthor) {
-      cg.on('click', () => { navigate(`/scholars/${selectedAuthor.author_id}`); });
+      cg.on('click', () => { navigate(`/scholars/${selectedAuthor.author_id}`, { viewTransition: true }); });
     }
 
   }, [treeData, selectedSlug, selectedAuthor, maxGen, t, navigate]);
@@ -399,7 +400,7 @@ export default function SilsileView() {
                   <span className="chip-dot-sm" style={{ background: HAVZA_COLORS[a.havza] }} />
                   <span className="silsile-opt-name">{a.meshur_isim}</span>
                   <span className="silsile-opt-meta">
-                    {t(`havza_names.${a.havza}`)} · {a.vefat_yili_m || '?'}
+                    {t(`havza_names.${a.havza}`)} · {deathYears(a, t)}
                   </span>
                 </button>
               ))}

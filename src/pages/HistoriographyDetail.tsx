@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Seo from '../components/Seo';
 import { useAuthors, useWorks, useRelations, useHistoriography, useCityCoords, useHavzaGeo } from '../hooks/useData';
 import { HAVZA_COLORS, PERIOD_COLORS, getPeriodId } from '../utils/colors';
+import { deathYears, hasDeathYear } from '../utils/dates';
 
 const MiniCityMap = lazy(() => import('../components/MiniCityMap'));
 const MiniTimeline = lazy(() => import('../components/MiniTimeline'));
@@ -215,7 +216,7 @@ export default function HistoriographyDetail() {
                           <Link key={sc.author_id} to={`/scholars/${sc.author_id}`} className="scholar-chip-mini">
                             <span className="chip-dot" style={{ background: color }} />
                             <span>{sc.meshur_isim}</span>
-                            {sc.vefat_yili_m && <span className="chip-year">ö. {sc.vefat_yili_m}</span>}
+                            {hasDeathYear(sc) && <span className="chip-year">ö. {deathYears(sc, t)}</span>}
                           </Link>
                         ))}
                       </div>

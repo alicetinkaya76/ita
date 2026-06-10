@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { useAuthors, useWorks, useRelations, usePeriods } from '../hooks/useData';
 import { HAVZA_COLORS } from '../utils/colors';
 import { PERIOD_COLORS, getPeriodId } from '../utils/colors';
+import { deathYears } from '../utils/dates';
+import CiteButton from '../components/CiteButton';
 import { useMemo, lazy, Suspense } from 'react';
 
 const MiniNetwork = lazy(() => import('../components/MiniNetwork'));
@@ -84,6 +86,9 @@ export default function ScholarDetail() {
             </Link>
           )}
         </div>
+        <div className="detail-actions">
+          <CiteButton kind="scholar" id={scholar.author_id} title={scholar.meshur_isim} filename={`ita-${scholar.author_id}`} />
+        </div>
       </header>
 
       <div className="detail-grid">
@@ -96,10 +101,13 @@ export default function ScholarDetail() {
               {scholar.vefat_yili_h ? ` / ${scholar.vefat_yili_h} ${t('common.hijri')}` : ''}
             </span>
           </div>
-          {scholar.dogum_yili_m && (
+          {(scholar.dogum_yili_m || scholar.dogum_yili_h) && (
             <div className="meta-row">
               <span className="meta-key">{t('scholar_detail.birth')}</span>
-              <span className="meta-val">{scholar.dogum_yili_m} {t('common.ce')}</span>
+              <span className="meta-val">
+                {scholar.dogum_yili_m ? `${scholar.dogum_yili_m} ${t('common.ce')}` : ''}
+                {scholar.dogum_yili_h ? `${scholar.dogum_yili_m ? ' / ' : ''}${scholar.dogum_yili_h} ${t('common.hijri')}` : ''}
+              </span>
             </div>
           )}
           <div className="meta-row">
@@ -228,7 +236,7 @@ export default function ScholarDetail() {
               <Link key={s.author_id} to={`/scholars/${s.author_id}`} className="scholar-chip-mini">
                 <span className="chip-dot" style={{ background: HAVZA_COLORS[s.havza] }} />
                 <span>{s.meshur_isim}</span>
-                {s.vefat_yili_m && <span className="chip-year">ö. {s.vefat_yili_m}</span>}
+                {(s.vefat_yili_m || s.vefat_yili_h) && <span className="chip-year">ö. {deathYears(s, t)}</span>}
               </Link>
             ))}
           </div>

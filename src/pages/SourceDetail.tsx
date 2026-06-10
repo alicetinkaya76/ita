@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useWorks, useAuthors } from '../hooks/useData';
 import { HAVZA_COLORS, TYPE_COLORS } from '../utils/colors';
+import CiteButton from '../components/CiteButton';
 import { useMemo } from 'react';
 
 export default function SourceDetail() {
@@ -12,6 +13,18 @@ export default function SourceDetail() {
 
   const work = useMemo(() => works.find(w => w.work_id === id), [works, id]);
   const author = useMemo(() => work ? authors.find(a => a.author_id === work.author_id) : null, [authors, work]);
+
+  const relatedWorks = useMemo(() => {
+    if (!work) return [];
+    const sameAuthor = works.filter(w => w.work_id !== work.work_id && w.author_id === work.author_id);
+    const sameKind = works.filter(w =>
+      w.work_id !== work.work_id &&
+      w.author_id !== work.author_id &&
+      w.eser_turu === work.eser_turu &&
+      w.havza === work.havza
+    );
+    return [...sameAuthor, ...sameKind].slice(0, 8);
+  }, [works, work]);
 
   if (wLoading || aLoading) return <div className="loading-screen">{t('common.loading')}</div>;
   if (!work) return <div className="loading-screen">{t('scholar_detail.no_data')}</div>;
@@ -33,6 +46,9 @@ export default function SourceDetail() {
         {work.diger_adlari && work.diger_adlari.length > 0 && (
           <p className="detail-alt-names">{work.diger_adlari.join(' · ')}</p>
         )}
+        <div className="detail-actions">
+          <CiteButton kind="work" id={work.work_id} title={work.eser_adi} author={author?.meshur_isim} filename={`ita-${work.work_id}`} />
+        </div>
       </header>
 
       <div className="detail-grid">
@@ -70,6 +86,20 @@ export default function SourceDetail() {
           </section>
         )}
       </div>
+
+      {relatedWorks.length > 0 && (
+        <div className="similar-scholars-card">
+          <h3>{t('source_detail.related')}</h3>
+          <div className="similar-scholars-grid">
+            {relatedWorks.map(w => (
+              <Link key={w.work_id} to={`/sources/${w.work_id}`} className="scholar-chip-mini">
+                <span className="chip-dot" style={{ background: TYPE_COLORS[w.eser_turu] || '#999' }} />
+                <span>{w.eser_adi}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

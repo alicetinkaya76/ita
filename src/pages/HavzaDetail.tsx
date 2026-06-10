@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuthors, useWorks, useRelations, useCityCoords, useHavzaGeo, usePeriods } from '../hooks/useData';
 import { HAVZA_COLORS, TYPE_COLORS, HAVZA_ORDER, PERIOD_COLORS, getPeriodId } from '../utils/colors';
+import { deathYears, hasDeathYear } from '../utils/dates';
 
 const MiniCityMap = lazy(() => import('../components/MiniCityMap'));
 const HavzaMiniNetwork = lazy(() => import('../components/HavzaMiniNetwork'));
@@ -215,7 +216,7 @@ export default function HavzaDetail() {
                 <div className="chip-info">
                   <span className="chip-name">{s.meshur_isim}</span>
                   <span className="chip-meta">
-                    {s.vefat_yili_m ? `ö. ${s.vefat_yili_m}` : ''} · {s.eser_sayisi} {t('common.work_count')}
+                    {hasDeathYear(s) ? `ö. ${deathYears(s, t)}` : ''} · {s.eser_sayisi} {t('common.work_count')}
                   </span>
                 </div>
               </Link>

@@ -100,7 +100,8 @@
     "dynasty": "سلسله",
     "city": "محل تألیف",
     "havza": "منطقه",
-    "description": "توضیح"
+    "description": "توضیح",
+    "related": "آثار مرتبط"
   },
   "dashboard": {
     "title": "اطلس تاریخ‌نگاری اسلامی",
@@ -124,7 +125,13 @@
     "filter": "صافی",
     "all": "همه",
     "more": "بیشتر",
-    "export": "خروجی"
+    "export": "خروجی",
+    "h_short": "هـ",
+    "m_short": "م",
+    "cite": "ارجاع",
+    "copy": "کپی",
+    "copied": "کپی شد ✓",
+    "download": "دانلود"
   },
   "map": {
     "geocoded": "مختصات‌دار",
