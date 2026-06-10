@@ -293,5 +293,18 @@
     "subtitle": "مقالات چارچوبی دربارهٔ دوره‌ها و حوزه‌ها",
     "periods": "مقالات دوره‌ها",
     "basins": "مقالات حوزه‌ها"
+  },
+  "command": {
+    "placeholder": "جستجوی مورخان، آثار یا صفحات…",
+    "open": "پنل فرمان",
+    "no_results": "نتیجه‌ای یافت نشد",
+    "group_pages": "صفحات",
+    "group_scholars": "مورخان",
+    "group_sources": "آثار",
+    "group_basins": "حوزه‌ها",
+    "group_periods": "دوره‌ها",
+    "hint_navigate": "حرکت",
+    "hint_select": "انتخاب",
+    "hint_toggle": "باز/بسته"
   }
 }

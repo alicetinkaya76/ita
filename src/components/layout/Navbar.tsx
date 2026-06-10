@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import LanguageSwitcher from './LanguageSwitcher';
-import GlobalSearch from './GlobalSearch';
 import ThemeToggle from './ThemeToggle';
+
+const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent);
 
 const navItems = [
   { key: 'home', path: '/' },
@@ -51,7 +52,18 @@ export default function Navbar() {
         ))}
       </div>
 
-      <GlobalSearch />
+      <button
+        type="button"
+        className="cmdk-trigger"
+        onClick={() => window.dispatchEvent(new Event('itta:open-command-palette'))}
+        aria-label={t('command.open')}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+        </svg>
+        <span className="cmdk-trigger-text">{t('command.placeholder')}</span>
+        <kbd className="cmdk-kbd">{isMac ? '⌘' : 'Ctrl'} K</kbd>
+      </button>
       <ThemeToggle />
       <LanguageSwitcher />
 

@@ -297,5 +297,18 @@
     "subtitle": "Dönem ve havza üzerine çerçeve makaleler",
     "periods": "Dönem Makaleleri",
     "basins": "Havza Makaleleri"
+  },
+  "command": {
+    "placeholder": "Tarihçi, eser veya sayfa ara…",
+    "open": "Komut paleti",
+    "no_results": "Sonuç bulunamadı",
+    "group_pages": "Sayfalar",
+    "group_scholars": "Tarihçiler",
+    "group_sources": "Eserler",
+    "group_basins": "Havzalar",
+    "group_periods": "Dönemler",
+    "hint_navigate": "gezin",
+    "hint_select": "seç",
+    "hint_toggle": "aç/kapat"
   }
 }

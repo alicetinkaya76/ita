@@ -280,5 +280,18 @@
     "subtitle": "مقالات إطارية حول الحقب والحوزات",
     "periods": "مقالات الحقب",
     "basins": "مقالات الحوزات"
+  },
+  "command": {
+    "placeholder": "ابحث عن مؤرخين أو مؤلفات أو صفحات…",
+    "open": "لوحة الأوامر",
+    "no_results": "لا توجد نتائج",
+    "group_pages": "الصفحات",
+    "group_scholars": "المؤرخون",
+    "group_sources": "المؤلفات",
+    "group_basins": "الأحواض",
+    "group_periods": "الحقب",
+    "hint_navigate": "تنقّل",
+    "hint_select": "اختر",
+    "hint_toggle": "فتح/إغلاق"
   }
 }

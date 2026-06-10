@@ -1,0 +1,20 @@
+# --- Bağımlılıklar ---
+node_modules/
+
+# --- Build çıktıları ---
+# Pages'e CI build eder; dist commit'lenmemeli.
+dist/
+dist-ssr/
+.vite/
+
+# --- macOS ---
+.DS_Store
+._*
+
+# --- Yerel veri yedeği (köprü kaynağı — repoya gitmez) ---
+data_v1_backup/
+
+# --- Loglar / yerel env ---
+*.log
+*.local
+npm-debug.log*

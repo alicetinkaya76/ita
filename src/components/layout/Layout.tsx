@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Breadcrumb from './Breadcrumb';
 import BottomNav from '../mobile/BottomNav';
 import MobileHeader from '../mobile/MobileHeader';
+import CommandPalette from '../CommandPalette';
 
 export default function Layout() {
   const { isMobile } = useMobile();
@@ -16,6 +17,7 @@ export default function Layout() {
         <Outlet />
       </main>
       {isMobile && <BottomNav />}
+      {!isMobile && <CommandPalette />}
     </div>
   );
 }

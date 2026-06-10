@@ -2009,3 +2009,130 @@ html[lang="fa"] .article-title,
 html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3 {
   font-family: 'Vazirmatn', 'Crimson Pro', Georgia, serif;
 }
+
+/* ===== Command Palette (Cmd+K) ===== */
+.cmdk-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 230px;
+  padding: 7px 10px 7px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  cursor: text;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.cmdk-trigger:hover { border-color: var(--accent-light); background: var(--bg-card); color: var(--text-secondary); }
+.cmdk-trigger svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.8; }
+.cmdk-trigger-text { flex: 1; text-align: start; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.cmdk-kbd {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  line-height: 1;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 3px 6px;
+  white-space: nowrap;
+}
+[dir="rtl"] .cmdk-kbd { direction: ltr; }
+
+.cmdk-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12vh 16px 16px;
+  background: rgba(28, 20, 16, 0.42);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: cmdk-fade 0.14s ease-out;
+}
+.cmdk-panel {
+  width: 100%;
+  max-width: 640px;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: cmdk-pop 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cmdk-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+.cmdk-input-icon { width: 18px; height: 18px; color: var(--text-muted); flex-shrink: 0; }
+.cmdk-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+.cmdk-input::placeholder { color: var(--text-muted); }
+
+.cmdk-list { overflow-y: auto; padding: 6px; flex: 1; }
+.cmdk-group {
+  padding: 10px 12px 4px;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.cmdk-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: start;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  transition: background 0.1s;
+}
+.cmdk-item--active { background: var(--bg-secondary); }
+.cmdk-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.cmdk-glyph { width: 15px; height: 15px; color: var(--accent); flex-shrink: 0; }
+[dir="rtl"] .cmdk-glyph { transform: scaleX(-1); }
+.cmdk-item-label { flex: 1; font-size: 0.9rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cmdk-item-meta { font-size: 0.76rem; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; max-width: 45%; overflow: hidden; text-overflow: ellipsis; }
+.cmdk-empty { padding: 32px 16px; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+
+.cmdk-footer {
+  display: flex;
+  gap: 16px;
+  padding: 9px 14px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-secondary);
+}
+.cmdk-hint { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; color: var(--text-muted); }
+.cmdk-footer .cmdk-kbd { background: var(--bg-card); }
+
+@keyframes cmdk-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes cmdk-pop { from { opacity: 0; transform: translateY(-8px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (prefers-reduced-motion: reduce) { .cmdk-overlay, .cmdk-panel { animation: none; } }
+
+@media (max-width: 980px) { .cmdk-trigger-text { display: none; } .cmdk-trigger { min-width: 0; } }

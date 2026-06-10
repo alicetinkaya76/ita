@@ -297,5 +297,18 @@
     "subtitle": "Framing essays on periods and basins",
     "periods": "Period Articles",
     "basins": "Basin Articles"
+  },
+  "command": {
+    "placeholder": "Search scholars, works or pages…",
+    "open": "Command palette",
+    "no_results": "No results found",
+    "group_pages": "Pages",
+    "group_scholars": "Scholars",
+    "group_sources": "Works",
+    "group_basins": "Basins",
+    "group_periods": "Periods",
+    "hint_navigate": "navigate",
+    "hint_select": "select",
+    "hint_toggle": "toggle"
   }
 }
