@@ -60,6 +60,7 @@ export default function BottomNav() {
               key={item.key}
               to={item.path}
               end={item.path === '/'}
+              viewTransition
               className={({ isActive }) => `bnav-drawer-link ${isActive ? 'active' : ''}`}
             >
               {t(`nav.${item.key}`)}
@@ -75,6 +76,7 @@ export default function BottomNav() {
             key={tab.key}
             to={tab.path}
             end={tab.path === '/'}
+            viewTransition
             className={({ isActive }) => `bnav-tab ${isActive ? 'bnav-tab-active' : ''}`}
           >
             <span className="bnav-icon">{tab.icon}</span>

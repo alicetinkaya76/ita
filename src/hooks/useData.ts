@@ -141,14 +141,23 @@ export interface HistoriographyData {
 }
 
 const cache: Record<string, unknown> = {};
+const inflight: Record<string, Promise<unknown> | undefined> = {};
 const BASE = import.meta.env.BASE_URL;
 
 async function loadJSON<T>(path: string): Promise<T> {
   if (cache[path]) return cache[path] as T;
-  const res = await fetch(BASE + path);
-  const data = await res.json();
-  cache[path] = data;
-  return data as T;
+  if (inflight[path]) return inflight[path] as Promise<T>;
+  const p = fetch(BASE + path)
+    .then(res => res.json())
+    .then(data => { cache[path] = data; delete inflight[path]; return data; })
+    .catch(err => { delete inflight[path]; throw err; });
+  inflight[path] = p;
+  return p as Promise<T>;
+}
+
+/** Warm the JSON cache ahead of navigation (deduped via the cache above). Used by intent-based prefetch. */
+export function prefetchData(paths: string[]): void {
+  for (const path of paths) { void loadJSON(path).catch(() => {}); }
 }
 
 export function useAuthors() {

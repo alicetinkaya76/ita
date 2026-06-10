@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Fuse from 'fuse.js';
 import { useAuthors, useWorks, usePeriods, useHistoriography, type Author, type Work } from '../hooks/useData';
 import { HAVZA_COLORS, TYPE_COLORS, PERIOD_COLORS } from '../utils/colors';
+import { prefetchRoute, prefetchChunk } from '../utils/prefetch';
 
 /* Pages reachable from the palette (mirrors the navbar routes). */
 const PAGES: { key: string; path: string }[] = [
@@ -36,6 +37,7 @@ interface CmdItem {
   label: string;
   meta: string;
   color: string;
+  prefetch?: () => void;
   run: () => void;
 }
 
@@ -140,7 +142,8 @@ export default function CommandPalette() {
         label: t(`nav.${p.key}`),
         meta: t('command.group_pages'),
         color: 'var(--accent)',
-        run: () => navigate(p.path),
+        prefetch: () => prefetchRoute(p.path),
+        run: () => navigate(p.path, { viewTransition: true }),
       });
     }
 
@@ -154,7 +157,8 @@ export default function CommandPalette() {
           label: a.meshur_isim,
           meta: `${t(`havza_names.${a.havza}`)}${a.vefat_yili_m ? ` · ö. ${a.vefat_yili_m}` : ''}`,
           color: HAVZA_COLORS[a.havza] || '#999',
-          run: () => navigate(`/scholars/${a.author_id}`),
+          prefetch: () => prefetchChunk('scholarDetail'),
+          run: () => navigate(`/scholars/${a.author_id}`, { viewTransition: true }),
         });
       }
       for (const r of fuseSources.search(q, { limit: 6 })) {
@@ -166,7 +170,8 @@ export default function CommandPalette() {
           label: w.eser_adi,
           meta: t(`source_types.${w.eser_turu}`),
           color: TYPE_COLORS[w.eser_turu] || '#999',
-          run: () => navigate(`/sources/${w.work_id}`),
+          prefetch: () => prefetchChunk('sourceDetail'),
+          run: () => navigate(`/sources/${w.work_id}`, { viewTransition: true }),
         });
       }
       for (const r of fuseBasins.search(q, { limit: 4 })) {
@@ -178,7 +183,8 @@ export default function CommandPalette() {
           label: b.name,
           meta: t('historiography.title'),
           color: HAVZA_COLORS[b.havza_key] || '#999',
-          run: () => navigate(`/historiography/${b.id}`),
+          prefetch: () => prefetchChunk('historiographyDetail'),
+          run: () => navigate(`/historiography/${b.id}`, { viewTransition: true }),
         });
       }
       for (const r of fusePeriods.search(q, { limit: 3 })) {
@@ -190,7 +196,8 @@ export default function CommandPalette() {
           label: p.name,
           meta: `${t('periodization.title')} · ${p.subtitle}`,
           color: PERIOD_COLORS[p.id] || '#999',
-          run: () => navigate(`/periodization#${p.id}`),
+          prefetch: () => prefetchRoute('/periodization'),
+          run: () => navigate(`/periodization#${p.id}`, { viewTransition: true }),
         });
       }
     }
@@ -199,12 +206,13 @@ export default function CommandPalette() {
     return out.sort((a, b) => GROUP_ORDER.indexOf(a.group) - GROUP_ORDER.indexOf(b.group));
   }, [query, i18n.language, t, navigate, fuseScholars, fuseSources, fuseBasins, fusePeriods]);
 
-  // Scroll the active option into view
+  // Scroll the active option into view + prefetch its target (chunk/data)
   useEffect(() => {
     if (!open) return;
     const el = listRef.current?.querySelector<HTMLElement>(`#cmdk-opt-${activeIdx}`);
     el?.scrollIntoView({ block: 'nearest' });
-  }, [activeIdx, open]);
+    items[activeIdx]?.prefetch?.();
+  }, [activeIdx, open, items]);
 
   const select = useCallback((item: CmdItem | undefined) => {
     if (!item) return;

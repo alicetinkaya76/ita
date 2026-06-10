@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
+import { prefetchRoute } from '../../utils/prefetch';
 
 const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent);
 
@@ -32,7 +33,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <NavLink to="/" className="brand-link">
+        <NavLink to="/" className="brand-link" viewTransition>
           <span className="brand-icon">◆</span>
           <span className="brand-text">İTA</span>
         </NavLink>
@@ -44,6 +45,9 @@ export default function Navbar() {
             key={item.key}
             to={item.path}
             end={item.path === '/'}
+            viewTransition
+            onMouseEnter={() => prefetchRoute(item.path)}
+            onFocus={() => prefetchRoute(item.path)}
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
             onClick={() => setMenuOpen(false)}
           >

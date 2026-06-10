@@ -2136,3 +2136,12 @@ html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3 {
 @media (prefers-reduced-motion: reduce) { .cmdk-overlay, .cmdk-panel { animation: none; } }
 
 @media (max-width: 980px) { .cmdk-trigger-text { display: none; } .cmdk-trigger { min-width: 0; } }
+
+/* ===== Page view transitions (cross-route fade + subtle rise) ===== */
+::view-transition-old(root) { animation: vt-fade-out 0.16s ease both; }
+::view-transition-new(root) { animation: vt-fade-in 0.26s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes vt-fade-out { to { opacity: 0; } }
+@keyframes vt-fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}

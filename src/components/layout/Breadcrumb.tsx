@@ -1,6 +1,7 @@
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuthors, useWorks } from '../../hooks/useData';
+import { prefetchRoute } from '../../utils/prefetch';
 
 interface Crumb {
   label: string;
@@ -67,7 +68,7 @@ export default function Breadcrumb() {
         <span key={i} className="breadcrumb-item">
           {i > 0 && <span className="breadcrumb-sep">›</span>}
           {c.path && i < crumbs.length - 1 ? (
-            <Link to={c.path} className="breadcrumb-link">{c.label}</Link>
+            <Link to={c.path} viewTransition onMouseEnter={() => prefetchRoute(c.path!)} className="breadcrumb-link">{c.label}</Link>
           ) : (
             <span className="breadcrumb-current">{c.label}</span>
           )}
