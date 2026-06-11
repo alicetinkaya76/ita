@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useAuthors, useRelations, type Author, type Relation } from '../hooks/useData';
+import { useAuthors, useRelations, useGraphMetrics, type Author, type Relation } from '../hooks/useData';
 import { HAVZA_COLORS, HAVZA_ORDER, PERIOD_COLORS, PERIOD_RANGES } from '../utils/colors';
+import { deathYears } from '../utils/dates';
 import * as d3 from 'd3';
 
 interface GraphNode extends d3.SimulationNodeDatum {
@@ -12,10 +13,17 @@ interface GraphNode extends d3.SimulationNodeDatum {
   havza: string;
   century: number | null;
   deathYear: number | null;
+  deathYearH: number | null;
   importance: number;
   workCount: number;
   authorId: string;
   degree: number;
+  globalDegree: number;
+  betweenness: number;
+  pagerank: number;
+  teachers: number;
+  students: number;
+  contemporaries: number;
 }
 
 interface GraphLink extends d3.SimulationLinkDatum<GraphNode> {
@@ -42,6 +50,7 @@ export default function NetworkView() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { authors, loading: aLoading } = useAuthors();
   const { relations, loading: rLoading } = useRelations();
+  const { metrics } = useGraphMetrics();
 
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -106,6 +115,7 @@ export default function NetworkView() {
           const c = author.yuzyil ?? (author.vefat_yili_m ? Math.ceil(author.vefat_yili_m / 100) : null);
           if (c === null || c < pMin || c > pMax) continue;
         }
+        const m = metrics?.nodes[slug];
         nodeMap.set(slug, {
           id: slug,
           slug,
@@ -113,10 +123,17 @@ export default function NetworkView() {
           havza: author.havza,
           century: author.yuzyil,
           deathYear: author.vefat_yili_m,
+          deathYearH: author.vefat_yili_h,
           importance: author.importance_score || 10,
           workCount: author.eser_sayisi,
           authorId: author.author_id,
           degree: 0,
+          globalDegree: m?.degree ?? 0,
+          betweenness: m?.betweenness ?? 0,
+          pagerank: m?.pagerank ?? 0,
+          teachers: m?.teachers ?? 0,
+          students: m?.students ?? 0,
+          contemporaries: m?.contemporaries ?? 0,
         });
       }
     }
@@ -140,7 +157,7 @@ export default function NetworkView() {
     }
 
     return { nodes: [...nodeMap.values()], links: graphLinks };
-  }, [relations, slugMap, selectedHavza, selectedCentury, selectedPeriod, selectedRelType, showAllEdges]);
+  }, [relations, slugMap, selectedHavza, selectedCentury, selectedPeriod, selectedRelType, showAllEdges, metrics]);
 
   // Stats
   const graphStats = useMemo(() => {
@@ -154,6 +171,15 @@ export default function NetworkView() {
     }
     return { havzaCounts, typeCounts };
   }, [nodes, links]);
+
+  // Most central scholars in the current view (by PageRank on the full graph)
+  const topCentral = useMemo(
+    () => [...nodes]
+      .filter(n => n.pagerank > 0)
+      .sort((a, b) => b.pagerank - a.pagerank)
+      .slice(0, 8),
+    [nodes]
+  );
 
   // D3 simulation
   useEffect(() => {
@@ -266,7 +292,7 @@ export default function NetworkView() {
     g.append('g')
       .attr('class', 'labels')
       .selectAll<SVGTextElement, GraphNode>('text')
-      .data(nodes.filter(n => n.importance > 40 || n.degree > 4))
+      .data(nodes.filter(n => n.importance > 40 || n.globalDegree > 12 || n.degree > 4))
       .join('text')
       .text(d => d.name.length > 20 ? d.name.slice(0, 18) + '…' : d.name)
       .attr('font-size', 9)
@@ -451,6 +477,25 @@ export default function NetworkView() {
             ))}
           </div>
 
+          {/* Most central scholars (by network centrality) */}
+          {topCentral.length > 0 && (
+            <div className="network-legend-section">
+              <div className="network-legend-title">{t('network.central')}</div>
+              <ol className="network-central-list">
+                {topCentral.map((n, i) => (
+                  <li key={n.id}>
+                    <button className="network-central-item" onClick={() => setSelectedNode(n)}>
+                      <span className="network-central-rank">{i + 1}</span>
+                      <span className="chip-dot-sm" style={{ background: HAVZA_COLORS[n.havza] }} />
+                      <span className="network-central-name">{n.name}</span>
+                      <span className="network-central-deg">{n.globalDegree}</span>
+                    </button>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
+
           <div className="network-legend-hint">
             {t('network.hint')}
           </div>
@@ -477,9 +522,9 @@ export default function NetworkView() {
                     <span style={{ color: HAVZA_COLORS[hoveredNode.havza] }}>
                       {t(`havza_names.${hoveredNode.havza}`)}
                     </span>
-                    {hoveredNode.deathYear && ` · ö. ${hoveredNode.deathYear}`}
+                    {(hoveredNode.deathYear || hoveredNode.deathYearH) && ` · ö. ${deathYears({ vefat_yili_h: hoveredNode.deathYearH, vefat_yili_m: hoveredNode.deathYear }, t)}`}
                     {` · ${hoveredNode.workCount} ${t('common.work_count')}`}
-                    {` · ${hoveredNode.degree} ${t('network.edges')}`}
+                    {` · ${hoveredNode.globalDegree || hoveredNode.degree} ${t('network.edges')}`}
                   </div>
                 </div>
               )}
@@ -501,10 +546,10 @@ export default function NetworkView() {
                   {t(`havza_names.${selectedNode.havza}`)}
                 </span>
               </div>
-              {selectedNode.deathYear && (
+              {(selectedNode.deathYear || selectedNode.deathYearH) && (
                 <div className="meta-row">
                   <span className="meta-key">{t('scholar_detail.death')}</span>
-                  <span className="meta-val">{selectedNode.deathYear} {t('common.ce')}</span>
+                  <span className="meta-val">{deathYears({ vefat_yili_h: selectedNode.deathYearH, vefat_yili_m: selectedNode.deathYear }, t)}</span>
                 </div>
               )}
               <div className="meta-row">
@@ -513,8 +558,20 @@ export default function NetworkView() {
               </div>
               <div className="meta-row">
                 <span className="meta-key">{t('network.edges')}</span>
-                <span className="meta-val">{selectedNode.degree}</span>
+                <span className="meta-val">{selectedNode.globalDegree || selectedNode.degree}</span>
               </div>
+              {(selectedNode.teachers > 0 || selectedNode.students > 0) && (
+                <div className="meta-row">
+                  <span className="meta-key">{t('scholar_detail.teachers')} / {t('scholar_detail.students')}</span>
+                  <span className="meta-val">{selectedNode.teachers} / {selectedNode.students}</span>
+                </div>
+              )}
+              {selectedNode.betweenness > 0 && (
+                <div className="meta-row">
+                  <span className="meta-key">{t('network.betweenness')}</span>
+                  <span className="meta-val">{(selectedNode.betweenness * 100).toFixed(2)}</span>
+                </div>
+              )}
 
               {/* Connected scholars */}
               <div className="network-connected">
@@ -553,6 +610,6 @@ export default function NetworkView() {
 }
 
 function nodeRadius(d: GraphNode): number {
-  const base = Math.sqrt(d.importance || 10) * 0.8;
-  return Math.max(4, Math.min(18, base + d.degree * 0.5));
+  const g = d.globalDegree || d.degree || 0;
+  return Math.max(5, Math.min(22, 5 + Math.sqrt(g) * 2));
 }

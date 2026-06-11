@@ -146,7 +146,9 @@
     "connected": "مورخان مرتبط",
     "go_to_scholar": "صفحهٔ مورخ",
     "mini_title": "شبکهٔ روابط",
-    "expand": "نمای کامل شبکه"
+    "expand": "نمای کامل شبکه",
+    "central": "محوری‌ترین عالمان",
+    "betweenness": "میانجی‌گری"
   },
   "timeline": {
     "brush_hint": "برای انتخاب بازه بکشید",

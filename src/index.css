@@ -2172,3 +2172,20 @@ html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3 {
 }
 .cite-action:hover { color: var(--accent); border-color: var(--accent-light); }
 .cite-action-icon { display: inline-flex; align-items: center; justify-content: center; padding: 4px 7px; }
+
+/* ===== Network: most-central leaderboard ===== */
+.network-central-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.network-central-item {
+  display: flex; align-items: center; gap: 7px; width: 100%;
+  padding: 4px 6px; background: none; border: none; border-radius: var(--radius);
+  cursor: pointer; text-align: start; color: var(--text-primary);
+  font-family: var(--font-body); font-size: 0.8rem; transition: background 0.12s;
+}
+.network-central-item:hover { background: var(--bg-secondary); }
+.network-central-rank {
+  flex-shrink: 0; width: 17px; height: 17px; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.66rem; font-weight: 700; color: var(--text-muted);
+  background: var(--bg-secondary); border-radius: 50%;
+}
+.network-central-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.network-central-deg { flex-shrink: 0; font-size: 0.72rem; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }

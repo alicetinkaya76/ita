@@ -232,6 +232,46 @@ export function useHistoriography() {
   return { histData: data, loading };
 }
 
+// ---- Graph metrics (derived: public/data/graph_metrics.json) ----
+export interface NodeMetric {
+  teachers: number;
+  students: number;
+  contemporaries: number;
+  degree: number;
+  betweenness: number;
+  pagerank: number;
+  component_size: number;
+}
+
+export interface GraphMetricsSummary {
+  graph_nodes: number;
+  graph_edges: number;
+  itta_nodes: number;
+  itta_with_relations: number;
+  itta_internal_edges: number;
+  components: number;
+  largest_component: number;
+  density: number;
+}
+
+export interface GraphMetrics {
+  generated_at: string;
+  summary: GraphMetricsSummary;
+  nodes: Record<string, NodeMetric>;
+}
+
+/** Loads precomputed network centrality metrics (degree/betweenness/pagerank). */
+export function useGraphMetrics() {
+  const [metrics, setMetrics] = useState<GraphMetrics | null>(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    loadJSON<GraphMetrics>('data/graph_metrics.json')
+      .then(d => { setMetrics(d); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, []);
+  return { metrics, loading };
+}
+
 // ---- Articles (full document-derived essays) ----
 export interface ArticleTocItem {
   id: string;

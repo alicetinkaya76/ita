@@ -146,7 +146,9 @@
     "connected": "Connected Scholars",
     "go_to_scholar": "Scholar Page",
     "mini_title": "Relation Network",
-    "expand": "Full network view"
+    "expand": "Full network view",
+    "central": "Most Central Scholars",
+    "betweenness": "Betweenness"
   },
   "timeline": {
     "brush_hint": "Drag to select a time range",

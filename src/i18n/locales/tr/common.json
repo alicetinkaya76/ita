@@ -146,7 +146,9 @@
     "connected": "Bağlantılı Tarihçiler",
     "go_to_scholar": "Tarihçi Sayfası",
     "mini_title": "İlişki Ağı",
-    "expand": "Tam ağ görselleştirme"
+    "expand": "Tam ağ görselleştirme",
+    "central": "En Merkezî Tarihçiler",
+    "betweenness": "Aracılık"
   },
   "timeline": {
     "brush_hint": "Zaman aralığı seçmek için sürükleyin",
