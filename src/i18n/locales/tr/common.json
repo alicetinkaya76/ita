@@ -221,7 +221,18 @@
     "search_placeholder": "Silsile görüntülemek için tarihçi arayın...",
     "generations": "Kuşak derinliği",
     "hint": "Düğüme tıklayarak tarihçi detay sayfasına gidin",
-    "empty": "Silsile görüntülemek için yukarıdan bir tarihçi seçin"
+    "empty": "Silsile görüntülemek için yukarıdan bir tarihçi seçin",
+    "path_title": "İsnad Yolu Bul",
+    "path_from": "Başlangıç",
+    "path_to": "Hedef",
+    "path_steps": "adım",
+    "path_none": "Bu iki tarihçi arasında bilinen bir bağlantı bulunamadı.",
+    "path_same": "Lütfen iki farklı tarihçi seçin.",
+    "path_ts_only": "Sadece hoca-talebe bağlantıları",
+    "rel_teacher": "hocası",
+    "rel_student": "talebesi",
+    "rel_contemporary": "çağdaşı",
+    "rel_ts": "hoca-talebe"
   },
   "compare": {
     "title": "Havza Karşılaştırma",

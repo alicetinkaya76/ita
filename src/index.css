@@ -2189,3 +2189,33 @@ html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3 {
 }
 .network-central-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .network-central-deg { flex-shrink: 0; font-size: 0.72rem; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+/* ===== Isnad path finder (Silsile) ===== */
+.isnad-path { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+.isnad-path-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--text-primary); margin: 0 0 14px; }
+.isnad-path-pickers { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+.isnad-path-arrow { font-size: 1.3rem; color: var(--text-muted); padding-bottom: 8px; }
+.isnad-picker { display: flex; flex-direction: column; gap: 4px; min-width: 230px; flex: 1; }
+.isnad-picker-label { font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); }
+.isnad-picker-search { position: relative; }
+.isnad-picker-input { width: 100%; padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-primary); font-family: var(--font-body); font-size: 0.88rem; }
+.isnad-picker-input:focus { outline: none; border-color: var(--accent-light); }
+.isnad-picker-dropdown { position: absolute; top: calc(100% + 4px); inset-inline-start: 0; inset-inline-end: 0; z-index: 40; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); max-height: 260px; overflow-y: auto; padding: 4px; }
+.isnad-picker-option { display: flex; align-items: center; gap: 8px; width: 100%; padding: 7px 9px; background: none; border: none; border-radius: var(--radius); cursor: pointer; text-align: start; color: var(--text-primary); font-size: 0.86rem; }
+.isnad-picker-option:hover { background: var(--bg-secondary); }
+.isnad-picker-option-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.isnad-picker-chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 10px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); }
+.isnad-picker-chip-name { font-size: 0.88rem; font-weight: 600; color: var(--text-primary); }
+.isnad-picker-clear { margin-inline-start: 2px; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 1.05rem; line-height: 1; border-radius: 50%; }
+.isnad-picker-clear:hover { color: var(--accent); background: var(--bg-card); }
+.isnad-path-toggle { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; font-size: 0.82rem; color: var(--text-secondary); cursor: pointer; }
+.isnad-path-note { margin-top: 16px; padding: 14px 16px; background: var(--bg-secondary); border-radius: var(--radius); color: var(--text-secondary); font-size: 0.9rem; }
+.isnad-path-result { margin-top: 18px; }
+.isnad-path-count { font-size: 0.8rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+.isnad-chain { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.isnad-chain-item { display: flex; flex-direction: column; align-items: flex-start; }
+.isnad-chain-rel { margin-inline-start: 19px; padding: 3px 0 3px 18px; font-size: 0.74rem; font-style: italic; color: var(--text-muted); border-inline-start: 2px dashed var(--border); }
+.isnad-chain-node { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font-display); font-size: 0.92rem; font-weight: 600; color: var(--text-primary); }
+.isnad-chain-link { cursor: pointer; transition: border-color 0.12s, color 0.12s; }
+.isnad-chain-link:hover { border-color: var(--accent); color: var(--accent); }
+.isnad-chain-ext { color: var(--text-secondary); font-weight: 500; border-style: dashed; }

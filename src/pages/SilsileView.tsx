@@ -6,6 +6,7 @@ import * as d3 from 'd3';
 import { useAuthors, useRelations, type Author, type Relation } from '../hooks/useData';
 import { deathYears } from '../utils/dates';
 import { HAVZA_COLORS } from '../utils/colors';
+import IsnadPath from '../components/IsnadPath';
 
 /* ── Types ── */
 interface TreeNode {
@@ -441,6 +442,8 @@ export default function SilsileView() {
           <p>{t('silsile.empty')}</p>
         </div>
       )}
+
+      <IsnadPath relations={relations} slugToAuthor={slugToAuthor} scholarOptions={scholarOptions} />
     </div>
   );
 }

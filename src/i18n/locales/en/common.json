@@ -221,7 +221,18 @@
     "search_placeholder": "Search for a scholar to view their chain...",
     "generations": "Chain depth",
     "hint": "Click a node to visit the scholar's page",
-    "empty": "Select a scholar above to view their teacher–student chain"
+    "empty": "Select a scholar above to view their teacher–student chain",
+    "path_title": "Find Isnad Path",
+    "path_from": "From",
+    "path_to": "To",
+    "path_steps": "steps",
+    "path_none": "No known connection between these two scholars.",
+    "path_same": "Please choose two different scholars.",
+    "path_ts_only": "Teacher–student links only",
+    "rel_teacher": "teacher",
+    "rel_student": "student",
+    "rel_contemporary": "contemporary",
+    "rel_ts": "teacher–student"
   },
   "compare": {
     "title": "Region Comparison",
