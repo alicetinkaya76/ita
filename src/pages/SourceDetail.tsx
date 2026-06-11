@@ -16,14 +16,24 @@ export default function SourceDetail() {
 
   const relatedWorks = useMemo(() => {
     if (!work) return [];
-    const sameAuthor = works.filter(w => w.work_id !== work.work_id && w.author_id === work.author_id);
-    const sameKind = works.filter(w =>
-      w.work_id !== work.work_id &&
-      w.author_id !== work.author_id &&
-      w.eser_turu === work.eser_turu &&
-      w.havza === work.havza
-    );
-    return [...sameAuthor, ...sameKind].slice(0, 8);
+    // Catch-all genres (ozel_tarih ~474, diger ~221) are too generic to signal
+    // real relatedness, so they barely score; author/dynasty/specific genre dominate.
+    const CATCHALL = new Set(['diger', 'ozel_tarih']);
+    return works
+      .filter(w => w.work_id !== work.work_id)
+      .map(w => {
+        let score = 0;
+        if (w.author_id === work.author_id) score += 100;
+        if (w.hanedan && work.hanedan && w.hanedan === work.hanedan) score += 12;
+        if (w.eser_turu === work.eser_turu) score += CATCHALL.has(work.eser_turu) ? 1 : 6;
+        if (w.havza === work.havza) score += 2;
+        if (w.dil && work.dil && w.dil === work.dil) score += 1;
+        return { w, score };
+      })
+      .filter(x => x.score >= 3)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 8)
+      .map(x => x.w);
   }, [works, work]);
 
   if (wLoading || aLoading) return <div className="loading-screen">{t('common.loading')}</div>;

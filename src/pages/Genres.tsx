@@ -13,7 +13,11 @@ type Category = { id: string; title: string; color: string; intro?: boolean; lea
 const TAXONOMY: Category[] = [
   {
     id: 'siyer', title: 'Siyer ve Meğâzî', color: '#AD1457',
-    leaves: [{ label: 'Siyer ve Meğâzî', key: 'siyer_megazi' }],
+    leaves: [
+      { label: 'Siyer ve Meğâzî', key: 'siyer_megazi' },
+      { label: 'Şemâil' },
+      { label: 'Delâil' },
+    ],
   },
   {
     id: 'dunya', title: 'Dünya Tarihi / Evrensel Tarih', color: '#0277BD',
@@ -28,7 +32,6 @@ const TAXONOMY: Category[] = [
     leaves: [
       { label: 'Sultanların Tarihi', key: 'hanedan_tarihi' },
       { label: 'Hanedan Tarihi', key: 'hanedan_tarihi' },
-      { label: 'Şemâil ve Delâil' },
       { label: 'Hatırat ve Otobiyografi' },
       { label: 'Tabakat Terâcim', key: 'tabakat' },
       { label: 'Menâkıbnâme' },
