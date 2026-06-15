@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Seo from '../components/Seo';
 
@@ -6,6 +7,7 @@ type Video =
   | { kind: 'link'; url: string; title: string; source: string };
 
 const PROGRAMS: Video[] = [
+  { kind: 'youtube', id: '9uWzdqb1pJ4', title: 'Medeniyet Havzalarında Tarih ve Tarihçilik — Doç. Dr. Abdulkadir Macit', source: 'Enderun Sohbetleri · VAV TV' },
   { kind: 'youtube', id: 'T_w34-yEP0A', title: 'Medeniyet Havzalarında Tarih ve Tarihçilik', source: 'Enderun Sohbetleri · VAV TV' },
   { kind: 'youtube', id: 'bBpUef2TZZ4', title: 'Hafızanın Haritasından, Haritanın Hafızasına Medeniyet Havzaları', source: 'Bin1 · TVNET' },
   { kind: 'link', url: 'https://www.vavtv.com.tr/programlar/son-davet/islam-medeniyetinde-tarih-yaziciligi-ve-muhammed-hamidullah-son-davet', title: 'İslam Medeniyetinde Tarih Yazıcılığı ve Muhammed Hamidullah', source: 'Son Davet · VAV TV' },
@@ -26,23 +28,37 @@ const WORKSHOPS: Video[] = [
   { kind: 'link', url: 'https://drive.google.com/file/d/1M9UJoU3MAb3Gt0QNPvCGlAHza2xfTdSj/view?usp=sharing', title: 'Balkan Çalıştayı (3. Oturum)', source: 'Çalıştay · Google Drive' },
 ];
 
+function YouTubeCard({ v }: { v: Extract<Video, { kind: 'youtube' }> }) {
+  const [playing, setPlaying] = useState(false);
+  const thumb = `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
+  return (
+    <div className="media-card">
+      <div className="media-thumb">
+        {playing ? (
+          <iframe
+            className="media-iframe"
+            src={`https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0`}
+            title={v.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        ) : (
+          <button type="button" className="media-play-btn" onClick={() => setPlaying(true)} aria-label={v.title}>
+            <img src={thumb} alt={v.title} loading="lazy" />
+            <span className="media-play" aria-hidden>▶</span>
+          </button>
+        )}
+      </div>
+      <div className="media-body">
+        <span className="media-source">{v.source}</span>
+        <span className="media-title">{v.title}</span>
+      </div>
+    </div>
+  );
+}
+
 function VideoCard({ v }: { v: Video }) {
-  if (v.kind === 'youtube') {
-    const href = `https://www.youtube.com/watch?v=${v.id}`;
-    const thumb = `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
-    return (
-      <a className="media-card" href={href} target="_blank" rel="noopener noreferrer">
-        <div className="media-thumb">
-          <img src={thumb} alt={v.title} loading="lazy" />
-          <span className="media-play" aria-hidden>▶</span>
-        </div>
-        <div className="media-body">
-          <span className="media-source">{v.source}</span>
-          <span className="media-title">{v.title}</span>
-        </div>
-      </a>
-    );
-  }
+  if (v.kind === 'youtube') return <YouTubeCard v={v} />;
   return (
     <a className="media-card media-card-link" href={v.url} target="_blank" rel="noopener noreferrer">
       <div className="media-thumb media-thumb-link">

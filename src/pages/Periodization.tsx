@@ -20,6 +20,7 @@ export default function Periodization() {
   const { works, loading: wLoad } = useWorks();
   const { relations, loading: rLoad } = useRelations();
   const { periodsData, loading: pLoad } = usePeriods();
+  const { articlesData } = useArticles();
 
   const [expandedPeriod, setExpandedPeriod] = useState<string | null>(null);
   const location = useLocation();
@@ -116,7 +117,6 @@ export default function Periodization() {
   }
 
   const periods = periodsData?.periods || [];
-  const { articlesData } = useArticles();
   const periodArticles: Record<string, ArticleMeta> = Object.fromEntries(
     (articlesData?.articles || []).filter(a => a.kind === 'period').map(a => [a.key, a])
   );
