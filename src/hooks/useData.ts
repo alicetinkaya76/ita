@@ -272,6 +272,22 @@ export function useGraphMetrics() {
   return { metrics, loading };
 }
 
+// ---- Havza historiography intro texts (derived: public/data/havza_intro.json) ----
+export interface HavzaIntroBlock { metin: string; baslik: boolean }
+export interface HavzaIntro { baslik: string; bloklar: HavzaIntroBlock[] }
+
+/** Loads the per-basin historiography intro texts (author-provided). */
+export function useHavzaIntro() {
+  const [havzaIntro, setHavzaIntro] = useState<Record<string, HavzaIntro> | null>(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    loadJSON<Record<string, HavzaIntro>>('data/havza_intro.json')
+      .then(d => { setHavzaIntro(d); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, []);
+  return { havzaIntro, loading };
+}
+
 // ---- Articles (full document-derived essays) ----
 export interface ArticleTocItem {
   id: string;

@@ -2219,3 +2219,11 @@ html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3 {
 .isnad-chain-link { cursor: pointer; transition: border-color 0.12s, color 0.12s; }
 .isnad-chain-link:hover { border-color: var(--accent); color: var(--accent); }
 .isnad-chain-ext { color: var(--text-secondary); font-weight: 500; border-style: dashed; }
+
+/* ===== Havza historiography intro text ===== */
+.havza-histo-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px 32px; margin-bottom: 24px; }
+.havza-histo-body { max-width: 760px; }
+.havza-histo-body p { margin: 0 0 1em; line-height: 1.85; color: var(--text-secondary); font-size: 0.98rem; }
+.havza-histo-body p:last-child { margin-bottom: 0; }
+.havza-histo-subhead { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin: 1.4em 0 0.5em; }
+@media (max-width: 640px) { .havza-histo-card { padding: 20px 18px; } }

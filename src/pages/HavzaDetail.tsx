@@ -1,7 +1,7 @@
 import { useMemo, lazy, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAuthors, useWorks, useRelations, useCityCoords, useHavzaGeo, usePeriods } from '../hooks/useData';
+import { useAuthors, useWorks, useRelations, useCityCoords, useHavzaGeo, usePeriods, useHavzaIntro } from '../hooks/useData';
 import { HAVZA_COLORS, TYPE_COLORS, HAVZA_ORDER, PERIOD_COLORS, getPeriodId } from '../utils/colors';
 import { deathYears, hasDeathYear } from '../utils/dates';
 
@@ -19,6 +19,7 @@ export default function HavzaDetail() {
   const { coords, loading: cLoading } = useCityCoords();
   const { geo, loading: gLoading } = useHavzaGeo();
   const { periodsData, loading: pLoading } = usePeriods();
+  const { havzaIntro } = useHavzaIntro();
 
   const havzaAuthors = useMemo(() => authors.filter(a => a.havza === id), [authors, id]);
   const havzaWorks = useMemo(() => works.filter(w => w.havza === id), [works, id]);
@@ -85,6 +86,8 @@ export default function HavzaDetail() {
 
   if (aLoading || wLoading || rLoading || cLoading || gLoading || pLoading) return <div className="loading-screen">{t('common.loading')}</div>;
   if (!id || !HAVZA_ORDER.includes(id)) return <div className="loading-screen">{t('scholar_detail.no_data')}</div>;
+
+  const intro = havzaIntro?.[id];
 
   return (
     <div className="detail-page havza-detail">
@@ -237,6 +240,20 @@ export default function HavzaDetail() {
           maxNodes={25}
         />
       </Suspense>
+
+      {/* Historiography intro text (author-provided) */}
+      {intro && intro.bloklar.length > 0 && (
+        <section className="havza-histo-card">
+          <h2 className="card-title">{t('historiography.basin_writing')}</h2>
+          <div className="havza-histo-body">
+            {intro.bloklar.map((b, i) =>
+              b.baslik
+                ? <h3 key={i} className="havza-histo-subhead">{b.metin}</h3>
+                : <p key={i}>{b.metin}</p>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Historiography Link */}
       <div className="hist-link-card">
