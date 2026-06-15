@@ -1,27 +1,25 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
 import { prefetchRoute } from '../../utils/prefetch';
 
 const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent);
 
-const navItems = [
+const navItems: { key: string; path: string; labelKey?: string; match?: string[] }[] = [
   { key: 'home', path: '/' },
   { key: 'havzalar', path: '/havzalar' },
-  { key: 'veritabani', path: '/veritabani' },
+  { key: 'scholars', path: '/scholars' },
+  { key: 'sources', path: '/sources' },
   { key: 'hanedanlar', path: '/hanedanlar' },
   { key: 'genres', path: '/turler' },
   { key: 'makaleler', path: '/makaleler' },
   { key: 'periodization', path: '/periodization' },
-  { key: 'historiography', path: '/historiography' },
   { key: 'map', path: '/map' },
-  { key: 'network', path: '/network' },
-  { key: 'silsile', path: '/silsile' },
+  { key: 'network', path: '/network', labelKey: 'network_silsile', match: ['/network', '/silsile'] },
   { key: 'timeline', path: '/timeline' },
-  { key: 'compare', path: '/compare' },
-  { key: 'statistics', path: '/statistics' },
+  { key: 'statistics', path: '/statistics', labelKey: 'stats_compare', match: ['/statistics', '/compare'] },
   { key: 'media', path: '/videolar' },
   { key: 'about', path: '/about' },
 ];
@@ -29,6 +27,7 @@ const navItems = [
 export default function Navbar() {
   const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <nav className="navbar">
@@ -48,10 +47,13 @@ export default function Navbar() {
             viewTransition
             onMouseEnter={() => prefetchRoute(item.path)}
             onFocus={() => prefetchRoute(item.path)}
-            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+            className={({ isActive }) => {
+              const matchActive = item.match ? item.match.some(p => location.pathname === p || location.pathname.startsWith(p + '/')) : false;
+              return `nav-link ${isActive || matchActive ? 'active' : ''}`;
+            }}
             onClick={() => setMenuOpen(false)}
           >
-            {t(`nav.${item.key}`)}
+            {t(`nav.${item.labelKey || item.key}`)}
           </NavLink>
         ))}
       </div>

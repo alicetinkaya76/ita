@@ -18,7 +18,9 @@
     "havzalar": "Basins",
     "veritabani": "Database",
     "hanedanlar": "Dynasties",
-    "makaleler": "Articles"
+    "makaleler": "Articles",
+    "network_silsile": "Network & Silsile",
+    "stats_compare": "Statistics & Compare"
   },
   "stats": {
     "scholars": "Scholars",

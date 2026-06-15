@@ -2227,3 +2227,13 @@ html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3 {
 .havza-histo-body p:last-child { margin-bottom: 0; }
 .havza-histo-subhead { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin: 1.4em 0 0.5em; }
 @media (max-width: 640px) { .havza-histo-card { padding: 20px 18px; } }
+
+/* ===== Merged-pair page tabs (Ağ↔Silsile, İstatistik↔Karşılaştır) ===== */
+.page-tabs { display: flex; gap: 6px; margin-bottom: 18px; border-bottom: 1px solid var(--border); }
+.page-tab {
+  padding: 9px 18px; font-family: var(--font-display); font-size: 0.92rem; font-weight: 600;
+  color: var(--text-secondary); text-decoration: none; border-bottom: 2px solid transparent;
+  margin-bottom: -1px; transition: color 0.15s, border-color 0.15s;
+}
+.page-tab:hover { color: var(--text-primary); }
+.page-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
