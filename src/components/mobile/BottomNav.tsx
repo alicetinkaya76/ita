@@ -5,23 +5,18 @@ import { NavLink, useLocation } from 'react-router-dom';
 const mainTabs = [
   { key: 'home', path: '/', icon: '◆' },
   { key: 'havzalar', path: '/havzalar', icon: '🗺' },
-  { key: 'veritabani', path: '/veritabani', icon: '🗂' },
-  { key: 'makaleler', path: '/makaleler', icon: '📄' },
+  { key: 'scholars', path: '/scholars', icon: '👤' },
+  { key: 'sources', path: '/sources', icon: '📚' },
 ];
 
-const drawerItems = [
+const drawerItems: { key: string; path: string; labelKey?: string; match?: string[] }[] = [
   { key: 'hanedanlar', path: '/hanedanlar' },
   { key: 'genres', path: '/turler' },
   { key: 'periodization', path: '/periodization' },
-  { key: 'historiography', path: '/historiography' },
-  { key: 'scholars', path: '/scholars' },
-  { key: 'sources', path: '/sources' },
   { key: 'map', path: '/map' },
-  { key: 'network', path: '/network' },
-  { key: 'silsile', path: '/silsile' },
+  { key: 'network', path: '/network', labelKey: 'network_silsile', match: ['/network', '/silsile'] },
   { key: 'timeline', path: '/timeline' },
-  { key: 'compare', path: '/compare' },
-  { key: 'statistics', path: '/statistics' },
+  { key: 'statistics', path: '/statistics', labelKey: 'stats_compare', match: ['/statistics', '/compare'] },
   { key: 'media', path: '/videolar' },
   { key: 'about', path: '/about' },
 ];
@@ -40,9 +35,10 @@ export default function BottomNav() {
     setDrawerOpen(o => !o);
   }, []);
 
-  const isDrawerItemActive = drawerItems.some(
-    d => location.pathname === d.path || location.pathname.startsWith(d.path + '/')
-  );
+  const isDrawerItemActive = drawerItems.some(d => {
+    const paths = d.match || [d.path];
+    return paths.some(p => location.pathname === p || location.pathname.startsWith(p + '/'));
+  });
 
   return (
     <>
@@ -55,17 +51,20 @@ export default function BottomNav() {
       <div className={`bnav-drawer ${drawerOpen ? 'bnav-drawer-open' : ''}`}>
         <div className="bnav-drawer-handle" />
         <nav className="bnav-drawer-items">
-          {drawerItems.map(item => (
-            <NavLink
-              key={item.key}
-              to={item.path}
-              end={item.path === '/'}
-              viewTransition
-              className={({ isActive }) => `bnav-drawer-link ${isActive ? 'active' : ''}`}
-            >
-              {t(`nav.${item.key}`)}
-            </NavLink>
-          ))}
+          {drawerItems.map(item => {
+            const paths = item.match || [item.path];
+            const active = paths.some(p => location.pathname === p || location.pathname.startsWith(p + '/'));
+            return (
+              <NavLink
+                key={item.key}
+                to={item.path}
+                viewTransition
+                className={`bnav-drawer-link ${active ? 'active' : ''}`}
+              >
+                {t(`nav.${item.labelKey || item.key}`)}
+              </NavLink>
+            );
+          })}
         </nav>
       </div>
 
