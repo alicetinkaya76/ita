@@ -1,7 +1,7 @@
 import { useMemo, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuthors, useWorks, useRelations, usePeriods } from '../hooks/useData';
+import { useAuthors, useWorks, useRelations, usePeriods, useArticles, type ArticleMeta } from '../hooks/useData';
 import { PERIOD_COLORS, getPeriodId, HAVZA_COLORS } from '../utils/colors';
 import { deathYears, hasDeathYear } from '../utils/dates';
 import * as d3 from 'd3';
@@ -116,6 +116,10 @@ export default function Periodization() {
   }
 
   const periods = periodsData?.periods || [];
+  const { articlesData } = useArticles();
+  const periodArticles: Record<string, ArticleMeta> = Object.fromEntries(
+    (articlesData?.articles || []).filter(a => a.kind === 'period').map(a => [a.key, a])
+  );
 
   return (
     <div className="periodization-page">
@@ -173,6 +177,18 @@ export default function Periodization() {
 
               {/* Summary */}
               <p className="period-summary">{pLang.summary}</p>
+
+              {/* Full period article */}
+              {periodArticles[p.id] && (
+                <Link to={`/makale/${p.id}`} className="article-cta" style={{ borderLeftColor: p.color }}>
+                  <span className="article-cta-text">
+                    <span className="article-cta-kicker" style={{ color: p.color }}>{t('article.read_full')}</span>
+                    <span className="article-cta-title">{periodArticles[p.id].title}</span>
+                    <span className="article-cta-meta">{t('article.reading_time', { count: periodArticles[p.id].reading_minutes })}</span>
+                  </span>
+                  <span className="article-cta-arrow" style={{ color: p.color }}>→</span>
+                </Link>
+              )}
 
               {/* Genres */}
               <div className="period-genres">

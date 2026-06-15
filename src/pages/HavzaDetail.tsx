@@ -1,7 +1,7 @@
 import { useMemo, lazy, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAuthors, useWorks, useRelations, useCityCoords, useHavzaGeo, usePeriods, useHavzaIntro } from '../hooks/useData';
+import { useAuthors, useWorks, useRelations, useCityCoords, useHavzaGeo, usePeriods, useHavzaIntro, useArticles } from '../hooks/useData';
 import { HAVZA_COLORS, TYPE_COLORS, HAVZA_ORDER, PERIOD_COLORS, getPeriodId } from '../utils/colors';
 import { deathYears, hasDeathYear } from '../utils/dates';
 
@@ -20,6 +20,8 @@ export default function HavzaDetail() {
   const { geo, loading: gLoading } = useHavzaGeo();
   const { periodsData, loading: pLoading } = usePeriods();
   const { havzaIntro } = useHavzaIntro();
+  const { articlesData } = useArticles();
+  const havzaArticle = (articlesData?.articles || []).find(a => a.kind === 'havza' && a.key === id);
 
   const havzaAuthors = useMemo(() => authors.filter(a => a.havza === id), [authors, id]);
   const havzaWorks = useMemo(() => works.filter(w => w.havza === id), [works, id]);
@@ -253,6 +255,18 @@ export default function HavzaDetail() {
             )}
           </div>
         </section>
+      )}
+
+      {/* Full basin article */}
+      {havzaArticle && (
+        <Link to={`/makale/${havzaArticle.id}`} className="article-cta" style={{ borderLeftColor: color }}>
+          <span className="article-cta-text">
+            <span className="article-cta-kicker" style={{ color }}>{t('article.read_full')}</span>
+            <span className="article-cta-title">{havzaArticle.title}</span>
+            <span className="article-cta-meta">{t('article.reading_time', { count: havzaArticle.reading_minutes })}</span>
+          </span>
+          <span className="article-cta-arrow" style={{ color }}>→</span>
+        </Link>
       )}
 
       {/* Historiography Link */}

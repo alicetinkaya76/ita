@@ -14,7 +14,6 @@ const navItems: { key: string; path: string; labelKey?: string; match?: string[]
   { key: 'sources', path: '/sources' },
   { key: 'hanedanlar', path: '/hanedanlar' },
   { key: 'genres', path: '/turler' },
-  { key: 'makaleler', path: '/makaleler' },
   { key: 'periodization', path: '/periodization' },
   { key: 'map', path: '/map' },
   { key: 'network', path: '/network', labelKey: 'network_silsile', match: ['/network', '/silsile'] },
