@@ -510,6 +510,151 @@ function PeriodTypeHeatmap({ authors, works }: { authors: { author_id: string; y
   );
 }
 
+/* ─── Language over centuries (Arabic → Persian → Turkish) ─── */
+const LANG_KEYS = ['Arapça', 'Farsça', 'Türkçe', 'Diğer'];
+const LANG_COLORS: Record<string, string> = {
+  'Arapça': '#1F6FB2', 'Farsça': '#2E8B57', 'Türkçe': '#C1440E', 'Diğer': '#A89A8C',
+};
+const LANG_LABEL: Record<string, string> = {
+  'Arapça': 'arabic', 'Farsça': 'persian', 'Türkçe': 'turkish', 'Diğer': 'other',
+};
+function langBucket(dil: string | null | undefined): string | null {
+  const s = (dil || '').trim();
+  if (!s) return null;
+  if (s === 'Arapça') return 'Arapça';
+  if (s === 'Farsça') return 'Farsça';
+  if (/türk|osmanl|çağatay/i.test(s)) return 'Türkçe';
+  return 'Diğer';
+}
+
+function LanguageCenturyChart({ works, authors }: { works: { dil: string; author_id: string }[]; authors: { author_id: string; yuzyil: number | null }[] }) {
+  const { t } = useTranslation();
+  const ref = useRef<SVGSVGElement>(null);
+
+  const data = useMemo(() => {
+    const centuryByAuthor: Record<string, number | null> = {};
+    for (const a of authors) centuryByAuthor[a.author_id] = a.yuzyil;
+    const counts: Record<number, Record<string, number>> = {};
+    for (const w of works) {
+      const c = centuryByAuthor[w.author_id];
+      const lb = langBucket(w.dil);
+      if (c == null || c < 7 || c > 21 || !lb) continue;
+      counts[c] = counts[c] || {};
+      counts[c][lb] = (counts[c][lb] || 0) + 1;
+    }
+    const centuries = Object.keys(counts).map(Number).sort((a, b) => a - b);
+    return centuries.map(c => {
+      const row: Record<string, number> = { century: c };
+      for (const k of LANG_KEYS) row[k] = counts[c]?.[k] || 0;
+      return row;
+    });
+  }, [works, authors]);
+
+  useEffect(() => {
+    if (!ref.current || !data.length) return;
+    const svg = d3.select(ref.current);
+    svg.selectAll('*').remove();
+    const margin = { top: 20, right: 20, bottom: 40, left: 50 };
+    const width = 700 - margin.left - margin.right;
+    const height = 360 - margin.top - margin.bottom;
+    const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+    const centuries = data.map(d => d.century);
+    const stack = d3.stack<Record<string, number>>().keys(LANG_KEYS)(data);
+    const x = d3.scaleBand().domain(centuries.map(String)).range([0, width]).padding(0.2);
+    const y = d3.scaleLinear().domain([0, d3.max(stack[stack.length - 1], d => d[1]) || 0]).nice().range([height, 0]);
+    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#9B8C7E';
+    g.append('g').attr('transform', `translate(0,${height})`)
+      .call(d3.axisBottom(x).tickFormat(d => `${d}.`)).selectAll('text').attr('fill', textColor).style('font-size', '0.72rem');
+    g.append('g').call(d3.axisLeft(y).ticks(6)).selectAll('text').attr('fill', textColor).style('font-size', '0.72rem');
+    g.selectAll('g.layer').data(stack).join('g').attr('class', 'layer')
+      .attr('fill', d => LANG_COLORS[d.key] || '#999')
+      .selectAll('rect').data(d => d).join('rect')
+      .attr('x', d => x(String(d.data.century)) || 0)
+      .attr('y', d => y(d[1])).attr('height', d => y(d[0]) - y(d[1])).attr('width', x.bandwidth())
+      .attr('rx', 2).attr('opacity', 0.88)
+      .append('title').text(d => `${d.data.century}. yy`);
+    g.selectAll('.grid-line').data(y.ticks(6)).join('line').attr('class', 'grid-line')
+      .attr('x1', 0).attr('x2', width).attr('y1', d => y(d)).attr('y2', d => y(d))
+      .attr('stroke', textColor).attr('stroke-opacity', 0.12);
+  }, [data, t]);
+
+  return <svg ref={ref} viewBox="0 0 700 360" className="stat-chart-svg" />;
+}
+
+/* ─── Genre × Havza heatmap ─── */
+function GenreHavzaHeatmap({ works }: { works: { eser_turu: string; havza: string }[] }) {
+  const { t } = useTranslation();
+  const ref = useRef<SVGSVGElement>(null);
+
+  const { matrix, typeKeys } = useMemo(() => {
+    const counts: Record<string, Record<string, number>> = {};
+    const typeSet = new Set<string>();
+    for (const w of works) {
+      if (!w.eser_turu || !w.havza) continue;
+      typeSet.add(w.eser_turu);
+      counts[w.havza] = counts[w.havza] || {};
+      counts[w.havza][w.eser_turu] = (counts[w.havza][w.eser_turu] || 0) + 1;
+    }
+    const typeTotals = Array.from(typeSet).map(tp => ({
+      type: tp,
+      total: HAVZA_ORDER.reduce((s, h) => s + (counts[h]?.[tp] || 0), 0),
+    })).sort((a, b) => b.total - a.total).slice(0, 12);
+    const tk = typeTotals.map(tt => tt.type);
+    const rows: { havza: string; type: string; count: number }[] = [];
+    for (const h of HAVZA_ORDER) for (const tp of tk) rows.push({ havza: h, type: tp, count: counts[h]?.[tp] || 0 });
+    return { matrix: rows, typeKeys: tk };
+  }, [works]);
+
+  useEffect(() => {
+    if (!ref.current || !matrix.length) return;
+    const svg = d3.select(ref.current);
+    svg.selectAll('*').remove();
+    const margin = { top: 64, right: 20, bottom: 20, left: 160 };
+    const cellW = 64;
+    const cellH = 30;
+    const width = margin.left + HAVZA_ORDER.length * cellW + margin.right;
+    const height = margin.top + typeKeys.length * cellH + margin.bottom;
+    svg.attr('viewBox', `0 0 ${width} ${height}`).attr('width', '100%').attr('height', height);
+    const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+    const maxCount = Math.max(...matrix.map(m => m.count), 1);
+    const colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, maxCount]);
+
+    HAVZA_ORDER.forEach((h, i) => {
+      g.append('text')
+        .attr('transform', `translate(${i * cellW + cellW / 2}, -10) rotate(-32)`)
+        .attr('text-anchor', 'start').attr('font-size', 10).attr('font-weight', 600)
+        .attr('fill', HAVZA_COLORS[h] || '#666')
+        .text(t(`havza_names.${h}`));
+    });
+    typeKeys.forEach((tp, j) => {
+      g.append('text').attr('x', -8).attr('y', j * cellH + cellH / 2 + 1)
+        .attr('text-anchor', 'end').attr('dominant-baseline', 'middle')
+        .attr('font-size', 10.5).attr('fill', TYPE_COLORS[tp] || '#666').attr('font-weight', 600)
+        .text(t(`source_types.${tp}`));
+    });
+    for (const m of matrix) {
+      const i = HAVZA_ORDER.indexOf(m.havza);
+      const j = typeKeys.indexOf(m.type);
+      if (i < 0 || j < 0) continue;
+      g.append('rect').attr('x', i * cellW + 2).attr('y', j * cellH + 2)
+        .attr('width', cellW - 4).attr('height', cellH - 4).attr('rx', 4)
+        .attr('fill', m.count > 0 ? colorScale(m.count) : 'var(--bg-secondary, #F5F0EB)')
+        .attr('stroke', 'var(--border, #E2D9CE)').attr('stroke-width', 0.5);
+      g.append('text').attr('x', i * cellW + cellW / 2).attr('y', j * cellH + cellH / 2 + 1)
+        .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+        .attr('font-size', 11).attr('font-weight', m.count > 0 ? 700 : 400)
+        .attr('fill', m.count > maxCount * 0.5 ? '#fff' : m.count > 0 ? '#3E2F1C' : '#BCAB99')
+        .text(m.count > 0 ? m.count.toLocaleString() : '—');
+    }
+  }, [matrix, typeKeys, t]);
+
+  return (
+    <div className="stat-chart-wrap" style={{ overflowX: 'auto' }}>
+      <svg ref={ref} />
+    </div>
+  );
+}
+
 /* ─── Main Statistics Page ─── */
 export default function Statistics() {
   const { t } = useTranslation();
@@ -554,6 +699,22 @@ export default function Statistics() {
         </div>
       </section>
 
+      {/* Language shift over centuries */}
+      <section className="stat-section">
+        <h2 className="stat-section-title">{t('statistics.language_shift')}</h2>
+        <div className="stat-chart-wrap">
+          <LanguageCenturyChart works={works} authors={authors} />
+          <div className="stat-chart-legend">
+            {LANG_KEYS.map(k => (
+              <span key={k} className="stat-legend-item">
+                <span className="stat-legend-dot" style={{ background: LANG_COLORS[k] }} />
+                {t(`lang_bucket.${LANG_LABEL[k]}`)}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Type Distribution */}
       <section className="stat-section">
         <h2 className="stat-section-title">{t('statistics.type_distribution')}</h2>
@@ -572,6 +733,12 @@ export default function Statistics() {
       <section className="stat-section">
         <h2 className="stat-section-title">{t('statistics.period_havza_heatmap')}</h2>
         <PeriodHavzaHeatmap authors={authors} />
+      </section>
+
+      {/* Genre × Havza Heatmap */}
+      <section className="stat-section">
+        <h2 className="stat-section-title">{t('statistics.genre_havza')}</h2>
+        <GenreHavzaHeatmap works={works} />
       </section>
 
       {/* Period × Type Heatmap */}

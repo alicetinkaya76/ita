@@ -170,7 +170,9 @@
     "avg_century": "میانگین سده",
     "century_range": "بازهٔ سده",
     "period_havza_heatmap": "توزیع دوره × حوزه",
-    "period_type_heatmap": "توزیع دوره × نوع منبع"
+    "period_type_heatmap": "توزیع دوره × نوع منبع",
+    "language_shift": "زبان آثار بر حسب قرن",
+    "genre_havza": "توزیع نوع × حوضه"
   },
   "periodization": {
     "title": "دوره‌بندی",
@@ -331,5 +333,11 @@
     "hint_navigate": "حرکت",
     "hint_select": "انتخاب",
     "hint_toggle": "باز/بسته"
+  },
+  "lang_bucket": {
+    "arabic": "عربی",
+    "persian": "فارسی",
+    "turkish": "ترکی",
+    "other": "دیگر"
   }
 }

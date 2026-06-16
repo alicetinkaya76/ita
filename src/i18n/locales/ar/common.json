@@ -170,7 +170,9 @@
     "avg_century": "متوسط القرن",
     "century_range": "نطاق القرون",
     "period_havza_heatmap": "التوزيع حسب الفترة والحوض",
-    "period_type_heatmap": "توزيع الفترة × نوع المصدر"
+    "period_type_heatmap": "توزيع الفترة × نوع المصدر",
+    "language_shift": "لغة المؤلفات حسب القرن",
+    "genre_havza": "توزيع النوع × الحوض"
   },
   "about": {
     "title": "حول İTA",
@@ -318,5 +320,11 @@
     "hint_navigate": "تنقّل",
     "hint_select": "اختر",
     "hint_toggle": "فتح/إغلاق"
+  },
+  "lang_bucket": {
+    "arabic": "العربية",
+    "persian": "الفارسية",
+    "turkish": "التركية",
+    "other": "أخرى"
   }
 }

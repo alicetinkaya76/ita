@@ -170,7 +170,9 @@
     "avg_century": "Avg. Century",
     "century_range": "Century Range",
     "period_havza_heatmap": "Period × Basin Distribution",
-    "period_type_heatmap": "Period × Source Type Distribution"
+    "period_type_heatmap": "Period × Source Type Distribution",
+    "language_shift": "Language of Works by Century",
+    "genre_havza": "Genre × Basin Distribution"
   },
   "about": {
     "title": "About İTA",
@@ -335,5 +337,11 @@
     "hint_navigate": "navigate",
     "hint_select": "select",
     "hint_toggle": "toggle"
+  },
+  "lang_bucket": {
+    "arabic": "Arabic",
+    "persian": "Persian",
+    "turkish": "Turkish",
+    "other": "Other"
   }
 }

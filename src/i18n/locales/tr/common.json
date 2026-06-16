@@ -170,7 +170,9 @@
     "avg_century": "Ort. Yüzyıl",
     "century_range": "Yüzyıl Aralığı",
     "period_havza_heatmap": "Dönem × Havza Dağılımı",
-    "period_type_heatmap": "Dönem × Eser Türü Dağılımı"
+    "period_type_heatmap": "Dönem × Eser Türü Dağılımı",
+    "language_shift": "Eserlerin Dili — Yüzyıllara Göre",
+    "genre_havza": "Tür × Havza Dağılımı"
   },
   "about": {
     "title": "İTA Hakkında",
@@ -335,5 +337,11 @@
     "hint_navigate": "gezin",
     "hint_select": "seç",
     "hint_toggle": "aç/kapat"
+  },
+  "lang_bucket": {
+    "arabic": "Arapça",
+    "persian": "Farsça",
+    "turkish": "Türkçe",
+    "other": "Diğer"
   }
 }
