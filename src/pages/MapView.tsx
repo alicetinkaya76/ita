@@ -102,6 +102,10 @@ export default function MapView() {
     return clusters.reduce((s, c) => s + c.authors.length, 0);
   }, [clusters]);
 
+  const scopeTotal = useMemo(() => {
+    return activeHavza ? filteredAuthors.filter(a => a.havza === activeHavza).length : filteredAuthors.length;
+  }, [filteredAuthors, activeHavza]);
+
   const loading = aLoading || cLoading || gLoading;
   if (loading) return <div className="loading-screen">{t('common.loading')}</div>;
 
@@ -110,7 +114,7 @@ export default function MapView() {
       <header className="list-header">
         <h1>{t('nav.map')}</h1>
         <span className="list-count">
-          {geocodedCount} / {filteredAuthors.length} {t('common.scholar_count')} {t('map.geocoded')}
+          {geocodedCount} / {scopeTotal} {t('common.scholar_count')} {t('map.geocoded')}
         </span>
       </header>
 
@@ -183,7 +187,7 @@ export default function MapView() {
 
             {/* City markers */}
             {clusters.map((c) => {
-              const radius = Math.min(4 + Math.sqrt(c.authors.length) * 3, 20);
+              const radius = Math.min(4 + Math.sqrt(c.authors.length) * 3.4, 26);
               return (
                 <CircleMarker
                   key={`${c.city}-${c.havza}`}
