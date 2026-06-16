@@ -33,19 +33,62 @@ export default function ScholarDetail() {
     };
   }, [relations, scholar]);
 
-  // Similar scholars: same havza + same period, sorted by importance
+  // Similar scholars: multi-signal similarity from existing fields only —
+  // shared havza, century proximity, madhhab, network proximity (direct link or
+  // shared teachers/students), and comparable output. No fabricated data.
   const similarScholars = useMemo(() => {
     if (!scholar) return [];
-    const pid = getPeriodId(scholar.yuzyil);
+    // adjacency over the relation graph (slug -> directly related slugs)
+    const adj = new Map<string, Set<string>>();
+    const link = (x: string, y: string) => {
+      let s = adj.get(x);
+      if (!s) { s = new Set(); adj.set(x, s); }
+      s.add(y);
+    };
+    for (const r of relations) {
+      if (!r.source || !r.target) continue;
+      link(r.source, r.target);
+      link(r.target, r.source);
+    }
+    const selfSlug = scholar.dia_slug || '';
+    const selfNeighbors = selfSlug ? (adj.get(selfSlug) ?? new Set<string>()) : new Set<string>();
+    const selfMezhep = (scholar.mezhep || '').trim();
+    const tier = (n: number) => (n <= 0 ? 0 : n <= 2 ? 1 : n <= 5 ? 2 : n <= 10 ? 3 : 4);
+    const selfTier = tier(scholar.eser_sayisi || 0);
+
     return authors
-      .filter(a =>
-        a.author_id !== scholar.author_id &&
-        a.havza === scholar.havza &&
-        getPeriodId(a.yuzyil) === pid
-      )
-      .sort((a, b) => (b.importance_score || 0) - (a.importance_score || 0))
-      .slice(0, 6);
-  }, [authors, scholar]);
+      .filter(a => a.author_id !== scholar.author_id)
+      .map(a => {
+        let score = 0;
+        if (a.havza === scholar.havza) score += 3;
+        if (a.yuzyil != null && scholar.yuzyil != null) {
+          const d = Math.abs(a.yuzyil - scholar.yuzyil);
+          if (d === 0) score += 3; else if (d === 1) score += 1;
+        }
+        const am = (a.mezhep || '').trim();
+        if (am && selfMezhep && am === selfMezhep) score += 2;
+        const aslug = a.dia_slug || '';
+        if (aslug && selfNeighbors.size) {
+          if (selfNeighbors.has(aslug)) {
+            score += 5; // directly connected (teacher / student / contemporary)
+          } else {
+            const an = adj.get(aslug);
+            if (an) {
+              const [small, big] = an.size < selfNeighbors.size ? [an, selfNeighbors] : [selfNeighbors, an];
+              let shared = 0;
+              for (const s of small) { if (big.has(s)) { shared++; if (shared >= 3) break; } }
+              score += shared; // up to +3 for shared mentors / students
+            }
+          }
+        }
+        if (tier(a.eser_sayisi || 0) === selfTier) score += 1;
+        return { a, score };
+      })
+      .filter(x => x.score > 0)
+      .sort((x, y) => y.score - x.score || (y.a.importance_score || 0) - (x.a.importance_score || 0))
+      .slice(0, 6)
+      .map(x => x.a);
+  }, [authors, relations, scholar]);
 
   if (aLoading || wLoading || rLoading) return <div className="loading-screen">{t('common.loading')}</div>;
   if (!scholar) return <div className="loading-screen">{t('scholar_detail.no_data')}</div>;

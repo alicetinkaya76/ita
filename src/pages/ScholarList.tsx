@@ -19,6 +19,7 @@ export default function ScholarList() {
 
   const havzaFilter = searchParams.get('havza') || '';
   const centuryFilter = searchParams.get('century') || '';
+  const mezhepFilter = searchParams.get('mezhep') || '';
   const query = searchParams.get('q') || '';
 
   const setParam = useCallback((key: string, value: string) => {
@@ -35,6 +36,7 @@ export default function ScholarList() {
       const next = new URLSearchParams(prev);
       next.delete('havza');
       next.delete('century');
+      next.delete('mezhep');
       next.delete('q');
       return next;
     }, { replace: true });
@@ -44,16 +46,18 @@ export default function ScholarList() {
     const chips = [];
     if (havzaFilter) chips.push({ key: 'havza', label: t('scholar_detail.havza'), value: t(`havza_names.${havzaFilter}`) });
     if (centuryFilter) chips.push({ key: 'century', label: t('scholar_detail.century'), value: `${centuryFilter}${t('dashboard.century_suffix')}` });
+    if (mezhepFilter) chips.push({ key: 'mezhep', label: t('scholar_detail.madhhab', { defaultValue: 'Mezhep' }), value: mezhepFilter });
     if (query) chips.push({ key: 'q', label: t('common.search'), value: query });
     return chips;
-  }, [havzaFilter, centuryFilter, query, t]);
+  }, [havzaFilter, centuryFilter, mezhepFilter, query, t]);
 
   const filtered = useMemo(() => {
     let list = authors;
     if (havzaFilter) list = list.filter(a => a.havza === havzaFilter);
     if (centuryFilter) list = list.filter(a => a.yuzyil === parseInt(centuryFilter));
+    if (mezhepFilter) list = list.filter(a => (a.mezhep || '').trim() === mezhepFilter);
     return list;
-  }, [authors, havzaFilter, centuryFilter]);
+  }, [authors, havzaFilter, centuryFilter, mezhepFilter]);
 
   const fuse = useMemo(
     () => new Fuse(filtered, { keys: ['meshur_isim', 'tam_isim', 'sehir', 'kimlik'], threshold: 0.35 }),
@@ -68,6 +72,15 @@ export default function ScholarList() {
   const centuries = useMemo(() => {
     const set = new Set(authors.map(a => a.yuzyil).filter(Boolean) as number[]);
     return [...set].sort((a, b) => a - b);
+  }, [authors]);
+
+  const mezhepOptions = useMemo(() => {
+    const c: Record<string, number> = {};
+    for (const a of authors) {
+      const m = (a.mezhep || '').trim();
+      if (m) c[m] = (c[m] || 0) + 1;
+    }
+    return Object.entries(c).sort((a, b) => b[1] - a[1]).map(([m]) => m);
   }, [authors]);
 
   const renderRow = useCallback((a: Author, _index: number, style: CSSProperties) => (
@@ -124,6 +137,12 @@ export default function ScholarList() {
           <option value="">{t('common.all')} — {t('scholar_detail.century')}</option>
           {centuries.map(c => (
             <option key={c} value={String(c)}>{c}. {t('dashboard.century_suffix')}</option>
+          ))}
+        </select>
+        <select value={mezhepFilter} onChange={e => setParam('mezhep', e.target.value)} className="filter-select">
+          <option value="">{t('common.all')} — {t('scholar_detail.madhhab', { defaultValue: 'Mezhep' })}</option>
+          {mezhepOptions.map(m => (
+            <option key={m} value={m}>{m}</option>
           ))}
         </select>
         <ExportButton<Author>

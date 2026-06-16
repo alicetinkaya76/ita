@@ -53,6 +53,18 @@ export const TYPE_COLORS: Record<string, string> = {
   diger: '#9E9E9E',
 };
 
+// Madhhab (mezhep) colours — keys match the raw data values exactly.
+export const MEZHEP_COLORS: Record<string, string> = {
+  'Hanefî': '#1565C0',
+  'Mâlikî': '#2E7D32',
+  'Şâfiî': '#6A1B9A',
+  'Hanbelî': '#BF360C',
+  'Zâhirî': '#00838F',
+  'Şiî': '#AD1457',
+  'İbâzî': '#E65100',
+  'İsmâilî': '#827717',
+};
+
 export const HAVZA_ORDER = [
   'iran', 'misir', 'hint', 'endulus', 'arabistan',
   'magrib', 'turkistan', 'balkanlar', 'biladussam',

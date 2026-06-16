@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import * as d3 from 'd3';
 import { useAuthors, useWorks, useRelations, useStats } from '../hooks/useData';
-import { HAVZA_COLORS, HAVZA_ORDER, TYPE_COLORS, PERIOD_COLORS, PERIOD_RANGES } from '../utils/colors';
+import { HAVZA_COLORS, HAVZA_ORDER, TYPE_COLORS, PERIOD_COLORS, PERIOD_RANGES, MEZHEP_COLORS } from '../utils/colors';
 
 /* ─── Havza Stacked Bar Chart ─── */
 function HavzaCenturyChart({ authors }: { authors: { havza: string; yuzyil: number | null }[] }) {
@@ -656,6 +656,32 @@ function GenreHavzaHeatmap({ works }: { works: { eser_turu: string; havza: strin
 }
 
 /* ─── Main Statistics Page ─── */
+/* ─── Madhhab distribution (recorded subset only) ─── */
+function MezhepChart({ authors }: { authors: { mezhep: string }[] }) {
+  const rows = useMemo(() => {
+    const c: Record<string, number> = {};
+    for (const a of authors) {
+      const m = (a.mezhep || '').trim();
+      if (m) c[m] = (c[m] || 0) + 1;
+    }
+    return Object.entries(c).sort((a, b) => b[1] - a[1]);
+  }, [authors]);
+  const max = rows.length ? rows[0][1] : 1;
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 560 }}>
+      {rows.map(([m, n]) => (
+        <div key={m} style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 14 }}>
+          <span style={{ width: 92, textAlign: 'right', color: '#8a8a8a', flexShrink: 0 }}>{m}</span>
+          <span style={{ flex: 1, background: 'rgba(128,128,128,0.18)', borderRadius: 6, height: 18, overflow: 'hidden' }}>
+            <span style={{ display: 'block', height: '100%', width: `${(n / max) * 100}%`, background: MEZHEP_COLORS[m] || '#8B7355', borderRadius: 6 }} />
+          </span>
+          <span style={{ width: 30, color: '#8a8a8a', flexShrink: 0 }}>{n}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function Statistics() {
   const { t } = useTranslation();
   const { authors, loading: aLoading } = useAuthors();
@@ -753,6 +779,15 @@ export default function Statistics() {
         <div className="stat-chart-wrap">
           <TopCitiesChart authors={authors} />
         </div>
+      </section>
+
+      {/* Madhhab distribution (recorded subset) */}
+      <section className="stat-section">
+        <h2 className="stat-section-title">{t('statistics.madhhab_dist', { defaultValue: 'Mezhep dağılımı' })}</h2>
+        <p style={{ fontSize: 13, color: '#8a8a8a', margin: '0 0 14px', maxWidth: 560, lineHeight: 1.5 }}>
+          {t('statistics.madhhab_note', { defaultValue: 'Yalnızca mezhebi kayıtlı tarihçiler için (toplamın yaklaşık %9’u); bütün külliyayı temsil etmez.' })}
+        </p>
+        <MezhepChart authors={authors} />
       </section>
     </div>
   );
