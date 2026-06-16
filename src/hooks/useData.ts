@@ -241,6 +241,15 @@ export interface NodeMetric {
   betweenness: number;
   pagerank: number;
   component_size: number;
+  community: number | null;
+}
+
+export interface CommunityInfo {
+  id: number;
+  itta_size: number;
+  total_size: number;
+  top_havza: string | null;
+  members: { slug: string; name: string }[];
 }
 
 export interface GraphMetricsSummary {
@@ -252,12 +261,15 @@ export interface GraphMetricsSummary {
   components: number;
   largest_component: number;
   density: number;
+  communities_total?: number;
+  communities_shown?: number;
 }
 
 export interface GraphMetrics {
   generated_at: string;
   summary: GraphMetricsSummary;
   nodes: Record<string, NodeMetric>;
+  communities: CommunityInfo[];
 }
 
 /** Loads precomputed network centrality metrics (degree/betweenness/pagerank). */

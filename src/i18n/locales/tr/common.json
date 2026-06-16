@@ -150,7 +150,9 @@
     "mini_title": "İlişki Ağı",
     "expand": "Tam ağ görselleştirme",
     "central": "En Merkezî Tarihçiler",
-    "betweenness": "Aracılık"
+    "betweenness": "Aracılık",
+    "color_by": "Renklendir",
+    "schools": "İlim Halkaları"
   },
   "timeline": {
     "brush_hint": "Zaman aralığı seçmek için sürükleyin",

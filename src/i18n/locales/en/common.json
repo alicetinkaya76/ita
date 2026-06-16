@@ -150,7 +150,9 @@
     "mini_title": "Relation Network",
     "expand": "Full network view",
     "central": "Most Central Scholars",
-    "betweenness": "Betweenness"
+    "betweenness": "Betweenness",
+    "color_by": "Color by",
+    "schools": "Scholarly Circles"
   },
   "timeline": {
     "brush_hint": "Drag to select a time range",

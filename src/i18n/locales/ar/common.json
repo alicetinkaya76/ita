@@ -150,7 +150,9 @@
     "mini_title": "شبكة العلاقات",
     "expand": "عرض الشبكة الكاملة",
     "central": "أبرز العلماء",
-    "betweenness": "الوساطة"
+    "betweenness": "الوساطة",
+    "color_by": "تلوين حسب",
+    "schools": "الحلقات العلمية"
   },
   "timeline": {
     "brush_hint": "اسحب لتحديد نطاق زمني",

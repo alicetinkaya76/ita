@@ -24,12 +24,25 @@ interface GraphNode extends d3.SimulationNodeDatum {
   teachers: number;
   students: number;
   contemporaries: number;
+  community: number | null;
 }
 
 interface GraphLink extends d3.SimulationLinkDatum<GraphNode> {
   type: string;
   sourceSlug: string;
   targetSlug: string;
+}
+
+const COMMUNITY_PALETTE = [
+  '#C1440E', '#1F6FB2', '#2E8B57', '#8E44AD', '#D98324', '#16A085',
+  '#C0392B', '#34495E', '#7D6608', '#A93226', '#117A65', '#6C3483',
+];
+function communityColor(c: number | null | undefined): string {
+  if (c == null || c >= COMMUNITY_PALETTE.length) return '#B8AEA0';
+  return COMMUNITY_PALETTE[c];
+}
+function nodeColor(d: { havza: string; community: number | null }, mode: string): string {
+  return mode === 'community' ? communityColor(d.community) : (HAVZA_COLORS[d.havza] || '#999');
 }
 
 const REL_COLORS: Record<string, string> = {
@@ -60,6 +73,7 @@ export default function NetworkView() {
   const [selectedPeriod, setSelectedPeriod] = useState<string>(searchParams.get('period') || '');
   const [selectedRelType, setSelectedRelType] = useState<string>(searchParams.get('rel') || '');
   const [showAllEdges, setShowAllEdges] = useState(false);
+  const [colorMode, setColorMode] = useState<'havza' | 'community'>('havza');
   const [hoveredNode, setHoveredNode] = useState<GraphNode | null>(null);
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -134,6 +148,7 @@ export default function NetworkView() {
           teachers: m?.teachers ?? 0,
           students: m?.students ?? 0,
           contemporaries: m?.contemporaries ?? 0,
+          community: m?.community ?? null,
         });
       }
     }
@@ -249,7 +264,7 @@ export default function NetworkView() {
       .data(nodes)
       .join('circle')
       .attr('r', d => nodeRadius(d))
-      .attr('fill', d => HAVZA_COLORS[d.havza] || '#999')
+      .attr('fill', d => nodeColor(d, colorMode))
       .attr('stroke', '#fff')
       .attr('stroke-width', 1.5)
       .attr('cursor', 'pointer')
@@ -359,6 +374,14 @@ export default function NetworkView() {
     return () => { simulation.stop(); };
   }, [nodes, links, navigate]);
 
+  // Recolor nodes on color-mode change without re-running the simulation
+  useEffect(() => {
+    if (!svgRef.current) return;
+    d3.select(svgRef.current)
+      .selectAll<SVGCircleElement, GraphNode>('g.nodes circle')
+      .attr('fill', d => nodeColor(d, colorMode));
+  }, [colorMode, nodes]);
+
   // Update URL params
   useEffect(() => {
     const params: Record<string, string> = {};
@@ -446,21 +469,68 @@ export default function NetworkView() {
       <div className="network-layout">
         {/* Legend sidebar */}
         <div className="network-legend">
-          {/* Havza legend */}
+          {/* Color mode toggle */}
           <div className="network-legend-section">
-            <div className="network-legend-title">{t('stats.havzas')}</div>
-            {HAVZA_ORDER.filter(h => graphStats.havzaCounts[h]).map(h => (
-              <button
-                key={h}
-                className={`map-legend-item ${selectedHavza === h ? 'map-legend-active' : ''}`}
-                onClick={() => setSelectedHavza(prev => prev === h ? '' : h)}
-              >
-                <span className="map-legend-dot" style={{ background: HAVZA_COLORS[h] }} />
-                <span className="map-legend-name">{t(`havza_names.${h}`)}</span>
-                <span className="map-legend-count">{graphStats.havzaCounts[h] || 0}</span>
-              </button>
-            ))}
+            <div className="network-legend-title">{t('network.color_by')}</div>
+            <div className="network-colormode-toggle">
+              <button className={`colormode-btn ${colorMode === 'havza' ? 'active' : ''}`} onClick={() => setColorMode('havza')}>{t('stats.havzas')}</button>
+              <button className={`colormode-btn ${colorMode === 'community' ? 'active' : ''}`} onClick={() => setColorMode('community')}>{t('network.schools')}</button>
+            </div>
           </div>
+
+          {/* Havza legend */}
+          {colorMode === 'havza' && (
+            <div className="network-legend-section">
+              <div className="network-legend-title">{t('stats.havzas')}</div>
+              {HAVZA_ORDER.filter(h => graphStats.havzaCounts[h]).map(h => (
+                <button
+                  key={h}
+                  className={`map-legend-item ${selectedHavza === h ? 'map-legend-active' : ''}`}
+                  onClick={() => setSelectedHavza(prev => prev === h ? '' : h)}
+                >
+                  <span className="map-legend-dot" style={{ background: HAVZA_COLORS[h] }} />
+                  <span className="map-legend-name">{t(`havza_names.${h}`)}</span>
+                  <span className="map-legend-count">{graphStats.havzaCounts[h] || 0}</span>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* School / lineage list (community detection) */}
+          {colorMode === 'community' && metrics?.communities && (
+            <div className="network-legend-section">
+              <div className="network-legend-title">{t('network.schools')}</div>
+              <div className="network-school-list">
+                {metrics.communities.slice(0, COMMUNITY_PALETTE.length).map(c => (
+                  <div key={c.id} className="network-school">
+                    <div className="network-school-head">
+                      <span className="map-legend-dot" style={{ background: communityColor(c.id) }} />
+                      <span className="network-school-name">{c.members[0]?.name || `#${c.id + 1}`}</span>
+                      <span className="map-legend-count">{c.itta_size}</span>
+                    </div>
+                    <div className="network-school-members">
+                      {c.members.slice(0, 3).map(m => {
+                        const a = slugMap.get(m.slug);
+                        return (
+                          <button
+                            key={m.slug}
+                            className="network-school-member"
+                            onClick={() => {
+                              const n = nodes.find(x => x.slug === m.slug);
+                              if (n) setSelectedNode(n);
+                              else if (a) navigate(`/scholars/${a.author_id}`);
+                            }}
+                          >
+                            {m.name}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Relation type legend */}
           <div className="network-legend-section">

@@ -50,6 +50,23 @@ for comp in components:
     for n in comp:
         comp_size[n] = len(comp)
 
+# --- community detection (Louvain) → scholarly "schools/lineages" ---
+import networkx.algorithms.community as nxcom
+try:
+    _comms = nxcom.louvain_communities(G, seed=42)
+except Exception:
+    _comms = list(nxcom.greedy_modularity_communities(G))
+# rank communities by how many İTA authors they contain (largest school = rank 0)
+_ranked_comms = sorted(
+    ((c, sum(1 for n in c if n in itta_slugs)) for c in _comms),
+    key=lambda x: -x[1],
+)
+_ranked_comms = [(c, k) for c, k in _ranked_comms if k > 0]
+community_of = {}
+for _rank, (_c, _k) in enumerate(_ranked_comms):
+    for _n in _c:
+        community_of[_n] = _rank
+
 def r4(x): return round(float(x), 4)
 def r6(x): return round(float(x), 6)
 
@@ -59,6 +76,7 @@ for slug in itta_slugs:
         nodes_out[slug] = {
             "teachers": 0, "students": 0, "contemporaries": 0,
             "degree": 0, "betweenness": 0.0, "pagerank": 0.0, "component_size": 0,
+            "community": None,
         }
         continue
     nodes_out[slug] = {
@@ -69,7 +87,29 @@ for slug in itta_slugs:
         "betweenness": r4(betweenness.get(slug, 0.0)),
         "pagerank": r6(pagerank.get(slug, 0.0)),
         "component_size": comp_size.get(slug, 1),
+        "community": community_of.get(slug),
     }
+
+# --- school/lineage summary (communities with >=3 İTA authors) ---
+havza_by_slug = {a["dia_slug"]: a.get("havza") for a in authors if a.get("dia_slug")}
+name_by_slug  = {a["dia_slug"]: a.get("meshur_isim", a["dia_slug"]) for a in authors if a.get("dia_slug")}
+communities_out = []
+for _rank, (_c, _k) in enumerate(_ranked_comms):
+    if _k < 3:
+        continue
+    _members = sorted((n for n in _c if n in itta_slugs), key=lambda n: pagerank.get(n, 0.0), reverse=True)
+    _hv = defaultdict(int)
+    for n in _members:
+        h = havza_by_slug.get(n)
+        if h:
+            _hv[h] += 1
+    communities_out.append({
+        "id": _rank,
+        "itta_size": _k,
+        "total_size": len(_c),
+        "top_havza": (max(_hv.items(), key=lambda x: x[1])[0] if _hv else None),
+        "members": [{"slug": n, "name": name_by_slug.get(n, n)} for n in _members[:6]],
+    })
 
 summary = {
     "graph_nodes": G.number_of_nodes(),
@@ -80,12 +120,15 @@ summary = {
     "components": len(components),
     "largest_component": max((len(c) for c in components), default=0),
     "density": r6(nx.density(G)),
+    "communities_total": len(_ranked_comms),
+    "communities_shown": len(communities_out),
 }
 
 out = {
     "generated_at": datetime.date.today().isoformat(),
     "summary": summary,
     "nodes": nodes_out,
+    "communities": communities_out,
 }
 (DATA / "graph_metrics.json").write_text(
     json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8"
