@@ -343,5 +343,14 @@
     "persian": "Persian",
     "turkish": "Turkish",
     "other": "Other"
+  },
+  "story": {
+    "title": "The Story of Islamic Historiography",
+    "lead": "From Medina to the Maghrib, from the 7th century to today — the journey of history-writing across space and time.",
+    "scroll_hint": "Scroll to begin",
+    "map_caption": "Centers of the schools — colored by period",
+    "outro_title": "The journey doesn't end here",
+    "outro_lead": "Explore every historian, work, and connection yourself.",
+    "home_cta": "Explore the Story"
   }
 }

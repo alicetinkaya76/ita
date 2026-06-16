@@ -343,5 +343,14 @@
     "persian": "Farsça",
     "turkish": "Türkçe",
     "other": "Diğer"
+  },
+  "story": {
+    "title": "İslam Tarih Yazıcılığının Hikâyesi",
+    "lead": "Medine'den Mağrib'e, 7. yüzyıldan günümüze — tarih yazımının mekânda ve zamanda yolculuğu.",
+    "scroll_hint": "Başlamak için kaydırın",
+    "map_caption": "Ekol merkezleri — döneme göre renklendirilmiş",
+    "outro_title": "Yolculuk burada bitmiyor",
+    "outro_lead": "Her tarihçiyi, eseri ve ilişkiyi kendiniz keşfedin.",
+    "home_cta": "Hikâyeyi Keşfet"
   }
 }

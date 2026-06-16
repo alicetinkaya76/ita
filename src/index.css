@@ -2316,3 +2316,39 @@ html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3 {
   border-radius: 7px; cursor: pointer; transition: all 0.15s;
 }
 .map-timeline-reset:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ===== Scrollytelling story ("Hikâye") ===== */
+.story-page { display: flex; align-items: flex-start; position: relative; }
+.story-visual { position: sticky; top: 0; height: 100vh; flex: 0 0 52%; display: flex; flex-direction: column; }
+.story-map { flex: 1; min-height: 0; width: 100%; background: var(--bg-secondary, #EDE6DC); }
+.story-visual-caption { padding: 8px 16px; font-size: 0.78rem; color: var(--text-muted); text-align: center; background: var(--surface); border-top: 1px solid var(--border); }
+.story-steps { flex: 1 1 48%; padding: 0 6%; }
+.story-step { min-height: 86vh; display: flex; flex-direction: column; justify-content: center; opacity: 0.4; transition: opacity 0.45s ease; }
+.story-step.active { opacity: 1; }
+.story-title { font-family: var(--font-display); font-size: 2.4rem; line-height: 1.15; color: var(--text-primary); margin: 0 0 16px; }
+.story-lead { font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary); max-width: 38ch; }
+.story-scroll-hint { margin-top: 28px; font-size: 0.9rem; color: var(--text-muted); letter-spacing: 0.04em; animation: storyBounce 1.8s ease-in-out infinite; }
+@keyframes storyBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+.story-period { border-left: 4px solid; padding-left: 18px; }
+.story-period-kicker { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.story-period-title { font-family: var(--font-display); font-size: 2.1rem; margin: 6px 0 0; }
+.story-school-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-bottom: 12px; }
+.story-school-name { font-family: var(--font-display); font-size: 1.6rem; color: var(--text-primary); margin: 0 0 12px; }
+.story-school-desc { font-size: 1.05rem; line-height: 1.65; color: var(--text-secondary); max-width: 42ch; }
+.story-school-scholars { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.story-scholar-chip { font-size: 0.85rem; padding: 5px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--text-primary); text-decoration: none; transition: border-color 0.15s, color 0.15s; }
+.story-scholar-chip:hover { border-color: var(--accent); color: var(--accent); }
+.story-outro-title { font-family: var(--font-display); font-size: 1.9rem; color: var(--text-primary); margin: 0 0 12px; }
+.story-outro-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.story-cta { padding: 10px 20px; border-radius: 8px; background: var(--accent); color: #fff; text-decoration: none; font-family: var(--font-display); font-weight: 600; transition: background 0.15s; }
+.story-cta:hover { background: var(--accent-hover); }
+.hero-story-cta { display: inline-block; margin-top: 22px; padding: 12px 26px; border-radius: 999px; background: #fff; color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 1rem; text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,0.14); transition: transform 0.15s, box-shadow 0.15s; }
+.hero-story-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,0,0,0.2); }
+@media (max-width: 900px) {
+  .story-page { flex-direction: column; }
+  .story-visual { height: 42vh; flex: none; width: 100%; z-index: 2; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .story-steps { width: 100%; padding: 0 7%; }
+  .story-step { min-height: 68vh; }
+  .story-title { font-size: 1.9rem; }
+  .story-school-name { font-size: 1.4rem; }
+}

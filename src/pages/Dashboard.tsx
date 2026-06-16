@@ -154,6 +154,7 @@ export default function Dashboard() {
         <div className="hero-pattern" />
         <h1 className="hero-title">{t('dashboard.title')}</h1>
         <p className="hero-subtitle">{t('dashboard.subtitle')}</p>
+        <Link to="/hikaye" className="hero-story-cta">{t('story.home_cta')} →</Link>
       </header>
 
       {/* Stats Row */}
