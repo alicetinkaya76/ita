@@ -5,6 +5,15 @@ import * as d3 from 'd3';
 import { useAuthors, useWorks, useRelations } from '../hooks/useData';
 import { HAVZA_COLORS, HAVZA_ORDER, TYPE_COLORS, PERIOD_COLORS, PERIOD_RANGES, getPeriodId } from '../utils/colors';
 
+function langBucket(dil: string | null | undefined): string | null {
+  const s = (dil || '').trim();
+  if (!s) return null;
+  if (s === 'Arapça') return 'Arapça';
+  if (s === 'Farsça') return 'Farsça';
+  if (/türk|osmanl|çağatay/i.test(s)) return 'Türkçe';
+  return 'Diğer';
+}
+
 interface HavzaStats {
   key: string;
   scholars: number;
@@ -12,6 +21,7 @@ interface HavzaStats {
   diaMatch: number;
   centuryDist: Record<number, number>;
   typeDist: Record<string, number>;
+  langDist: Record<string, number>;
   cities: [string, number][];
   avgCentury: number;
   teachers: number;
@@ -21,7 +31,7 @@ interface HavzaStats {
 function computeStats(
   havza: string,
   authors: { havza: string; yuzyil: number | null; dia_slug: string; sehir: string }[],
-  works: { havza: string; eser_turu: string }[],
+  works: { havza: string; eser_turu: string; dil: string }[],
   relations: { source: string; target: string; type: string }[],
   slugToHavza: Map<string, string>
 ): HavzaStats {
@@ -31,6 +41,7 @@ function computeStats(
 
   const centuryDist: Record<number, number> = {};
   const typeDist: Record<string, number> = {};
+  const langDist: Record<string, number> = {};
   const cityMap: Record<string, number> = {};
   let centurySum = 0, centuryCount = 0;
 
@@ -44,6 +55,8 @@ function computeStats(
   }
   for (const w of hWorks) {
     if (w.eser_turu) typeDist[w.eser_turu] = (typeDist[w.eser_turu] || 0) + 1;
+    const lb = langBucket(w.dil);
+    if (lb) langDist[lb] = (langDist[lb] || 0) + 1;
   }
 
   let teachers = 0, students = 0;
@@ -62,6 +75,7 @@ function computeStats(
     diaMatch: hAuthors.filter(a => a.dia_slug).length,
     centuryDist,
     typeDist,
+    langDist,
     cities,
     avgCentury: centuryCount ? Math.round(centurySum / centuryCount * 10) / 10 : 0,
     teachers,
@@ -365,6 +379,10 @@ export default function HavzaCompare() {
   const typeLeft = allTypes.map(tp => [t(`source_types.${tp}`), stats1.typeDist[tp] || 0] as [string, number]);
   const typeRight = allTypes.map(tp => [t(`source_types.${tp}`), stats2.typeDist[tp] || 0] as [string, number]);
 
+  const allLangs = ['Arapça', 'Farsça', 'Türkçe', 'Diğer'];
+  const langLeft = allLangs.map(l => [l, stats1.langDist[l] || 0] as [string, number]);
+  const langRight = allLangs.map(l => [l, stats2.langDist[l] || 0] as [string, number]);
+
   const loading = aLoading || wLoading || rLoading;
   if (loading) return <div className="loading-screen">{t('common.loading')}</div>;
 
@@ -459,6 +477,21 @@ export default function HavzaCompare() {
           <MirrorBarChart
             left={typeLeft}
             right={typeRight}
+            leftLabel={t(`havza_names.${h1}`)}
+            rightLabel={t(`havza_names.${h2}`)}
+            leftColor={c1}
+            rightColor={c2}
+          />
+        </div>
+      </section>
+
+      {/* Language Distribution Mirror */}
+      <section className="stat-section">
+        <h2 className="stat-section-title">{t('statistics.language_shift', { defaultValue: 'Dil dağılımı' })}</h2>
+        <div className="stat-chart-wrap">
+          <MirrorBarChart
+            left={langLeft}
+            right={langRight}
             leftLabel={t(`havza_names.${h1}`)}
             rightLabel={t(`havza_names.${h2}`)}
             leftColor={c1}

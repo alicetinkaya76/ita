@@ -57,6 +57,7 @@ const NetworkInsights = lazyRetry(() => import('./pages/NetworkInsights'));
 const DataHealth = lazyRetry(() => import('./pages/DataHealth'));
 const EtkiKanon = lazyRetry(() => import('./pages/EtkiKanon'));
 const Muhitler = lazyRetry(() => import('./pages/Muhitler'));
+const PowerExplorer = lazyRetry(() => import('./pages/PowerExplorer'));
 
 function SuspenseWrap({ children }: { children: React.ReactNode }) {
   return (
@@ -85,6 +86,7 @@ export const router = createBrowserRouter([
       { path: 'veri-sagligi', element: <SuspenseWrap><DataHealth /></SuspenseWrap> },
       { path: 'etki-kanon', element: <SuspenseWrap><EtkiKanon /></SuspenseWrap> },
       { path: 'muhitler', element: <SuspenseWrap><Muhitler /></SuspenseWrap> },
+      { path: 'kesif', element: <SuspenseWrap><PowerExplorer /></SuspenseWrap> },
       { path: 'timeline', element: <SuspenseWrap><TimelineView /></SuspenseWrap> },
       { path: 'about', element: <SuspenseWrap><About /></SuspenseWrap> },
       { path: 'statistics', element: <SuspenseWrap><Statistics /></SuspenseWrap> },
