@@ -5,6 +5,7 @@ import { HAVZA_COLORS } from '../utils/colors';
 import { PERIOD_COLORS, getPeriodId } from '../utils/colors';
 import { deathYears } from '../utils/dates';
 import CiteButton from '../components/CiteButton';
+import KunyeButton from '../components/KunyeButton';
 import { useMemo, lazy, Suspense } from 'react';
 
 const MiniNetwork = lazy(() => import('../components/MiniNetwork'));
@@ -88,6 +89,7 @@ export default function ScholarDetail() {
         </div>
         <div className="detail-actions">
           <CiteButton kind="scholar" id={scholar.author_id} title={scholar.meshur_isim} filename={`ita-${scholar.author_id}`} />
+          <KunyeButton scholar={scholar} works={scholarWorks} relations={scholarRelations} />
         </div>
       </header>
 

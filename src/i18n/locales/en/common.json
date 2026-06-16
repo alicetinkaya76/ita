@@ -358,5 +358,19 @@
     "active_scholars": "active scholars",
     "no_scholars": "No located scholars in this range — drag or play the slider.",
     "play": "Play"
+  },
+  "kunye": {
+    "title": "Profile",
+    "download": "Profile (PDF)",
+    "hint": "Printable profile — choose 'Save as PDF' in the dialog",
+    "born": "b.",
+    "died": "d.",
+    "bio": "Description",
+    "works": "Works",
+    "no_works": "No recorded works",
+    "relations": "Relations",
+    "teachers": "Teachers",
+    "students": "Students",
+    "contemporaries": "Contemporaries"
   }
 }

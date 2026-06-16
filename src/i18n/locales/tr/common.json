@@ -358,5 +358,19 @@
     "active_scholars": "faal tarihçi",
     "no_scholars": "Bu aralıkta konumu bilinen tarihçi yok — kaydırıcıyı oynatın.",
     "play": "Oynat"
+  },
+  "kunye": {
+    "title": "Künye",
+    "download": "Künye (PDF)",
+    "hint": "Yazdırılabilir künye — açılan pencerede 'PDF olarak kaydet' seçin",
+    "born": "d.",
+    "died": "ö.",
+    "bio": "Tanım",
+    "works": "Eserler",
+    "no_works": "Kayıtlı eser yok",
+    "relations": "İlişkiler",
+    "teachers": "Hocaları",
+    "students": "Öğrencileri",
+    "contemporaries": "Çağdaşları"
   }
 }
