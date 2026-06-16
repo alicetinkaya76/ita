@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "merge": "node scripts/merge-data.js",
-    "build": "tsc -b && vite build",
+    "build": "node scripts/generate-sitemap.js && tsc -b && vite build",
+    "sitemap": "node scripts/generate-sitemap.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

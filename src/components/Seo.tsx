@@ -7,12 +7,14 @@ interface SeoProps {
   description?: string;
   /** canonical path, e.g. "/havzalar" */
   path?: string;
+  /** Schema.org structured data to embed as JSON-LD */
+  jsonLd?: object;
 }
 
 const SITE = 'İTA — İslam Tarihyazım Atlası';
 const BASE = 'https://alicetinkaya76.github.io/ita';
 
-export default function Seo({ title, description, path }: SeoProps) {
+export default function Seo({ title, description, path, jsonLd }: SeoProps) {
   const full = title === SITE ? title : `${title} · İTA`;
   const url = path ? `${BASE}${path}` : undefined;
   return (
@@ -25,6 +27,9 @@ export default function Seo({ title, description, path }: SeoProps) {
       {url && <meta property="og:url" content={url} />}
       <meta name="twitter:card" content="summary" />
       {url && <link rel="canonical" href={url} />}
+      {jsonLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      )}
     </>
   );
 }

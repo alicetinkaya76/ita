@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useWorks, useAuthors } from '../hooks/useData';
 import { HAVZA_COLORS, TYPE_COLORS } from '../utils/colors';
 import CiteButton from '../components/CiteButton';
+import Seo from '../components/Seo';
 import { useMemo } from 'react';
 
 export default function SourceDetail() {
@@ -39,8 +40,20 @@ export default function SourceDetail() {
   if (wLoading || aLoading) return <div className="loading-screen">{t('common.loading')}</div>;
   if (!work) return <div className="loading-screen">{t('scholar_detail.no_data')}</div>;
 
+  const bookLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Book',
+    name: work.eser_adi,
+    ...(author ? { author: { '@type': 'Person', name: author.meshur_isim } } : {}),
+    ...(work.dil ? { inLanguage: work.dil } : {}),
+    ...(work.eser_turu ? { genre: work.eser_turu } : {}),
+    url: `https://alicetinkaya76.github.io/ita/sources/${work.work_id}`,
+  };
+  const seoDesc = `${work.eser_adi}${author ? ` — ${author.meshur_isim}` : ''}${work.dil ? ` · ${work.dil}` : ''}`;
+
   return (
     <div className="detail-page">
+      <Seo title={work.eser_adi} description={seoDesc} path={`/sources/${work.work_id}`} jsonLd={bookLd} />
       <Link to="/sources" className="back-link">← {t('common.back')}</Link>
 
       <header className="detail-header">

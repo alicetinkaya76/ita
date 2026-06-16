@@ -148,7 +148,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
-      <Seo title="İTA — İslam Tarihyazım Atlası" description={t('dashboard.subtitle')} path="/" />
+      <Seo title="İTA — İslam Tarihyazım Atlası" description={t('dashboard.subtitle')} path="/" jsonLd={{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'İslam Tarihyazım Atlası', alternateName: 'İTA', url: 'https://alicetinkaya76.github.io/ita/', description: t('dashboard.subtitle'), inLanguage: ['tr', 'en', 'ar', 'fa'] }} />
       {/* Hero */}
       <header className="dash-hero">
         <div className="hero-pattern" />

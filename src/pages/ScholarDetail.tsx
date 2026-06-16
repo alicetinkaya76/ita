@@ -6,6 +6,7 @@ import { PERIOD_COLORS, getPeriodId } from '../utils/colors';
 import { deathYears } from '../utils/dates';
 import CiteButton from '../components/CiteButton';
 import KunyeButton from '../components/KunyeButton';
+import Seo from '../components/Seo';
 import { useMemo, lazy, Suspense } from 'react';
 
 const MiniNetwork = lazy(() => import('../components/MiniNetwork'));
@@ -57,8 +58,23 @@ export default function ScholarDetail() {
     return <span className="rel-external">{name}</span>;
   }
 
+  const sa = scholar as Record<string, any>;
+  const personLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: scholar.meshur_isim,
+    ...(sa.tam_isim && sa.tam_isim !== scholar.meshur_isim ? { alternateName: sa.tam_isim } : {}),
+    ...(sa.vefat_yili_m ? { deathDate: String(sa.vefat_yili_m) } : {}),
+    ...(sa.dogum_yili_m ? { birthDate: String(sa.dogum_yili_m) } : {}),
+    ...(sa.kimlik ? { description: String(sa.kimlik).slice(0, 280) } : {}),
+    ...(sa.dia_slug ? { sameAs: `https://islamansiklopedisi.org.tr/${sa.dia_slug}` } : {}),
+    url: `https://alicetinkaya76.github.io/ita/scholars/${scholar.author_id}`,
+  };
+  const seoDesc = `${scholar.meshur_isim}${sa.tam_isim && sa.tam_isim !== scholar.meshur_isim ? ` (${sa.tam_isim})` : ''} — ${t(`havza_names.${scholar.havza}`, { defaultValue: scholar.havza })}. ${scholarWorks.length} ${t('kunye.works')}.`;
+
   return (
     <div className="detail-page">
+      <Seo title={scholar.meshur_isim} description={seoDesc} path={`/scholars/${scholar.author_id}`} jsonLd={personLd} />
       <Link to="/scholars" className="back-link">← {t('common.back')}</Link>
 
       <header className="detail-header">
