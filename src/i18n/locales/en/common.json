@@ -357,7 +357,10 @@
   "timemap": {
     "active_scholars": "active scholars",
     "no_scholars": "No located scholars in this range — drag or play the slider.",
-    "play": "Play"
+    "play": "Play",
+    "featured": "Leading figure",
+    "top_center": "Top center",
+    "by_havza": "By basin"
   },
   "kunye": {
     "title": "Profile",

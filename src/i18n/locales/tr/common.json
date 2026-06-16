@@ -357,7 +357,10 @@
   "timemap": {
     "active_scholars": "faal tarihçi",
     "no_scholars": "Bu aralıkta konumu bilinen tarihçi yok — kaydırıcıyı oynatın.",
-    "play": "Oynat"
+    "play": "Oynat",
+    "featured": "Öne çıkan",
+    "top_center": "En aktif merkez",
+    "by_havza": "Havzaya göre"
   },
   "kunye": {
     "title": "Künye",
