@@ -20,7 +20,8 @@
     "hanedanlar": "Dynasties",
     "makaleler": "Articles",
     "network_silsile": "Network & Silsile",
-    "stats_compare": "Statistics & Compare"
+    "stats_compare": "Statistics & Compare",
+    "timemap": "Time Map"
   },
   "stats": {
     "scholars": "Scholars",
@@ -352,5 +353,10 @@
     "outro_title": "The journey doesn't end here",
     "outro_lead": "Explore every historian, work, and connection yourself.",
     "home_cta": "Explore the Story"
+  },
+  "timemap": {
+    "active_scholars": "active scholars",
+    "no_scholars": "No located scholars in this range — drag or play the slider.",
+    "play": "Play"
   }
 }

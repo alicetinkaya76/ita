@@ -20,7 +20,8 @@
     "hanedanlar": "سلسله‌ها",
     "makaleler": "مقالات",
     "network_silsile": "شبکه و سلسله",
-    "stats_compare": "آمار و مقایسه"
+    "stats_compare": "آمار و مقایسه",
+    "timemap": "نقشه زمانی"
   },
   "stats": {
     "scholars": "مورخان",
@@ -348,5 +349,10 @@
     "outro_title": "سفر اینجا تمام نمی‌شود",
     "outro_lead": "هر مورخ، اثر و پیوند را خودتان کاوش کنید.",
     "home_cta": "کشف داستان"
+  },
+  "timemap": {
+    "active_scholars": "مورخ فعال",
+    "no_scholars": "در این بازه مورخی با مکان مشخص وجود ندارد.",
+    "play": "پخش"
   }
 }

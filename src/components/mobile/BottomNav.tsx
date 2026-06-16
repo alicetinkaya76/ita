@@ -16,6 +16,7 @@ const drawerItems: { key: string; path: string; labelKey?: string; match?: strin
   { key: 'map', path: '/map' },
   { key: 'network', path: '/network', labelKey: 'network_silsile', match: ['/network', '/silsile'] },
   { key: 'timeline', path: '/timeline' },
+  { key: 'timemap', path: '/zaman-haritasi' },
   { key: 'statistics', path: '/statistics', labelKey: 'stats_compare', match: ['/statistics', '/compare'] },
   { key: 'media', path: '/videolar' },
   { key: 'about', path: '/about' },

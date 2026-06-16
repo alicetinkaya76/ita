@@ -20,7 +20,8 @@
     "hanedanlar": "Hanedanlar",
     "makaleler": "Makaleler",
     "network_silsile": "Ağ & Silsile",
-    "stats_compare": "İstatistik & Karşılaştır"
+    "stats_compare": "İstatistik & Karşılaştır",
+    "timemap": "Zaman Haritası"
   },
   "stats": {
     "scholars": "Tarihçi",
@@ -352,5 +353,10 @@
     "outro_title": "Yolculuk burada bitmiyor",
     "outro_lead": "Her tarihçiyi, eseri ve ilişkiyi kendiniz keşfedin.",
     "home_cta": "Hikâyeyi Keşfet"
+  },
+  "timemap": {
+    "active_scholars": "faal tarihçi",
+    "no_scholars": "Bu aralıkta konumu bilinen tarihçi yok — kaydırıcıyı oynatın.",
+    "play": "Oynat"
   }
 }

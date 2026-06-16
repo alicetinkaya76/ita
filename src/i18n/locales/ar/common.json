@@ -20,7 +20,8 @@
     "hanedanlar": "السلالات",
     "makaleler": "المقالات",
     "network_silsile": "الشبكة والسلسلة",
-    "stats_compare": "إحصاءات ومقارنة"
+    "stats_compare": "إحصاءات ومقارنة",
+    "timemap": "خريطة زمنية"
   },
   "stats": {
     "scholars": "مؤرخ",
@@ -335,5 +336,10 @@
     "outro_title": "الرحلة لا تنتهي هنا",
     "outro_lead": "استكشف كل مؤرخ ومؤلَّف وعلاقة بنفسك.",
     "home_cta": "اكتشف القصة"
+  },
+  "timemap": {
+    "active_scholars": "مؤرخون فاعلون",
+    "no_scholars": "لا يوجد مؤرخون محدّدو الموقع في هذا النطاق.",
+    "play": "تشغيل"
   }
 }

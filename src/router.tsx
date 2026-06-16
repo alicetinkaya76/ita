@@ -52,6 +52,7 @@ const Veritabani = lazyRetry(() => import('./pages/Veritabani'));
 const Hanedanlar = lazyRetry(() => import('./pages/Hanedanlar'));
 const Makaleler = lazyRetry(() => import('./pages/Makaleler'));
 const StoryView = lazyRetry(() => import('./pages/StoryView'));
+const TimeMapView = lazyRetry(() => import('./pages/TimeMapView'));
 
 function SuspenseWrap({ children }: { children: React.ReactNode }) {
   return (
@@ -68,6 +69,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       { path: 'hikaye', element: <SuspenseWrap><StoryView /></SuspenseWrap> },
+      { path: 'zaman-haritasi', element: <SuspenseWrap><TimeMapView /></SuspenseWrap> },
       { path: 'scholars', element: <SuspenseWrap><ScholarList /></SuspenseWrap> },
       { path: 'scholars/:id', element: <SuspenseWrap><ScholarDetail /></SuspenseWrap> },
       { path: 'sources', element: <SuspenseWrap><SourceList /></SuspenseWrap> },
