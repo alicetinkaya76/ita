@@ -5,6 +5,7 @@ import { useAuthors, useWorks, useRelations } from '../hooks/useData';
 import type { Author, Work } from '../hooks/useData';
 import { HAVZA_ORDER, HAVZA_COLORS } from '../utils/colors';
 import Seo from '../components/Seo';
+import ExportButton from '../components/ui/ExportButton';
 
 function CoverageBar({ label, filled, total }: { label: string; filled: number; total: number }) {
   const pct = total ? (filled / total) * 100 : 0;
@@ -31,6 +32,17 @@ function pctCell(filled: number, total: number): CSSProperties {
   const color = pct >= 75 ? '#2E7D32' : pct >= 40 ? '#B8860B' : '#C0392B';
   return { ...tdNum, color, fontWeight: 600 };
 }
+
+const AUTHOR_FIELDS = ['author_id', 'meshur_isim', 'tam_isim', 'arabic_name', 'havza', 'yuzyil', 'dogum_yili_h', 'dogum_yili_m', 'vefat_yili_h', 'vefat_yili_m', 'sehir', 'mezhep', 'kimlik', 'eser_sayisi', 'importance_score', 'dia_slug', 'dia_url'];
+const WORK_FIELDS = ['work_id', 'author_id', 'havza', 'eser_adi', 'eser_turu', 'dil', 'hanedan', 'yazilma_sehri', 'kaynak_sayfa', 'tanitim'];
+const RELATION_FIELDS = ['source', 'source_name', 'type', 'target', 'target_name', 'both_in_itta'];
+const s = (v: unknown) => (v == null ? '' : String(v));
+
+const codeStyle: CSSProperties = { fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: 12.5, background: 'rgba(128,128,128,0.14)', padding: '1px 6px', borderRadius: 5 };
+const preStyle: CSSProperties = { background: 'rgba(128,128,128,0.1)', border: '1px solid rgba(128,128,128,0.2)', borderRadius: 8, padding: '12px 14px', fontSize: 12.5, lineHeight: 1.55, overflowX: 'auto', whiteSpace: 'pre-wrap', margin: '8px 0 0' };
+const noteStyle: CSSProperties = { fontSize: 13, color: '#8a8a8a', margin: '0 0 10px', maxWidth: 620, lineHeight: 1.55 };
+const subhStyle: CSSProperties = { fontSize: 14, margin: '16px 0 5px' };
+const dlRowStyle: CSSProperties = { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', padding: '10px 12px', border: '1px solid rgba(128,128,128,0.2)', borderRadius: 8 };
 
 export default function DataHealth() {
   const { t } = useTranslation();
@@ -93,6 +105,17 @@ export default function DataHealth() {
   }, [relations]);
 
   if (aL || wL || rL) return <div className="loading-screen">{t('common.loading')}</div>;
+
+  const year = new Date().getFullYear();
+  const siteUrl = 'https://alicetinkaya76.github.io/ita/';
+  const citationText = `Çetinkaya, Ali. İslam Tarihyazım Atlası (İTA). Selçuk Üniversitesi, ${year}. ${siteUrl}`;
+  const bibtex = `@misc{ita_${year},
+  author       = {Çetinkaya, Ali},
+  title        = {İslam Tarihyazım Atlası (İTA)},
+  year         = {${year}},
+  howpublished = {\\url{${siteUrl}}},
+  institution  = {Selçuk Üniversitesi}
+}`;
 
   return (
     <div className="list-page">
@@ -174,6 +197,63 @@ export default function DataHealth() {
             <span className="stat-rel-label">{t('health.both_in_itta', { defaultValue: 'İki ucu da İTA’da' })}</span>
           </div>
         </div>
+      </section>
+
+      <section className="stat-section">
+        <h2 className="stat-section-title">{t('health.downloads')}</h2>
+        <p style={noteStyle}>{t('health.downloads_note')}</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, maxWidth: 520 }}>
+          <div style={dlRowStyle}>
+            <span><strong>{t('health.ds_authors')}</strong> · {authors.length.toLocaleString()} {t('health.records')} · <code style={codeStyle}>itta_authors.json</code></span>
+            <ExportButton data={authors} filename="ita-tarihciler" csvHeaders={AUTHOR_FIELDS} csvRow={(a) => AUTHOR_FIELDS.map((k) => s((a as unknown as Record<string, unknown>)[k]))} />
+          </div>
+          <div style={dlRowStyle}>
+            <span><strong>{t('health.ds_works')}</strong> · {works.length.toLocaleString()} {t('health.records')} · <code style={codeStyle}>itta_works.json</code></span>
+            <ExportButton data={works} filename="ita-eserler" csvHeaders={WORK_FIELDS} csvRow={(w) => WORK_FIELDS.map((k) => s((w as unknown as Record<string, unknown>)[k]))} />
+          </div>
+          <div style={dlRowStyle}>
+            <span><strong>{t('health.ds_relations')}</strong> · {relations.length.toLocaleString()} {t('health.records')} · <code style={codeStyle}>itta_relations.json</code></span>
+            <ExportButton data={relations} filename="ita-iliskiler" csvHeaders={RELATION_FIELDS} csvRow={(r) => RELATION_FIELDS.map((k) => s((r as unknown as Record<string, unknown>)[k]))} />
+          </div>
+        </div>
+      </section>
+
+      <section className="stat-section">
+        <h2 className="stat-section-title">{t('health.dictionary')}</h2>
+        <p style={noteStyle}>{t('health.dictionary_note')}</p>
+        <h3 style={subhStyle}>{t('health.author_fields')} · <code style={codeStyle}>itta_authors.json</code></h3>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ borderCollapse: 'collapse', width: '100%', maxWidth: 640 }}>
+            <thead><tr><th style={th}>{t('health.field')}</th><th style={th}>{t('health.desc')}</th></tr></thead>
+            <tbody>
+              {AUTHOR_FIELDS.map((k) => (
+                <tr key={k}><td style={td}><code style={codeStyle}>{k}</code></td><td style={td}>{t(`health.dict.authors.${k}`)}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <h3 style={subhStyle}>{t('health.work_fields')} · <code style={codeStyle}>itta_works.json</code></h3>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ borderCollapse: 'collapse', width: '100%', maxWidth: 640 }}>
+            <thead><tr><th style={th}>{t('health.field')}</th><th style={th}>{t('health.desc')}</th></tr></thead>
+            <tbody>
+              {WORK_FIELDS.map((k) => (
+                <tr key={k}><td style={td}><code style={codeStyle}>{k}</code></td><td style={td}>{t(`health.dict.works.${k}`)}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="stat-section">
+        <h2 className="stat-section-title">{t('health.citation')}</h2>
+        <p style={noteStyle}>{t('health.citation_note')}</p>
+        <pre style={preStyle}>{citationText}</pre>
+        <pre style={preStyle}>{bibtex}</pre>
+        <h3 style={subhStyle}>{t('health.doi')}</h3>
+        <p style={noteStyle}>{t('health.doi_note')}</p>
+        <h3 style={subhStyle}>{t('health.license')}</h3>
+        <p style={noteStyle}>{t('health.license_note')}</p>
       </section>
     </div>
   );
