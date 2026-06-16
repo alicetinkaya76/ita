@@ -17,6 +17,7 @@ const authors = toArr(readJson('itta_authors.json'));
 const works = toArr(readJson('itta_works.json'));
 
 const basins = [...new Set(authors.map((a) => (a.havza || '').trim()).filter(Boolean))];
+const cities = [...new Set(authors.map((a) => (a.sehir || '').trim()).filter(Boolean))];
 
 let articleIds = [];
 try {
@@ -33,6 +34,7 @@ const STATIC = [
   'periodization', 'historiography', 'scholars', 'sources', 'map', 'network',
   'silsile', 'timeline', 'compare', 'statistics', 'videolar', 'about',
   'hikaye', 'zaman-haritasi',
+  'network-insights', 'veri-sagligi', 'etki-kanon', 'muhitler', 'kesif',
 ];
 
 const today = new Date().toISOString().slice(0, 10);
@@ -44,6 +46,7 @@ basins.forEach((b) => { add(`havza/${b}`, '0.7'); add(`historiography/${b}`, '0.
 articleIds.forEach((a) => add(`makale/${a}`, '0.6'));
 authors.forEach((a) => a.author_id && add(`scholars/${a.author_id}`, '0.6'));
 works.forEach((w) => w.work_id && add(`sources/${w.work_id}`, '0.5'));
+cities.forEach((c) => add(`sehir/${encodeURIComponent(c)}`, '0.5'));
 
 const body = urls
   .map((u) => `  <url>\n    <loc>${u.loc}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>${u.priority}</priority>\n  </url>`)

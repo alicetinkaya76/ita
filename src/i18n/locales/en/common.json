@@ -92,7 +92,10 @@
     "havza": "Region",
     "fields": "Fields",
     "no_data": "No data found",
-    "similar_scholars": "Similar Scholars"
+    "similar_scholars": "Similar Scholars",
+    "madhhab": "Madhhab",
+    "authorities": "Authority records",
+    "suggest_correction": "Suggest a correction"
   },
   "source_detail": {
     "title": "Title",
@@ -134,7 +137,9 @@
     "cite": "Cite",
     "copy": "Copy",
     "copied": "Copied ✓",
-    "download": "Download"
+    "download": "Download",
+    "clear": "Clear",
+    "unknown": "Unknown"
   },
   "map": {
     "geocoded": "geocoded",
@@ -173,7 +178,13 @@
     "period_havza_heatmap": "Period × Basin Distribution",
     "period_type_heatmap": "Period × Source Type Distribution",
     "language_shift": "Language of Works by Century",
-    "genre_havza": "Genre × Basin Distribution"
+    "genre_havza": "Genre × Basin Distribution",
+    "madhhab_dist": "Madhhab distribution",
+    "madhhab_note": "For scholars with a recorded madhhab only (about 9% of the total); not representative of the whole corpus.",
+    "genre_stream": "Evolution of genres over time",
+    "genre_stream_note": "The rise and decline of work genres across the centuries. Band thickness shows the number of works in that century.",
+    "havza_lang_flow": "From basin to language: flow of works",
+    "havza_lang_note": "Distribution by language of the works each basin produced. Ribbon thickness is proportional to the number of works (works with a recorded language)."
   },
   "about": {
     "title": "About İTA",
@@ -375,5 +386,71 @@
     "teachers": "Teachers",
     "students": "Students",
     "contemporaries": "Contemporaries"
+  },
+  "insights": {
+    "title": "Structure of the Scholarly Network",
+    "subtitle": "Bridge figures and the longest teacher–student chains",
+    "bridges": "Bridge figures",
+    "bridges_note": "Scholars who most often act as “bridges” linking different scholarly circles, ranked by betweenness centrality. A high value marks a key transmitter channeling knowledge between distinct traditions.",
+    "betweenness": "Betweenness",
+    "degree": "Degree",
+    "chains": "Longest teacher–student chains",
+    "chains_note": "Uninterrupted teacher→student chains found in the data. Linked names lead to İTA scholars; grey names are transmitters outside İTA. Longest unbroken chain",
+    "generations": "generations",
+    "havza_flow": "Inter-basin scholarly transmission",
+    "havza_flow_note": "Row = teacher’s basin, column = student’s basin. Cell intensity is proportional to the number of teacher→student ties in that direction. Covers only ties where both scholars are in İTA with a known basin",
+    "havza_flow_legend": "Diagonal = within-basin transmission; off-diagonal = across basins",
+    "cross_links": "cross-basin ties",
+    "path_hint": "You can find the shortest scholarly path between two specific scholars (who connects to whom, through whom) in the “path between two scholars” tool on the Silsile page."
+  },
+  "health": {
+    "title": "Data Health",
+    "intro": "A transparent breakdown of how fully each field is populated. This panel makes no new claim; it shows the coverage of the existing data and offers a roadmap for completion.",
+    "intro_short": "Field coverage rates and a completion roadmap.",
+    "author_fields": "Scholar fields",
+    "work_fields": "Work fields",
+    "by_havza": "Completion by basin",
+    "by_havza_note": "City and death year are two key fields feeding the map and time analyses. The table shows which basin should be prioritised for completion.",
+    "city_pct": "City %",
+    "death_pct": "Death year %",
+    "relations": "Relations",
+    "total_relations": "Total relations",
+    "both_in_itta": "Both ends in İTA"
+  },
+  "canon": {
+    "title": "Influence and Canon",
+    "subtitle": "Scholars highlighted by importance score",
+    "intro": "A canon view organised by the importance score İTA assigns to each scholar. The rankings surface the leading names by period and by basin. The score is a composite, relative measure of prominence — not an absolute value.",
+    "overall": "Overall canon (top 20)",
+    "score": "Importance",
+    "by_period": "Leading figures by period",
+    "by_havza": "Leading figures by basin"
+  },
+  "milieus": {
+    "title": "Contemporary Milieus",
+    "subtitle": "Clusters of scholars active in the same city and generation",
+    "hub_count": "milieus",
+    "intro": "When scholars active in the same city and the same century are brought together, the contemporary milieus where scholarly production concentrated come into view. City–century clusters of at least three scholars are ranked by density.",
+    "note": "Note: this view relies only on scholars with both a recorded city and death year"
+  },
+  "explorer": {
+    "title": "Power Explorer",
+    "subtitle": "Filter basin, century, madhhab, genre and language at once",
+    "intro": "Filter five dimensions at once; the result updates simultaneously as a timeline, a map and a list. Genre and language filters return scholars who authored works of that genre/language.",
+    "genre": "Genre",
+    "language": "Language",
+    "timeline": "Timeline",
+    "map": "Map",
+    "results": "Results",
+    "empty": "No scholars match these criteria."
+  },
+  "city": {
+    "scholars_by_century": "Scholars by century",
+    "empty": "No scholars associated with this city were found.",
+    "external": "External resources",
+    "external_note": "Search for this place name in external gazetteers and authority records."
+  },
+  "scholar_list": {
+    "random": "Random scholar"
   }
 }

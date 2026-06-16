@@ -7,7 +7,7 @@ import { deathYears } from '../utils/dates';
 import CiteButton from '../components/CiteButton';
 import KunyeButton from '../components/KunyeButton';
 import Seo from '../components/Seo';
-import { useMemo, lazy, Suspense } from 'react';
+import { useMemo, lazy, Suspense, type CSSProperties } from 'react';
 
 const MiniNetwork = lazy(() => import('../components/MiniNetwork'));
 
@@ -115,6 +115,11 @@ export default function ScholarDetail() {
   };
   const seoDesc = `${scholar.meshur_isim}${sa.tam_isim && sa.tam_isim !== scholar.meshur_isim ? ` (${sa.tam_isim})` : ''} — ${t(`havza_names.${scholar.havza}`, { defaultValue: scholar.havza })}. ${scholarWorks.length} ${t('kunye.works')}.`;
 
+  const authQ = encodeURIComponent(scholar.meshur_isim);
+  const pageUrl = `https://alicetinkaya76.github.io/ita/scholars/${scholar.author_id}`;
+  const suggestHref = `mailto:ali.cetinkaya@selcuk.edu.tr?subject=${encodeURIComponent(`İTA düzeltme önerisi: ${scholar.meshur_isim} (${scholar.author_id})`)}&body=${encodeURIComponent(`Tarihçi: ${scholar.meshur_isim} (${scholar.author_id})\nSayfa: ${pageUrl}\n\nÖnerilen düzeltme / kaynak:\n`)}`;
+  const extLinkStyle: CSSProperties = { fontSize: 12.5, textDecoration: 'none', color: 'inherit', border: '1px solid rgba(128,128,128,0.35)', borderRadius: 7, padding: '4px 10px' };
+
   return (
     <div className="detail-page">
       <Seo title={scholar.meshur_isim} description={seoDesc} path={`/scholars/${scholar.author_id}`} jsonLd={personLd} />
@@ -149,6 +154,13 @@ export default function ScholarDetail() {
         <div className="detail-actions">
           <CiteButton kind="scholar" id={scholar.author_id} title={scholar.meshur_isim} filename={`ita-${scholar.author_id}`} />
           <KunyeButton scholar={scholar} works={scholarWorks} relations={scholarRelations} />
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginTop: 10 }}>
+          <span style={{ fontSize: 12.5, color: '#8a8a8a' }}>{t('scholar_detail.authorities', { defaultValue: 'Otorite kayıtları' })}:</span>
+          <a href={`https://www.wikidata.org/w/index.php?search=${authQ}`} target="_blank" rel="noopener noreferrer" style={extLinkStyle}>Wikidata ↗</a>
+          <a href={`https://viaf.org/viaf/search?query=local.personalNames+all+%22${authQ}%22`} target="_blank" rel="noopener noreferrer" style={extLinkStyle}>VIAF ↗</a>
+          {scholar.dia_slug && <a href={`https://islamansiklopedisi.org.tr/${scholar.dia_slug}`} target="_blank" rel="noopener noreferrer" style={extLinkStyle}>DİA ↗</a>}
+          <a href={suggestHref} style={extLinkStyle}>{t('scholar_detail.suggest_correction', { defaultValue: 'Düzeltme öner' })}</a>
         </div>
       </header>
 

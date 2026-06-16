@@ -92,7 +92,10 @@
     "havza": "Havza",
     "fields": "İlgi Alanları",
     "no_data": "Veri bulunamadı",
-    "similar_scholars": "Benzer Tarihçiler"
+    "similar_scholars": "Benzer Tarihçiler",
+    "madhhab": "Mezhep",
+    "authorities": "Otorite kayıtları",
+    "suggest_correction": "Düzeltme öner"
   },
   "source_detail": {
     "title": "Eser Adı",
@@ -134,7 +137,9 @@
     "cite": "Atıf",
     "copy": "Kopyala",
     "copied": "Kopyalandı ✓",
-    "download": "İndir"
+    "download": "İndir",
+    "clear": "Temizle",
+    "unknown": "Bilinmeyen"
   },
   "map": {
     "geocoded": "konumlandırıldı",
@@ -173,7 +178,13 @@
     "period_havza_heatmap": "Dönem × Havza Dağılımı",
     "period_type_heatmap": "Dönem × Eser Türü Dağılımı",
     "language_shift": "Eserlerin Dili — Yüzyıllara Göre",
-    "genre_havza": "Tür × Havza Dağılımı"
+    "genre_havza": "Tür × Havza Dağılımı",
+    "madhhab_dist": "Mezhep dağılımı",
+    "madhhab_note": "Yalnızca mezhebi kayıtlı tarihçiler için (toplamın yaklaşık %9’u); bütün külliyayı temsil etmez.",
+    "genre_stream": "Türlerin zaman içindeki seyri",
+    "genre_stream_note": "Eser türlerinin yüzyıllar içindeki yükseliş ve gerileyişi. Bant kalınlığı o yüzyıldaki eser sayısını gösterir.",
+    "havza_lang_flow": "Havzadan dile: eser akışı",
+    "havza_lang_note": "Her havzanın ürettiği eserlerin dillere göre dağılımı. Şerit kalınlığı eser sayısıyla orantılıdır (dili kayıtlı eserler)."
   },
   "about": {
     "title": "İTA Hakkında",
@@ -375,5 +386,71 @@
     "teachers": "Hocaları",
     "students": "Öğrencileri",
     "contemporaries": "Çağdaşları"
+  },
+  "insights": {
+    "title": "İlmî Ağın Yapısı",
+    "subtitle": "Köprü figürler ve en uzun silsileler",
+    "bridges": "Köprü figürler",
+    "bridges_note": "Farklı ilim çevrelerini birbirine bağlayan, ağda en çok “köprü” konumundaki tarihçiler — aracılık (betweenness) merkeziliğine göre. Yüksek değer, kişinin farklı gelenekler arasında bilgi akışını sağlayan kilit bir aktarıcı olduğunu gösterir.",
+    "betweenness": "Aracılık",
+    "degree": "Bağlantı",
+    "chains": "En uzun hoca–talebe silsileleri",
+    "chains_note": "Veride yer alan kesintisiz hoca→talebe zincirleri. Bağlı isimler İTA tarihçilerine gider; gri isimler İTA dışı aktarıcılardır. En uzun kesintisiz zincir",
+    "generations": "nesil",
+    "havza_flow": "Havzalar arası ilmî aktarım",
+    "havza_flow_note": "Satır = hocanın havzası, sütun = talebenin havzası. Hücre koyuluğu o yöndeki hoca→talebe bağı sayısıyla orantılı. Yalnızca iki ucu da İTA’da olan ve havzası bilinen bağları kapsar",
+    "havza_flow_legend": "Köşegen = havza içi aktarım; köşegen dışı = havzalar arası",
+    "cross_links": "havzalar-arası bağ",
+    "path_hint": "İki belirli âlim arasındaki en kısa ilmî yolu (kim, kimin aracılığıyla kime bağlanıyor) Silsile sayfasındaki “iki âlim arası yol” aracında bulabilirsiniz."
+  },
+  "health": {
+    "title": "Veri Sağlığı",
+    "intro": "Hangi alanların ne ölçüde dolu olduğunun şeffaf dökümü. Bu panel yeni bir iddia üretmez; mevcut verinin kapsamını gösterir ve tamamlama için bir yol haritası sunar.",
+    "intro_short": "Alanların doluluk oranları ve tamamlama yol haritası.",
+    "author_fields": "Tarihçi alanları",
+    "work_fields": "Eser alanları",
+    "by_havza": "Havzaya göre tamamlanma",
+    "by_havza_note": "Şehir ve vefat yılı, harita ve zaman analizlerini besleyen iki kilit alan. Tablo, hangi havzanın tamamlamaya öncelik vermesi gerektiğini gösterir.",
+    "city_pct": "Şehir %",
+    "death_pct": "Vefat yılı %",
+    "relations": "İlişkiler",
+    "total_relations": "Toplam ilişki",
+    "both_in_itta": "İki ucu da İTA’da"
+  },
+  "canon": {
+    "title": "Etki ve Kanon",
+    "subtitle": "Önem skoruna göre öne çıkan tarihçiler",
+    "intro": "İTA’nın her tarihçi için tanımladığı önem skoruna göre düzenlenmiş bir kanon görünümü. Sıralamalar; dönemlere ve havzalara göre öne çıkan isimleri ortaya koyar. Skor bileşik bir göstergedir ve mutlak bir değer değil, göreli bir öne çıkma ölçüsüdür.",
+    "overall": "Genel kanon (ilk 20)",
+    "score": "Önem",
+    "by_period": "Döneme göre öne çıkanlar",
+    "by_havza": "Havzaya göre öne çıkanlar"
+  },
+  "milieus": {
+    "title": "Çağdaşlık Muhitleri",
+    "subtitle": "Aynı şehir ve nesilde faal olan tarihçi kümeleri",
+    "hub_count": "muhit",
+    "intro": "Aynı şehirde ve aynı yüzyılda faal olan tarihçiler bir araya getirildiğinde, ilmî üretimin yoğunlaştığı çağdaş muhitler ortaya çıkar. En az üç tarihçinin buluştuğu şehir–yüzyıl kümeleri, yoğunluğa göre sıralanmıştır.",
+    "note": "Not: Bu görünüm yalnızca hem şehri hem vefat yılı kayıtlı tarihçilere dayanır"
+  },
+  "explorer": {
+    "title": "Güç-Keşfi",
+    "subtitle": "Havza, yüzyıl, mezhep, tür ve dili aynı anda filtreleyin",
+    "intro": "Beş boyutu aynı anda süzün; sonuç eş zamanlı olarak zaman çizelgesi, harita ve liste hâlinde güncellenir. Tür ve dil filtreleri, o türde/dilde eseri olan tarihçileri getirir.",
+    "genre": "Tür",
+    "language": "Dil",
+    "timeline": "Zaman çizelgesi",
+    "map": "Harita",
+    "results": "Sonuçlar",
+    "empty": "Bu ölçütlere uyan tarihçi yok."
+  },
+  "city": {
+    "scholars_by_century": "Yüzyıla göre tarihçiler",
+    "empty": "Bu şehirle ilişkili tarihçi bulunamadı.",
+    "external": "Dış kaynaklar",
+    "external_note": "Bu yer adıyla harici coğrafya sözlüklerinde ve otorite kayıtlarında arama yapın."
+  },
+  "scholar_list": {
+    "random": "Rastgele tarihçi"
   }
 }
