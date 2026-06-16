@@ -862,6 +862,12 @@ export default function Statistics() {
         <Link to="/veri-sagligi" style={{ padding: '7px 14px', border: '1px solid rgba(128,128,128,0.35)', borderRadius: 9, fontSize: 14, textDecoration: 'none', color: 'inherit' }}>
           {t('health.title', { defaultValue: 'Veri Sağlığı' })} <span style={{ opacity: 0.6 }}>→</span>
         </Link>
+        <Link to="/etki-kanon" style={{ padding: '7px 14px', border: '1px solid rgba(128,128,128,0.35)', borderRadius: 9, fontSize: 14, textDecoration: 'none', color: 'inherit' }}>
+          {t('canon.title', { defaultValue: 'Etki ve Kanon' })} <span style={{ opacity: 0.6 }}>→</span>
+        </Link>
+        <Link to="/muhitler" style={{ padding: '7px 14px', border: '1px solid rgba(128,128,128,0.35)', borderRadius: 9, fontSize: 14, textDecoration: 'none', color: 'inherit' }}>
+          {t('milieus.title', { defaultValue: 'Çağdaşlık Muhitleri' })} <span style={{ opacity: 0.6 }}>→</span>
+        </Link>
       </div>
 
       {/* Havza Comparison Table */}
