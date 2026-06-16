@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>İTA — Tanıtım Sunumu</title>
+  <link rel="stylesheet" href="assets/reset.css">
+  <link rel="stylesheet" href="assets/reveal.css">
+  <link rel="stylesheet" href="assets/ita-theme.css">
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- 1 — TITLE -->
+    <section class="dark" data-background-color="#2E2014" style="display:flex;flex-direction:column;justify-content:center;height:100%">
+      <div class="eyebrow">TANITIM SUNUMU</div>
+      <h1 style="max-width:18em">Hesaplamalı Dijital Bilimlerin Tarih Alanındaki Uygulaması</h1>
+      <p style="font-family:Cambria,serif;font-style:italic;color:var(--tan);font-size:1.05em;margin:.2em 0 1em">İslam Tarihyazım Atlası Örneği</p>
+      <p style="font-size:.7em"><strong style="color:var(--cream)">Ali Çetinkaya</strong>&nbsp;&nbsp;&nbsp;<span style="color:var(--muted)">[Kurum · Tarih]</span></p>
+      <p class="url" style="margin-top:.3em">alicetinkaya76.github.io/ita</p>
+      <aside class="notes">Hoş geldiniz. İzninizle önce kısaca kendimi tanıtayım, sonra başlayalım. Bugün anlatmak istediğim şey şu: Tarih gibi köklü bir beşerî bilim alanında, hesaplamalı ve dijital yöntemleri nasıl kullanabiliriz? Bunu havada bırakmadan, somut bir örnek üzerinden göstereceğim: İslam Tarihyazım Atlası. Bu sunumun farkı şu: ekran görüntüsü göstermeyeceğim; sitenin kendisini bu slaytların içinde, canlı ve etkileşimli göreceğiz. Önce neden böyle bir şeye ihtiyaç duyduğumuzu, sonra ne yaptığımızı, hangi teknolojileri kullandığımızı ve neyi görünür kıldığımızı paylaşacağım.</aside>
+    </section>
+
+    <!-- 2 — PROBLEM -->
+    <section>
+      <div class="eyebrow">01 · Mesele</div>
+      <h2>On dört asır, tek bir bakışta görülebilir mi?</h2>
+      <p class="lead" style="max-width:30em">İslam tarih yazımı; 7. yüzyıldan günümüze uzanan, binlerce tarihçiyi, dokuz medeniyet havzasını ve iç içe geçmiş hoca–talebe ağlarını kapsayan engin bir gelenek. Bu bilgi kitaplarda mevcuttur; ama <strong>bütününü</strong> — zamana, coğrafyaya ve ağlara yayılan örüntüleri — düz metinle görmek güçtür.</p>
+      <div class="stats" style="margin-top:1em">
+        <div class="stat fragment"><div class="n">14 asır</div><div class="l">kapsanan dönem</div></div>
+        <div class="stat fragment"><div class="n tan">9</div><div class="l">medeniyet havzası</div></div>
+        <div class="stat fragment"><div class="n">binlerce</div><div class="l">tarihçi ve eser</div></div>
+      </div>
+      <aside class="notes">Önce meseleyi koyalım. İslam tarih yazımı son derece geniş bir alan: on dört asır, dokuz medeniyet havzası, birbirine bağlı binlerce tarihçi ve eser. Bu bilgi elbette kitaplarda ve kaynaklarda mevcut. Ama bütününü bir arada görmek — yüzyıllar içindeki eğilimleri, coğrafi kaymaları, ekollerin yapısını — düz metinle çok zor. Hesaplamalı yöntemlerin devreye girdiği yer tam da burası: dağılmış bilgiyi bir araya getirip üzerinde gezilebilir, sorgulanabilir ve görülebilir hâle getiriyoruz.</aside>
+    </section>
+
+    <!-- 3 — APPROACH (DH) -->
+    <section>
+      <div class="eyebrow">02 · Yaklaşım</div>
+      <h2>Hesaplamalı / Dijital Beşerî Bilimler</h2>
+      <p class="lead" style="max-width:32em;margin-bottom:.6em">İnsan bilimlerine ait soruları; veri, görselleştirme, haritalama ve ağ analiziyle ele alma yaklaşımı. İTA bunun tarih alanındaki somut bir uygulaması.</p>
+      <div class="row"><span class="ic">P</span><span class="rowtext"><b>Prosopografi — toplu biyografi.</b> <span>Binlerce tarihçiyi tutarlı, makine-okunabilir bir veri kümesine dönüştürmek.</span></span></div>
+      <div class="row"><span class="ic tan">M</span><span class="rowtext"><b>Mekânsal tarih.</b> <span>Üretim merkezlerini ve etkinliği coğrafya üzerinde görünür kılmak.</span></span></div>
+      <div class="row"><span class="ic">A</span><span class="rowtext"><b>Ağ analizi.</b> <span>Hoca–talebe silsilelerini ve ilim çevrelerini ortaya çıkarmak.</span></span></div>
+      <div class="row"><span class="ic tan">U</span><span class="rowtext"><b>Uzaktan okuma.</b> <span>Yüzyıllar boyu dil, tür ve dağılım eğilimlerini okumak.</span></span></div>
+      <aside class="notes">Peki dijital beşerî bilimler derken neyi kastediyoruz? Kısaca: insan bilimlerinin sorularını veriyle, görselleştirmeyle ve hesaplamayla ele almak. Tarihte bunun dört tipik kolu var. Prosopografi: tek tek biyografileri toplu bir veri kümesi gibi görmek. Mekânsal tarih: yani coğrafya, harita. Ağ analizi: silsileler. Bir de uzaktan okuma: tek bir metne değil bütün külliyata bakıp eğilim aramak. Atlasımız bu dördünü de kullanıyor; birazdan hepsini canlı göreceğiz.</aside>
+    </section>
+
+    <!-- 4 — WHAT IS İTA -->
+    <section>
+      <div class="eyebrow">03 · Proje</div>
+      <h2>İslam Tarihyazım Atlası (İTA)</h2>
+      <div style="display:grid;grid-template-columns:0.92fr 1.08fr;gap:1.1em;align-items:center">
+        <div>
+          <p class="lead">İslam tarih yazımı geleneğinin dijital, çok dilli ve açık bir atlası. Tarihçileri, eserleri ve aralarındaki ilişkileri tek bir gezilebilir ortamda buluşturur.</p>
+          <div class="row"><span class="ic">✓</span><span class="rowtext"><b>Web tabanlı, kurulum yok</b></span></div>
+          <div class="row"><span class="ic">✓</span><span class="rowtext"><b>Dört dil: TR · EN · AR · FA</b></span></div>
+          <div class="row"><span class="ic">✓</span><span class="rowtext"><b>Açık kaynak, ücretsiz erişim</b></span></div>
+          <p class="url" style="margin-top:.5em">alicetinkaya76.github.io/ita</p>
+        </div>
+        <div style="text-align:center">
+          <img class="shot" src="assets/home.jpg" alt="İTA ana sayfa">
+          <div class="cap">İTA ana sayfası — genel bakış</div>
+        </div>
+      </div>
+      <aside class="notes">İşte proje: İslam Tarihyazım Atlası, kısaca İTA. Tarayıcıdan açılan, kurulum gerektirmeyen, dört dilli ve açık kaynaklı bir atlas. Sağda ana sayfa görünüyor: üstte toplam sayılar, altta havza ve yüzyıl dağılımları. Birazdan bu sayfaların hepsini canlı olarak da göreceğiz. Şimdi bu noktaya nasıl geldiğimizi anlatayım.</aside>
+    </section>
+
+    <!-- 5 — HOW WE STARTED -->
+    <section>
+      <div class="eyebrow">04 · Süreç</div>
+      <h2>Nasıl başladık?</h2>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><h3>Kaynak veri</h3><p>Hocaların derlediği Excel veritabanı — projenin birincil, uzman kaynağı.</p></div>
+        <div class="step"><div class="num">2</div><h3>Yapılandırma</h3><p>Temizleme ve düzenleme ile tutarlı, makine-okunabilir veri (JSON) şeması.</p></div>
+        <div class="step"><div class="num gold">3</div><h3>Uygulama</h3><p>Keşif, görselleştirme ve analiz katmanlarıyla web atlası.</p></div>
+      </div>
+      <div class="note-strip"><strong>İlke:</strong> Veriyi koruyarak çalışmak — mevcut alanlardan değer üretmek, asla veri uydurmamak.</div>
+      <aside class="notes">Aslında sıfırdan başlamadık. Çekirdek, değerli hocalarımızın uzun bir emekle derlediği Excel veritabanıydı; birinci adım buydu. İkinci adımda bu veriyi temizleyip düzenledik ve makine-okunabilir bir formata, yani JSON'a taşıdık; tutarlı bir şema kurduk. Üçüncü adımda da bunun üzerine uygulamayı inşa ettik. Altta vurguladığım ilke çok önemli: hiçbir veriyi uydurmadık; yalnızca var olan alanlardan değer ürettik. Bu, projenin akademik güvenilirliğinin temeli.</aside>
+    </section>
+
+    <!-- 6 — DATA (real CSS charts) -->
+    <section>
+      <div class="eyebrow">05 · Veri</div>
+      <h2>Verinin ölçeği</h2>
+      <div class="stats" style="margin-bottom:.7em">
+        <div class="stat"><div class="n">1.485</div><div class="l">Tarihçi</div></div>
+        <div class="stat"><div class="n tan">1.875</div><div class="l">Eser</div></div>
+        <div class="stat"><div class="n">3.356</div><div class="l">İlişki</div></div>
+        <div class="stat"><div class="n tan">21</div><div class="l">Tür</div></div>
+        <div class="stat"><div class="n">4</div><div class="l">Dil</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.4em;align-items:start">
+        <div>
+          <div class="cap" style="margin:0 0 .4em">Havzalara göre tarihçi</div>
+          <div class="bars-h" id="havzaBars"></div>
+        </div>
+        <div>
+          <div class="cap" style="margin:0 0 .4em">Yüzyıllara göre tarihçi (7.–21. yy)</div>
+          <div class="bars-v" id="centBars"></div>
+        </div>
+      </div>
+      <aside class="notes">Ölçek hakkında fikir vermesi için: bin dört yüz seksen beş tarihçi, bin sekiz yüz yetmiş beş eser, üç bin üç yüz elli altı ilişki kaydı; dokuz havza, yirmi bir tür, dört dil. Soldaki çubuklar havza dağılımını gösteriyor — Balkanlar, Hint Alt Kıtası ve Biladüşşam öne çıkıyor. Sağdaki ise üretimin yüzyıllara dağılımı; on altıncı yüzyıldan sonra belirgin artış var. Her iki grafik de sitenin canlı verisinden; temsilî değil.</aside>
+    </section>
+
+    <!-- 7 — LIVE: MAP -->
+    <section class="dark" data-background-color="#1a1206" data-background-iframe="../map" data-background-interactive>
+      <div class="live-cap">
+        <h3>Harita + Zaman Tüneli <span class="badge">Canlı</span></h3>
+        <p>Tarihçilerin şehirlere dağılımı. Alttaki zaman çubuğunu oynattıkça yüzyıllara göre haritada birikiş izlenir.</p>
+      </div>
+      <div class="hint">Bu sayfa canlı — harita etkileşimli · ilerlemek için ok tuşları</div>
+      <aside class="notes">Atlasın kalbi, keşif araçları. İlki harita. Gördüğünüz bu sayfa canlı; ekran görüntüsü değil. Tarihçiler şehirlerine göre yerleşmiş durumda. Şimdi alttaki zaman çubuğunu oynatıyorum — yüzyıl yüzyıl ilerledikçe haritada tarihçilerin nasıl biriktiğini izleyebiliyoruz. İstersem bir kabarcığa tıklayıp o şehirdeki isimleri görebilirim.</aside>
+    </section>
+
+    <!-- 8 — LIVE: TIMEMAP -->
+    <section class="dark" data-background-color="#1a1206" data-background-iframe="../zaman-haritasi" data-background-interactive>
+      <div class="live-cap">
+        <h3>Zaman Haritası <span class="badge">Canlı</span></h3>
+        <p>Senkron yıl cetveli + harita. Her nesilde faal tarihçiler beliriyor; panelde öne çıkan figür ve havza etkinliği. Danışman hocamızın önerisiyle, İslam Düşünce Atlası'ndan ilhamla.</p>
+      </div>
+      <div class="hint">Cetveli oynatın · ilerlemek için ok tuşları</div>
+      <aside class="notes">Bu da Zaman Haritası — danışman hocamızın önerisiyle, İslam Düşünce Atlası'ndaki örnekten ilhamla yaptık. Alttaki yıl cetvelini oynatıyorum: her dönemde faal olan tarihçiler haritada beliriyor, soldaki panelde o dönemin öne çıkan ismi ve havza etkinliği görünüyor. Önemli fark şu: bizimki elle yazılmış olaylara değil, İTA'nın kendi verisine — tarihçilerin vefat yılı ve şehrine — dayanıyor.</aside>
+    </section>
+
+    <!-- 9 — LIVE: NETWORK -->
+    <section class="dark" data-background-color="#1a1206" data-background-iframe="../network" data-background-interactive>
+      <div class="live-cap">
+        <h3>Ağ &amp; İlim Halkaları <span class="badge">Canlı</span></h3>
+        <p>Hoca–talebe ağı. Renk düğmesiyle "İlim Halkaları" moduna geçince topluluk tespiti ekolleri renklendirir: Memlûk-Kahire, Endülüs, Şam, Mağrib…</p>
+      </div>
+      <div class="hint">Düğümleri sürükleyin · renk modunu deneyin</div>
+      <aside class="notes">Bu sayfa ağ ve silsile. Tarihçilerin hoca-talebe ilişkileri bir ağ olarak duruyor. Şimdi sağdaki renk düğmesinden İlim Halkaları moduna geçiyorum: sistem bu ağ üzerinde topluluk tespiti yapıp ekolleri renklendiriyor — Memlûk-Kahire çevresi, Endülüs, Şam gibi. Yani kitaplarda dağınık duran ekoller, ağ üzerinde âdeta kendiliğinden ortaya çıkıyor. Bu, hesaplamalı yöntemin en güzel örneklerinden biri.</aside>
+    </section>
+
+    <!-- 10 — LIVE: STORY -->
+    <section class="dark" data-background-color="#1a1206" data-background-iframe="../hikaye" data-background-interactive>
+      <div class="live-cap">
+        <h3>Hikâye <span class="badge">Canlı</span></h3>
+        <p>Kaydırmalı sinematik tur: harita Medine'den Mağrib'e ekol ekol ilerler; her ekolün — hocaların yazdığı — açıklaması ve anahtar tarihçileri görünür.</p>
+      </div>
+      <div class="hint">Sayfayı aşağı kaydırın</div>
+      <aside class="notes">Bu da Hikâye sayfası — rehberli bir tur. Aşağı kaydırdıkça harita Medine'den Mağrib'e ekol ekol ilerliyor; her ekolün, hocaların kaleme aldığı açıklaması karşımıza geliyor, anahtar tarihçileri tıklanabilir. Yani aynı veriyi, bu kez anlatı biçiminde sunuyoruz.</aside>
+    </section>
+
+    <!-- 11 — LIVE: STATISTICS -->
+    <section class="dark" data-background-color="#1a1206" data-background-iframe="../statistics" data-background-interactive>
+      <div class="live-cap">
+        <h3>İstatistik <span class="badge">Canlı</span></h3>
+        <p>Dağılımlar, yüzyıllara göre dil değişimi ve tür × havza ısı haritası — uzaktan okuma araçları.</p>
+      </div>
+      <div class="hint">Grafikleri görmek için kaydırın · ilerlemek için ok tuşları</div>
+      <aside class="notes">Son canlı sayfa İstatistik. Atlas yalnızca göstermiyor, analiz de ediyor. Burada eser dilinin yüzyıllara göre değişimini gösteren grafik var — erken dönem Arapça ağırlıklı, sonra Türkçe yükseliyor, en sonda Avrupa dilleri beliriyor. Bir de türle havzayı çapraz okuyan ısı haritası. Uzaktan okuma dediğimiz şey tam olarak budur: tek metne değil, bütün külliyaya bakmak.</aside>
+    </section>
+
+    <!-- 12 — SCHOLARLY OUTPUTS -->
+    <section>
+      <div class="eyebrow">06 · Bilimsel Çıktılar</div>
+      <h2>Araştırmacı için</h2>
+      <div class="grid2">
+        <div class="card"><h3>Künye (PDF)</h3><p>Her tarihçi için tek sayfalık, yazdırılabilir künye: tarihler, eserler, ilişkiler, DİA bağlantısı.</p></div>
+        <div class="card"><h3>Atıf — BibTeX / RIS</h3><p>Kayıtları Zotero, Mendeley gibi araçlara tek tıkla aktarma.</p></div>
+        <div class="card"><h3>Çok dillilik</h3><p>TR · EN · AR · FA; Arapça ve Farsça için sağdan-sola düzen.</p></div>
+        <div class="card"><h3>Keşfedilebilirlik</h3><p>Tüm sayfaları kapsayan site haritası + Schema.org yapısal veri.</p></div>
+      </div>
+      <aside class="notes">Bunlar doğrudan araştırmacıya dönük çıktılar. Birincisi künye: herhangi bir tarihçi sayfasında tek tıkla, yazdırılabilir bir özet — tarihler, eserler, ilişkiler, DİA bağlantısı. İkincisi atıf: kayıtlar BibTeX ve RIS formatında, yani doğrudan Zotero veya Mendeley'e aktarılabiliyor. Üçüncüsü dört dil; Arapça ve Farsça'da sağdan-sola düzeni destekliyor. Dördüncüsü arka planda: sitenin Google'da düzgün bulunabilmesi için tam site haritası ve yapısal veri ekledik.</aside>
+    </section>
+
+    <!-- 13 — TECHNOLOGY -->
+    <section>
+      <div class="eyebrow">07 · Teknoloji</div>
+      <h2>Kullanılan teknolojiler</h2>
+      <div class="grid2">
+        <div class="card"><h3>Ön yüz</h3><p>React 19 · TypeScript · Vite · Tailwind CSS · React Router</p></div>
+        <div class="card"><h3>Görselleştirme</h3><p>D3.js · Leaflet (harita) · Recharts — ağ, zaman çizelgesi, grafikler</p></div>
+        <div class="card"><h3>Veri &amp; Analiz</h3><p>Python · NetworkX (Louvain topluluk tespiti) · Fuse.js (bulanık arama)</p></div>
+        <div class="card"><h3>Dağıtım &amp; Erişim</h3><p>GitHub Pages + Actions (CI/CD) · PWA (çevrimdışı) · açık kaynak</p></div>
+      </div>
+      <aside class="notes">Teknoloji tarafı. Ön yüzü React, TypeScript ve Vite ile geliştirdik; Tailwind ile biçimlendirdik. Görselleştirmede D3 ve harita için Leaflet kullandık. Veri tarafında Python; özellikle ağ analizinde NetworkX ve ekolleri çıkaran Louvain topluluk-tespiti algoritması; arama için Fuse.js. Dağıtım tamamen ücretsiz ve açık: GitHub Pages ve Actions ile otomatik yayın, PWA sayesinde çevrimdışı çalışma, ve tüm kaynak kod açık. Zaten bu sunum da aynı altyapıda, sitenin yanında yayında.</aside>
+    </section>
+
+    <!-- 14 — METHODOLOGY -->
+    <section>
+      <div class="eyebrow">08 · İlkeler</div>
+      <h2>Metodoloji ve ilkeler</h2>
+      <div class="row"><span class="ic">✓</span><span class="rowtext"><b>Veriyi koruma.</b> <span>Mevcut alanlardan değer üretmek; içerik veya ilişki uydurmamak.</span></span></div>
+      <div class="row"><span class="ic tan">✓</span><span class="rowtext"><b>Yeniden üretilebilirlik.</b> <span>Tek komutla derlenen, sürümlenen ve izlenebilir bir boru hattı.</span></span></div>
+      <div class="row"><span class="ic">✓</span><span class="rowtext"><b>Şeffaflık.</b> <span>Veri açıkları (ör. koordinat kapsamı) açıkça belirtilir, gizlenmez.</span></span></div>
+      <div class="row"><span class="ic tan">✓</span><span class="rowtext"><b>Açıklık.</b> <span>Açık kaynak ve ücretsiz barındırma — sürdürülebilir erişim.</span></span></div>
+      <aside class="notes">Çalışmanın arkasındaki ilkeler şunlar. Bir: veriyi koruma — yalnızca var olandan değer ürettik, hiçbir şey uydurmadık. İki: yeniden üretilebilirlik — her şey tek komutla derlenen, sürümlenen bir boru hattından geçiyor; yarın veri güncellenirse site de güncelleniyor. Üç: şeffaflık — verinin eksik olduğu yerleri açıkça belirtiyoruz, gizlemiyoruz. Dört: açıklık — kod açık, barındırma ücretsiz. Bir akademik projeyi güvenilir kılan şeyler bunlar.</aside>
+    </section>
+
+    <!-- 15 — FINDINGS -->
+    <section>
+      <div class="eyebrow">09 · Ne görünür oldu</div>
+      <h2>Hesaplama neyi açığa çıkardı?</h2>
+      <div class="grid3">
+        <div class="card"><h3>Coğrafi kayma</h3><p>Merkezler Medine ve Kûfe'den Bağdat-Kahire'ye, oradan İstanbul-Delhi ve modern coğrafyaya kayıyor.</p></div>
+        <div class="card"><h3>Dilin dönüşümü</h3><p>Erken dönem Arapça baskın; 15–16. yy'da Türkçe yükseliyor; 19–20. yy'da Avrupa dilleri.</p></div>
+        <div class="card"><h3>İlim çevreleri</h3><p>Ağ, kitaplarda dağınık duran ekolleri kendiliğinden görünür kılıyor.</p></div>
+      </div>
+      <aside class="notes">Peki bütün bu çalışma neyi gösterdi? Üç bulgu özellikle dikkat çekici. Bir, coğrafi kayma: ilmin merkezi yüzyıllar içinde Medine ve Kûfe'den Bağdat ve Kahire'ye, oradan İstanbul ve Delhi'ye, en sonunda modern coğrafyaya kayıyor. İki, dilin dönüşümü: erken dönem Arapça, sonra Türkçe, en son Avrupa dilleri. Üç, ilim çevreleri: ağdaki topluluk tespiti, kitaplarda ayrı ayrı anlatılan ekolleri tek bir resimde gösteriyor. İşte hesaplamalı yöntemin tarihe kattığı asıl değer budur: bütünü görebilmek.</aside>
+    </section>
+
+    <!-- 16 — CLOSING -->
+    <section class="dark" data-background-color="#2E2014" style="display:flex;flex-direction:column;justify-content:center;height:100%">
+      <h2 style="font-size:1.5em">Bundan sonrası</h2>
+      <ul style="font-size:.66em;line-height:1.7;margin:.2em 0 0">
+        <li>Veri tamamlama: eksik şehir/koordinatlar, kapsam dışı kayıtlar, tür yeniden etiketleme</li>
+        <li>Tam SEO için sunucu-taraflı render / ön-render</li>
+        <li>Daha derin analizler ve yeni görselleştirmeler</li>
+      </ul>
+      <div style="height:1px;background:var(--tan);opacity:.4;margin:1em 0"></div>
+      <h2 style="color:var(--tan);font-size:1.7em;margin:0">Teşekkürler</h2>
+      <p style="font-size:.7em;margin-top:.4em"><strong style="color:var(--cream)">Ali Çetinkaya</strong>&nbsp;&nbsp;·&nbsp;&nbsp;<span class="url">alicetinkaya76.github.io/ita</span></p>
+      <aside class="notes">Toparlayayım. Bundan sonrası için üç önceliğimiz var: birincisi veriyi tamamlamak — eksik şehir bilgileri, kapsam dışı kalan kayıtlar ve tür etiketlerinin gözden geçirilmesi; bunlar doğrudan hocalarımızla yürüteceğimiz bir iş. İkincisi, tam arama-motoru görünürlüğü için sunucu-taraflı render. Üçüncüsü yeni analizler. Katkıları ve yönlendirmeleri için hocalarımıza teşekkür ediyorum. Sorularınızı memnuniyetle alırım; dilerseniz şimdi siteyi birlikte gezelim.</aside>
+    </section>
+
+  </div>
+</div>
+
+<script src="assets/reveal.js"></script>
+<script src="assets/plugin/notes.js"></script>
+<script>
+  Reveal.initialize({
+    width: 1280, height: 720, margin: 0.06,
+    hash: true, slideNumber: 'c/t', transition: 'slide',
+    controls: true, progress: true, center: false,
+    plugins: [ RevealNotes ],
+  });
+</script>
+<script>
+  // Real data → simple CSS charts
+  var HZ = [["İran",42,"#C2185B"],["Mısır",136,"#1565C0"],["Hint Alt Kıtası",247,"#00838F"],["Endülüs",152,"#AD1457"],["Arabistan",66,"#BF360C"],["Mağrib",151,"#2E7D32"],["Türkistan",101,"#6A1B9A"],["Balkanlar",407,"#37474F"],["Biladüşşam",183,"#E65100"]];
+  var hzMax = Math.max.apply(null, HZ.map(function(d){return d[1];}));
+  var hb = document.getElementById("havzaBars");
+  if (hb) hb.innerHTML = HZ.map(function(d){
+    return '<div class="bh"><span class="lbl">'+d[0]+'</span><span class="track"><span class="fill" style="width:'+(d[1]/hzMax*100).toFixed(1)+'%;background:'+d[2]+'"></span></span><span class="val">'+d[1]+'</span></div>';
+  }).join("");
+
+  var CN = [["7",6],["8",10],["9",30],["10",60],["11",63],["12",55],["13",71],["14",97],["15",85],["16",113],["17",124],["18",100],["19",176],["20",249],["21",60]];
+  var cnMax = Math.max.apply(null, CN.map(function(d){return d[1];}));
+  var cb = document.getElementById("centBars");
+  if (cb) cb.innerHTML = CN.map(function(d){
+    return '<div class="bv"><div class="col" style="height:'+(d[1]/cnMax*100).toFixed(1)+'%"></div><div class="cl">'+d[0]+'</div></div>';
+  }).join("");
+</script>
+</body>
+</html>
