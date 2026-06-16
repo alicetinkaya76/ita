@@ -138,7 +138,8 @@
   "map": {
     "geocoded": "geocoded",
     "cities": "Cities",
-    "top_cities": "Major Cities"
+    "top_cities": "Major Cities",
+    "timeline": "Time-lapse"
   },
   "network": {
     "edges": "connections",

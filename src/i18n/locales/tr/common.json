@@ -138,7 +138,8 @@
   "map": {
     "geocoded": "konumlandırıldı",
     "cities": "Şehir",
-    "top_cities": "Başlıca Şehirler"
+    "top_cities": "Başlıca Şehirler",
+    "timeline": "Zaman tüneli"
   },
   "network": {
     "edges": "bağlantı",

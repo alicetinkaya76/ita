@@ -138,7 +138,8 @@
   "map": {
     "geocoded": "مختصات‌دار",
     "cities": "شهرها",
-    "top_cities": "پرتکرارترین شهرها"
+    "top_cities": "پرتکرارترین شهرها",
+    "timeline": "خط زمانی"
   },
   "network": {
     "edges": "پیوندها",

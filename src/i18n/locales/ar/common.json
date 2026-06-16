@@ -138,7 +138,8 @@
   "map": {
     "geocoded": "تم تحديد الموقع",
     "cities": "مدن",
-    "top_cities": "المدن الرئيسية"
+    "top_cities": "المدن الرئيسية",
+    "timeline": "الخط الزمني"
   },
   "network": {
     "edges": "روابط",

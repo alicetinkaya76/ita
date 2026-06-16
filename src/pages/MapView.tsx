@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MapContainer, TileLayer, GeoJSON, CircleMarker, Popup } from 'react-leaflet';
@@ -75,17 +75,54 @@ export default function MapView() {
   const { geo, loading: gLoading } = useHavzaGeo();
   const [activeHavza, setActiveHavza] = useState('');
   const [activePeriod, setActivePeriod] = useState<PeriodKey | ''>('');
+  const [scrubCentury, setScrubCentury] = useState<number | null>(null);
+  const [playing, setPlaying] = useState(false);
   const [selectedCluster, setSelectedCluster] = useState<CityCluster | null>(null);
 
-  // Period-filtered authors
+  // Period- or timeline-filtered authors (scrubber takes precedence)
   const filteredAuthors = useMemo(() => {
+    const centuryOf = (a: Author) => a.yuzyil ?? (a.vefat_yili_m ? Math.ceil(a.vefat_yili_m / 100) : null);
+    if (scrubCentury != null) {
+      return authors.filter(a => {
+        const c = centuryOf(a);
+        return c !== null && c <= scrubCentury;
+      });
+    }
     if (!activePeriod) return authors;
     const [cMin, cMax] = PERIOD_RANGES[activePeriod];
     return authors.filter(a => {
-      const c = a.yuzyil ?? (a.vefat_yili_m ? Math.ceil(a.vefat_yili_m / 100) : null);
+      const c = centuryOf(a);
       return c !== null && c >= cMin && c <= cMax;
     });
-  }, [authors, activePeriod]);
+  }, [authors, activePeriod, scrubCentury]);
+
+  const sliderMin = 7;
+  const sliderMax = useMemo(() => {
+    let mx = sliderMin;
+    for (const a of authors) if (a.yuzyil != null && a.yuzyil > mx) mx = a.yuzyil;
+    return mx;
+  }, [authors]);
+
+  useEffect(() => {
+    if (!playing) return;
+    const id = setInterval(() => {
+      setScrubCentury(prev => {
+        const cur = prev == null ? sliderMin : prev;
+        if (cur >= sliderMax) { setPlaying(false); return sliderMax; }
+        return cur + 1;
+      });
+    }, 750);
+    return () => clearInterval(id);
+  }, [playing, sliderMax]);
+
+  const togglePlay = useCallback(() => {
+    setPlaying(p => {
+      if (p) return false;
+      setActivePeriod('');
+      setScrubCentury(prev => (prev == null || prev >= sliderMax) ? sliderMin : prev);
+      return true;
+    });
+  }, [sliderMax]);
 
   const havzaCounts = useMemo(() => {
     const m: Record<string, number> = {};
@@ -122,7 +159,7 @@ export default function MapView() {
       <div className="period-filter-bar">
         <button
           className={`period-pill ${activePeriod === '' ? 'period-pill-active' : ''}`}
-          onClick={() => setActivePeriod('')}
+          onClick={() => { setActivePeriod(''); setScrubCentury(null); setPlaying(false); }}
         >
           {t('common.all')}
         </button>
@@ -134,11 +171,41 @@ export default function MapView() {
               borderColor: PERIOD_COLORS[pk],
               ...(activePeriod === pk ? { background: PERIOD_COLORS[pk], color: '#fff' } : { color: PERIOD_COLORS[pk] }),
             }}
-            onClick={() => setActivePeriod(prev => prev === pk ? '' : pk)}
+            onClick={() => { setActivePeriod(prev => prev === pk ? '' : pk); setScrubCentury(null); setPlaying(false); }}
           >
             {t(`periods.${pk}`)}
           </button>
         ))}
+      </div>
+
+      {/* Timeline scrubber (cumulative by century) */}
+      <div className="map-timeline-bar">
+        <button
+          className={`map-timeline-play ${playing ? 'playing' : ''}`}
+          onClick={togglePlay}
+          aria-label={playing ? t('common.all') : t('map.timeline')}
+        >
+          {playing ? '❚❚' : '▶'}
+        </button>
+        <input
+          type="range"
+          className="map-timeline-slider"
+          min={sliderMin}
+          max={sliderMax}
+          step={1}
+          value={scrubCentury ?? sliderMax}
+          onChange={e => { setScrubCentury(Number(e.target.value)); setActivePeriod(''); setPlaying(false); }}
+        />
+        <span className="map-timeline-label">
+          {scrubCentury != null
+            ? `≤ ${scrubCentury}${t('dashboard.century_suffix')}`
+            : t('map.timeline')}
+        </span>
+        {scrubCentury != null && (
+          <button className="map-timeline-reset" onClick={() => { setScrubCentury(null); setPlaying(false); }}>
+            {t('common.all')}
+          </button>
+        )}
       </div>
 
       <div className="map-layout">

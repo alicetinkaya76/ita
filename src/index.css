@@ -2278,3 +2278,41 @@ html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3 {
   cursor: pointer; text-align: left; text-decoration: underline; text-decoration-color: transparent; transition: text-decoration-color 0.15s, color 0.15s;
 }
 .network-school-member:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+/* ===== Map timeline scrubber ===== */
+.map-timeline-bar {
+  display: flex; align-items: center; gap: 12px;
+  margin: 0 0 14px; padding: 8px 14px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+}
+.map-timeline-play {
+  flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+  border: none; background: var(--accent); color: #fff; cursor: pointer;
+  font-size: 0.8rem; line-height: 1; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+}
+.map-timeline-play:hover { background: var(--accent-hover); }
+.map-timeline-play:active { transform: scale(0.94); }
+.map-timeline-play.playing { background: var(--accent-hover); }
+.map-timeline-slider {
+  flex: 1; min-width: 120px; height: 4px; -webkit-appearance: none; appearance: none;
+  background: var(--border); border-radius: 4px; cursor: pointer; outline: none;
+}
+.map-timeline-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--accent); border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.25); cursor: pointer;
+}
+.map-timeline-slider::-moz-range-thumb {
+  width: 16px; height: 16px; border-radius: 50%; background: var(--accent);
+  border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.25); cursor: pointer;
+}
+.map-timeline-label {
+  flex-shrink: 0; min-width: 76px; font-family: var(--font-display); font-weight: 600;
+  font-size: 0.9rem; color: var(--text-primary); text-align: right;
+}
+.map-timeline-reset {
+  flex-shrink: 0; padding: 4px 12px; font-size: 0.82rem; font-weight: 600;
+  border: 1px solid var(--border); background: transparent; color: var(--text-secondary);
+  border-radius: 7px; cursor: pointer; transition: all 0.15s;
+}
+.map-timeline-reset:hover { color: var(--accent); border-color: var(--accent); }
