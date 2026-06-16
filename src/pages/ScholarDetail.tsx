@@ -177,7 +177,7 @@ export default function ScholarDetail() {
           </div>
           <div className="meta-row">
             <span className="meta-key">{t('scholar_detail.city')}</span>
-            <span className="meta-val">{scholar.sehir || '—'}</span>
+            <span className="meta-val">{scholar.sehir ? <Link to={`/sehir/${encodeURIComponent(scholar.sehir)}`} className="rel-link">{scholar.sehir}</Link> : '—'}</span>
           </div>
           {scholar.kimlik && (
             <div className="meta-row">

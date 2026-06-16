@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { useAuthors, type Author } from '../hooks/useData';
 import { HAVZA_COLORS, HAVZA_ORDER, PERIOD_COLORS } from '../utils/colors';
 import * as d3 from 'd3';
@@ -304,6 +304,12 @@ export default function TimelineView() {
           {displayItems.length} {t('common.scholar_count')}
           {brushRange && ` · ${brushRange[0]}–${brushRange[1]} ${t('common.ce')}`}
         </span>
+      </div>
+
+      <div style={{ margin: '-6px 0 14px' }}>
+        <Link to="/zaman-haritasi" style={{ padding: '6px 13px', border: '1px solid rgba(128,128,128,0.35)', borderRadius: 8, fontSize: 13.5, textDecoration: 'none', color: 'inherit' }}>
+          {t('nav.timemap', { defaultValue: 'Zaman Haritası' })} <span style={{ opacity: 0.6 }}>→</span>
+        </Link>
       </div>
 
       {/* Controls */}

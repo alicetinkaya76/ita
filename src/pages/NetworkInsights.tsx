@@ -4,8 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAuthors, useRelations, useGraphMetrics } from '../hooks/useData';
 import type { Author } from '../hooks/useData';
-import { HAVZA_COLORS } from '../utils/colors';
+import { HAVZA_COLORS, HAVZA_ORDER } from '../utils/colors';
 import Seo from '../components/Seo';
+
+function rgba(hex: string, a: number): string {
+  const h = (hex || '#999999').replace('#', '');
+  const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
+  return `rgba(${r},${g},${b},${a})`;
+}
 
 const th: CSSProperties = { textAlign: 'left', padding: '7px 10px', fontSize: 13, color: '#8a8a8a', fontWeight: 600, borderBottom: '1px solid rgba(128,128,128,0.3)', whiteSpace: 'nowrap' };
 const td: CSSProperties = { padding: '7px 10px', fontSize: 14, borderBottom: '1px solid rgba(128,128,128,0.12)', verticalAlign: 'middle' };
@@ -77,6 +83,24 @@ export default function NetworkInsights() {
     }
     return { picked, name, longestLen };
   }, [relations]);
+
+  // Havza → havza transmission matrix (teacher's havza → student's havza), İTA-internal edges only
+  const havzaFlow = useMemo(() => {
+    const M: Record<string, Record<string, number>> = {};
+    for (const h of HAVZA_ORDER) { M[h] = {}; for (const k of HAVZA_ORDER) M[h][k] = 0; }
+    let max = 0, total = 0, cross = 0;
+    for (const r of relations) {
+      if (r.type !== 'TEACHER_OF' || !r.source || !r.target) continue;
+      const sh = bySlug.get(r.source)?.havza;
+      const th = bySlug.get(r.target)?.havza;
+      if (sh && th && M[sh] && M[th] !== undefined && Object.prototype.hasOwnProperty.call(M[sh], th)) {
+        M[sh][th]++; total++;
+        if (sh !== th) cross++;
+        if (M[sh][th] > max) max = M[sh][th];
+      }
+    }
+    return { M, max, total, cross };
+  }, [relations, bySlug]);
 
   if (aL || rL || mL) return <div className="loading-screen">{t('common.loading')}</div>;
 
@@ -158,6 +182,58 @@ export default function NetworkInsights() {
             ))}
           </div>
         ))}
+      </section>
+
+      {/* Pointer to the two-scholar path tool (#1 lives in /silsile) */}
+      <p style={{ fontSize: 13.5, color: '#8a8a8a', margin: '4px 0 24px', maxWidth: 660, lineHeight: 1.55 }}>
+        {t('insights.path_hint', { defaultValue: 'İki belirli âlim arasındaki en kısa ilmî yolu (kim, kimin aracılığıyla kime bağlanıyor) Silsile sayfasındaki “iki âlim arası yol” aracında bulabilirsiniz.' })}{' '}
+        <Link to="/silsile" className="rel-link">{t('nav.silsile', { defaultValue: 'Silsile' })} →</Link>
+      </p>
+
+      {/* Havza → havza transmission matrix */}
+      <section className="stat-section">
+        <h2 className="stat-section-title">{t('insights.havza_flow', { defaultValue: 'Havzalar arası ilmî aktarım' })}</h2>
+        <p style={{ fontSize: 13, color: '#8a8a8a', margin: '0 0 14px', maxWidth: 660, lineHeight: 1.5 }}>
+          {t('insights.havza_flow_note', { defaultValue: 'Satır = hocanın havzası, sütun = talebenin havzası. Hücre koyuluğu o yöndeki hoca→talebe bağı sayısıyla orantılı. Yalnızca iki ucu da İTA’da olan ve havzası bilinen bağları kapsar' })} ({havzaFlow.total}).
+        </p>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ borderCollapse: 'collapse', fontSize: 12.5 }}>
+            <thead>
+              <tr>
+                <th style={{ padding: '4px 8px' }} />
+                {HAVZA_ORDER.map(h => (
+                  <th key={h} title={t(`havza_names.${h}`, { defaultValue: h })} style={{ padding: '4px 6px' }}>
+                    <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: HAVZA_COLORS[h] || '#999' }} />
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {HAVZA_ORDER.map(rowH => (
+                <tr key={rowH}>
+                  <th style={{ padding: '4px 10px 4px 4px', textAlign: 'right', fontWeight: 600, color: '#8a8a8a', whiteSpace: 'nowrap' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                      <span style={{ width: 9, height: 9, borderRadius: '50%', background: HAVZA_COLORS[rowH] || '#999' }} />
+                      {t(`havza_names.${rowH}`, { defaultValue: rowH })}
+                    </span>
+                  </th>
+                  {HAVZA_ORDER.map(colH => {
+                    const v = havzaFlow.M[rowH][colH];
+                    return (
+                      <td key={colH} title={`${t(`havza_names.${rowH}`, { defaultValue: rowH })} → ${t(`havza_names.${colH}`, { defaultValue: colH })}: ${v}`}
+                        style={{ width: 40, height: 32, textAlign: 'center', border: '1px solid rgba(128,128,128,0.12)', background: v ? rgba(HAVZA_COLORS[rowH] || '#999', 0.18 + 0.62 * (v / (havzaFlow.max || 1))) : 'transparent', fontVariantNumeric: 'tabular-nums' }}>
+                        {v || ''}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p style={{ fontSize: 12, color: '#8a8a8a', marginTop: 10 }}>
+          {t('insights.havza_flow_legend', { defaultValue: 'Köşegen = havza içi aktarım; köşegen dışı = havzalar arası' })} · {havzaFlow.cross} {t('insights.cross_links', { defaultValue: 'havzalar-arası bağ' })}.
+        </p>
       </section>
     </div>
   );

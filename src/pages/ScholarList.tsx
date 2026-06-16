@@ -1,6 +1,6 @@
 import { useMemo, useCallback, type CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import Fuse from 'fuse.js';
 import { useAuthors } from '../hooks/useData';
 import { HAVZA_COLORS, HAVZA_ORDER } from '../utils/colors';
@@ -16,6 +16,13 @@ export default function ScholarList() {
   const { authors, loading } = useAuthors();
   const [searchParams, setSearchParams] = useSearchParams();
   const { isMobile } = useMobile();
+
+  const navigate = useNavigate();
+  const randomScholar = useCallback(() => {
+    if (!authors.length) return;
+    const a = authors[Math.floor(Math.random() * authors.length)];
+    navigate(`/scholars/${a.author_id}`);
+  }, [authors, navigate]);
 
   const havzaFilter = searchParams.get('havza') || '';
   const centuryFilter = searchParams.get('century') || '';
@@ -151,6 +158,9 @@ export default function ScholarList() {
           csvHeaders={['author_id', 'meshur_isim', 'tam_isim', 'havza', 'vefat_yili_m', 'vefat_yili_h', 'yuzyil', 'sehir', 'kimlik', 'eser_sayisi']}
           csvRow={a => [a.author_id, a.meshur_isim, a.tam_isim, a.havza, String(a.vefat_yili_m || ''), String(a.vefat_yili_h || ''), String(a.yuzyil || ''), a.sehir, a.kimlik, String(a.eser_sayisi)]}
         />
+        <button type="button" onClick={randomScholar} className="filter-select" style={{ cursor: 'pointer', whiteSpace: 'nowrap' }}>
+          {t('scholar_list.random', { defaultValue: 'Rastgele tarihçi' })}
+        </button>
       </div>
 
       <FilterChips

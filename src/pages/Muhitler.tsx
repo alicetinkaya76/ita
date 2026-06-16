@@ -57,7 +57,7 @@ export default function Muhitler() {
           {milieus.map(m => (
             <div key={`${m.city}-${m.century}`} style={{ border: '1px solid rgba(128,128,128,0.2)', borderRadius: 12, padding: '13px 15px' }}>
               <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8, marginBottom: 8 }}>
-                <strong style={{ fontSize: 16 }}>{m.city} <span style={{ color: '#8a8a8a', fontWeight: 400, fontSize: 14 }}>· {m.century}. {t('dashboard.century_suffix', { defaultValue: 'yy' })}</span></strong>
+                <strong style={{ fontSize: 16 }}><Link to={`/sehir/${encodeURIComponent(m.city)}`} className="rel-link">{m.city}</Link> <span style={{ color: '#8a8a8a', fontWeight: 400, fontSize: 14 }}>· {m.century}. {t('dashboard.century_suffix', { defaultValue: 'yy' })}</span></strong>
                 <span style={{ fontSize: 12.5, fontWeight: 700, color: '#8B4513', whiteSpace: 'nowrap' }}>{m.list.length} {t('common.scholar_count', { defaultValue: 'tarihçi' })}</span>
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px 10px' }}>

@@ -58,6 +58,7 @@ const DataHealth = lazyRetry(() => import('./pages/DataHealth'));
 const EtkiKanon = lazyRetry(() => import('./pages/EtkiKanon'));
 const Muhitler = lazyRetry(() => import('./pages/Muhitler'));
 const PowerExplorer = lazyRetry(() => import('./pages/PowerExplorer'));
+const City = lazyRetry(() => import('./pages/City'));
 
 function SuspenseWrap({ children }: { children: React.ReactNode }) {
   return (
@@ -87,6 +88,7 @@ export const router = createBrowserRouter([
       { path: 'etki-kanon', element: <SuspenseWrap><EtkiKanon /></SuspenseWrap> },
       { path: 'muhitler', element: <SuspenseWrap><Muhitler /></SuspenseWrap> },
       { path: 'kesif', element: <SuspenseWrap><PowerExplorer /></SuspenseWrap> },
+      { path: 'sehir/:name', element: <SuspenseWrap><City /></SuspenseWrap> },
       { path: 'timeline', element: <SuspenseWrap><TimelineView /></SuspenseWrap> },
       { path: 'about', element: <SuspenseWrap><About /></SuspenseWrap> },
       { path: 'statistics', element: <SuspenseWrap><Statistics /></SuspenseWrap> },

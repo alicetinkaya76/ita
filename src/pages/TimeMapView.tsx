@@ -140,6 +140,12 @@ export default function TimeMapView() {
           <div className="timemap-year-sub">h. ~{toHijri(year)} · {t(`periods.${periodId}`)}</div>
           <div className="timemap-count">{active.length} {t('timemap.active_scholars')}<span className="timemap-window">≈ {year}±{WINDOW}</span></div>
 
+          <div style={{ margin: '8px 0 4px' }}>
+            <Link to="/timeline" style={{ padding: '5px 11px', border: '1px solid rgba(128,128,128,0.35)', borderRadius: 8, fontSize: 12.5, textDecoration: 'none', color: 'inherit', display: 'inline-block' }}>
+              {t('nav.timeline', { defaultValue: 'Kronoloji' })} <span style={{ opacity: 0.6 }}>→</span>
+            </Link>
+          </div>
+
           {(featured || topCenter) && (
             <div className="timemap-facts">
               {featured && (
