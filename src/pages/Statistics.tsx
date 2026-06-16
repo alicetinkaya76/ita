@@ -682,6 +682,159 @@ function MezhepChart({ authors }: { authors: { mezhep: string }[] }) {
   );
 }
 
+/* ─── Genre evolution streamgraph (genre × century) ─── */
+function GenreCenturyStream({ works, authors }: { works: { eser_turu: string; author_id: string }[]; authors: { author_id: string; yuzyil: number | null }[] }) {
+  const { t } = useTranslation();
+  const ref = useRef<SVGSVGElement>(null);
+
+  const { data, keys } = useMemo(() => {
+    const centuryByAuthor: Record<string, number | null> = {};
+    for (const a of authors) centuryByAuthor[a.author_id] = a.yuzyil;
+    const totals: Record<string, number> = {};
+    for (const w of works) { const g = (w.eser_turu || '').trim(); if (g) totals[g] = (totals[g] || 0) + 1; }
+    let keys = Object.entries(totals).sort((a, b) => b[1] - a[1]).slice(0, 7).map(([k]) => k);
+    if (!keys.includes('diger')) keys = [...keys, 'diger'];
+    const keySet = new Set(keys);
+    const counts: Record<number, Record<string, number>> = {};
+    for (const w of works) {
+      const c = centuryByAuthor[w.author_id];
+      if (c == null || c < 7 || c > 20) continue;
+      let g = (w.eser_turu || '').trim();
+      if (!g) continue;
+      if (!keySet.has(g)) g = 'diger';
+      counts[c] = counts[c] || {};
+      counts[c][g] = (counts[c][g] || 0) + 1;
+    }
+    const centuries = Object.keys(counts).map(Number).sort((a, b) => a - b);
+    const data = centuries.map(c => {
+      const row: Record<string, number> = { century: c };
+      for (const k of keys) row[k] = counts[c]?.[k] || 0;
+      return row;
+    });
+    return { data, keys };
+  }, [works, authors]);
+
+  useEffect(() => {
+    if (!ref.current || !data.length) return;
+    const svg = d3.select(ref.current);
+    svg.selectAll('*').remove();
+    const margin = { top: 10, right: 16, bottom: 30, left: 16 };
+    const width = 700 - margin.left - margin.right;
+    const height = 340 - margin.top - margin.bottom;
+    const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+    const centuries = data.map(d => d.century);
+    const stack = d3.stack<Record<string, number>>().keys(keys).offset(d3.stackOffsetWiggle).order(d3.stackOrderInsideOut)(data);
+    const x = d3.scalePoint<string>().domain(centuries.map(String)).range([0, width]);
+    const yMin = d3.min(stack, layer => d3.min(layer, d => d[0])) || 0;
+    const yMax = d3.max(stack, layer => d3.max(layer, d => d[1])) || 0;
+    const y = d3.scaleLinear().domain([yMin, yMax]).range([height, 0]);
+    const area = d3.area<d3.SeriesPoint<Record<string, number>>>()
+      .x((_d, i) => x(String(centuries[i])) || 0)
+      .y0(d => y(d[0]))
+      .y1(d => y(d[1]))
+      .curve(d3.curveBasis);
+    g.selectAll('path.layer').data(stack).join('path').attr('class', 'layer')
+      .attr('d', d => area(d as unknown as d3.SeriesPoint<Record<string, number>>[]))
+      .attr('fill', d => TYPE_COLORS[d.key] || '#999')
+      .attr('opacity', 0.82)
+      .append('title').text(d => t(`source_types.${d.key}`, { defaultValue: d.key }));
+    const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#9B8C7E';
+    g.append('g').attr('transform', `translate(0,${height})`)
+      .call(d3.axisBottom(x).tickFormat(d => `${d}.`))
+      .selectAll('text').attr('fill', textColor).style('font-size', '0.7rem');
+    g.selectAll('.domain,.tick line').attr('stroke', 'none');
+  }, [data, keys, t]);
+
+  return (
+    <div>
+      <svg ref={ref} viewBox="0 0 700 340" className="stat-chart-svg" />
+      <div className="stat-chart-legend">
+        {keys.map(k => (
+          <span key={k} className="stat-legend-item">
+            <span className="stat-legend-dot" style={{ background: TYPE_COLORS[k] || '#999' }} />
+            {t(`source_types.${k}`, { defaultValue: k })}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Havza → language flow (hand-rolled bipartite Sankey) ─── */
+function HavzaLangSankey({ works }: { works: { havza: string; dil: string }[] }) {
+  const { t } = useTranslation();
+
+  const layout = useMemo(() => {
+    const langs = LANG_KEYS;
+    const M: Record<string, Record<string, number>> = {};
+    const havzaTotals: Record<string, number> = {};
+    const langTotals: Record<string, number> = {};
+    let total = 0;
+    for (const h of HAVZA_ORDER) { M[h] = {}; for (const l of langs) M[h][l] = 0; }
+    for (const w of works) {
+      const h = (w.havza || '').trim();
+      const l = langBucket(w.dil);
+      if (!M[h] || !l) continue;
+      M[h][l]++; havzaTotals[h] = (havzaTotals[h] || 0) + 1; langTotals[l] = (langTotals[l] || 0) + 1; total++;
+    }
+    const havzas = HAVZA_ORDER.filter(h => (havzaTotals[h] || 0) > 0);
+    const W = 700, nodeW = 13, padX = 150, leftX = padX, rightX = W - padX - nodeW;
+    const top = 14, gap = 10;
+    const leftGaps = Math.max(0, havzas.length - 1) * gap;
+    const rightGaps = Math.max(0, langs.length - 1) * gap;
+    const areaH = 300;
+    const scale = areaH / (total || 1);
+    const leftH = total * scale + leftGaps;
+    const rightH = total * scale + rightGaps;
+    const H = Math.max(leftH, rightH) + top * 2;
+
+    const leftNodes: { key: string; y: number; h: number }[] = [];
+    let ly = top;
+    for (const h of havzas) { const hh = havzaTotals[h] * scale; leftNodes.push({ key: h, y: ly, h: hh }); ly += hh + gap; }
+
+    const rightNodes: { key: string; y: number; h: number }[] = [];
+    const langPos: Record<string, { y: number; off: number }> = {};
+    let ry = top + Math.max(0, (leftH - rightH) / 2);
+    for (const l of langs) { const lh = (langTotals[l] || 0) * scale; rightNodes.push({ key: l, y: ry, h: lh }); langPos[l] = { y: ry, off: 0 }; ry += lh + gap; }
+
+    const ribbons: { d: string; color: string; key: string; label: string }[] = [];
+    for (const node of leftNodes) {
+      const h = node.key; let sy = node.y;
+      for (const l of langs) {
+        const v = M[h][l];
+        if (!v) continue;
+        const thick = v * scale;
+        const ty = langPos[l].y + langPos[l].off;
+        const x0 = leftX + nodeW, x1 = rightX, cx = (x0 + x1) / 2;
+        const d = `M ${x0},${sy} C ${cx},${sy} ${cx},${ty} ${x1},${ty} L ${x1},${ty + thick} C ${cx},${ty + thick} ${cx},${sy + thick} ${x0},${sy + thick} Z`;
+        ribbons.push({ d, color: HAVZA_COLORS[h] || '#999', key: `${h}-${l}`, label: `${h} → ${l}: ${v}` });
+        sy += thick; langPos[l].off += thick;
+      }
+    }
+    return { W, H, nodeW, leftX, rightX, leftNodes, rightNodes, ribbons };
+  }, [works]);
+
+  return (
+    <svg viewBox={`0 0 ${layout.W} ${layout.H}`} className="stat-chart-svg" style={{ maxHeight: 420 }}>
+      {layout.ribbons.map(r => (
+        <path key={r.key} d={r.d} fill={r.color} opacity={0.4}><title>{r.label}</title></path>
+      ))}
+      {layout.leftNodes.map(n => (
+        <g key={n.key}>
+          <rect x={layout.leftX} y={n.y} width={layout.nodeW} height={Math.max(1, n.h)} fill={HAVZA_COLORS[n.key] || '#999'} rx={2} />
+          <text x={layout.leftX - 8} y={n.y + n.h / 2} dy="0.35em" textAnchor="end" fontSize="12" fill="currentColor">{t(`havza_names.${n.key}`, { defaultValue: n.key })}</text>
+        </g>
+      ))}
+      {layout.rightNodes.map(n => (
+        <g key={n.key}>
+          <rect x={layout.rightX} y={n.y} width={layout.nodeW} height={Math.max(1, n.h)} fill={LANG_COLORS[n.key] || '#999'} rx={2} />
+          <text x={layout.rightX + layout.nodeW + 8} y={n.y + n.h / 2} dy="0.35em" textAnchor="start" fontSize="12" fill="currentColor">{t(`lang_bucket.${LANG_LABEL[n.key] || ''}`, { defaultValue: n.key })}</text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
 export default function Statistics() {
   const { t } = useTranslation();
   const { authors, loading: aLoading } = useAuthors();
@@ -755,6 +908,28 @@ export default function Statistics() {
         <h2 className="stat-section-title">{t('statistics.type_distribution')}</h2>
         <div className="stat-chart-wrap">
           <TypeBarChart works={works} />
+        </div>
+      </section>
+
+      {/* Genre evolution streamgraph */}
+      <section className="stat-section">
+        <h2 className="stat-section-title">{t('statistics.genre_stream', { defaultValue: 'Türlerin zaman içindeki seyri' })}</h2>
+        <p style={{ fontSize: 13, color: '#8a8a8a', margin: '0 0 12px', maxWidth: 600, lineHeight: 1.5 }}>
+          {t('statistics.genre_stream_note', { defaultValue: 'Eser türlerinin yüzyıllar içindeki yükseliş ve gerileyişi. Bant kalınlığı o yüzyıldaki eser sayısını gösterir.' })}
+        </p>
+        <div className="stat-chart-wrap">
+          <GenreCenturyStream works={works} authors={authors} />
+        </div>
+      </section>
+
+      {/* Havza → language flow (Sankey) */}
+      <section className="stat-section">
+        <h2 className="stat-section-title">{t('statistics.havza_lang_flow', { defaultValue: 'Havzadan dile: eser akışı' })}</h2>
+        <p style={{ fontSize: 13, color: '#8a8a8a', margin: '0 0 12px', maxWidth: 600, lineHeight: 1.5 }}>
+          {t('statistics.havza_lang_note', { defaultValue: 'Her havzanın ürettiği eserlerin dillere göre dağılımı. Şerit kalınlığı eser sayısıyla orantılıdır (dili kayıtlı eserler).' })}
+        </p>
+        <div className="stat-chart-wrap">
+          <HavzaLangSankey works={works} />
         </div>
       </section>
 
