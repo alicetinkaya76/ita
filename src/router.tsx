@@ -53,6 +53,8 @@ const Hanedanlar = lazyRetry(() => import('./pages/Hanedanlar'));
 const Makaleler = lazyRetry(() => import('./pages/Makaleler'));
 const StoryView = lazyRetry(() => import('./pages/StoryView'));
 const TimeMapView = lazyRetry(() => import('./pages/TimeMapView'));
+const NetworkInsights = lazyRetry(() => import('./pages/NetworkInsights'));
+const DataHealth = lazyRetry(() => import('./pages/DataHealth'));
 
 function SuspenseWrap({ children }: { children: React.ReactNode }) {
   return (
@@ -77,6 +79,8 @@ export const router = createBrowserRouter([
       { path: 'map', element: <SuspenseWrap><MapView /></SuspenseWrap> },
       { path: 'havza/:id', element: <SuspenseWrap><HavzaDetail /></SuspenseWrap> },
       { path: 'network', element: <SuspenseWrap><NetworkView /></SuspenseWrap> },
+      { path: 'network-insights', element: <SuspenseWrap><NetworkInsights /></SuspenseWrap> },
+      { path: 'veri-sagligi', element: <SuspenseWrap><DataHealth /></SuspenseWrap> },
       { path: 'timeline', element: <SuspenseWrap><TimelineView /></SuspenseWrap> },
       { path: 'about', element: <SuspenseWrap><About /></SuspenseWrap> },
       { path: 'statistics', element: <SuspenseWrap><Statistics /></SuspenseWrap> },

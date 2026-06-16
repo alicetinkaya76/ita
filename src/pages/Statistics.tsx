@@ -702,6 +702,15 @@ export default function Statistics() {
         </span>
       </header>
 
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '-6px 0 20px' }}>
+        <Link to="/network-insights" style={{ padding: '7px 14px', border: '1px solid rgba(128,128,128,0.35)', borderRadius: 9, fontSize: 14, textDecoration: 'none', color: 'inherit' }}>
+          {t('insights.title', { defaultValue: 'İlmî Ağın Yapısı' })} <span style={{ opacity: 0.6 }}>→</span>
+        </Link>
+        <Link to="/veri-sagligi" style={{ padding: '7px 14px', border: '1px solid rgba(128,128,128,0.35)', borderRadius: 9, fontSize: 14, textDecoration: 'none', color: 'inherit' }}>
+          {t('health.title', { defaultValue: 'Veri Sağlığı' })} <span style={{ opacity: 0.6 }}>→</span>
+        </Link>
+      </div>
+
       {/* Havza Comparison Table */}
       <section className="stat-section">
         <h2 className="stat-section-title">{t('statistics.havza_comparison')}</h2>
