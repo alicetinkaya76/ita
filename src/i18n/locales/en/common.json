@@ -501,5 +501,30 @@
   },
   "scholar_list": {
     "random": "Random scholar"
+  },
+  "vs": {
+    "title": "Compare Scholars",
+    "subtitle": "Compare two scholars side by side",
+    "intro": "Pick two scholars; their identity, productivity, network position and shared connections are compared side by side.",
+    "pick_a": "First scholar",
+    "pick_b": "Second scholar",
+    "search_ph": "Search for a scholar…",
+    "attribute": "Attribute",
+    "death": "Death (CE)",
+    "city": "City",
+    "top_genres": "Top genres",
+    "network": "Network position",
+    "shared": "Shared connections",
+    "direct": "Relationship between them",
+    "direct_none": "No direct tie in the data",
+    "tag_teacher": "Teacher → student",
+    "tag_contemporary": "Contemporaries",
+    "shared_none": "No shared connections found",
+    "no_network": "No network data (scholar without a DİA link)",
+    "view_detail": "Details →",
+    "both_prompt": "Pick two scholars to compare.",
+    "compare_cta": "Compare",
+    "swap": "Swap",
+    "clear": "Remove"
   }
 }

@@ -154,6 +154,7 @@ export default function ScholarDetail() {
         <div className="detail-actions">
           <CiteButton kind="scholar" id={scholar.author_id} title={scholar.meshur_isim} filename={`ita-${scholar.author_id}`} />
           <KunyeButton scholar={scholar} works={scholarWorks} relations={scholarRelations} />
+          <Link to={`/tarihci-karsilastir?a=${scholar.author_id}`} style={extLinkStyle}>{t('vs.compare_cta', { defaultValue: 'Karşılaştır' })}</Link>
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginTop: 10 }}>
           <span style={{ fontSize: 12.5, color: '#8a8a8a' }}>{t('scholar_detail.authorities', { defaultValue: 'Otorite kayıtları' })}:</span>

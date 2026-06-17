@@ -501,5 +501,30 @@
   },
   "scholar_list": {
     "random": "Rastgele tarihçi"
+  },
+  "vs": {
+    "title": "Tarihçi Karşılaştırma",
+    "subtitle": "İki tarihçiyi yan yana karşılaştırın",
+    "intro": "İki tarihçi seçin; künye, üretkenlik, ağ konumu ve ortak bağlantılar yan yana karşılaştırılır.",
+    "pick_a": "Birinci tarihçi",
+    "pick_b": "İkinci tarihçi",
+    "search_ph": "Tarihçi ara…",
+    "attribute": "Özellik",
+    "death": "Vefat (m.)",
+    "city": "Şehir",
+    "top_genres": "Öne çıkan türler",
+    "network": "Ağ konumu",
+    "shared": "Ortak bağlantılar",
+    "direct": "Aralarındaki ilişki",
+    "direct_none": "Veride doğrudan bir bağ yok",
+    "tag_teacher": "Hoca → talebe",
+    "tag_contemporary": "Çağdaş",
+    "shared_none": "Ortak bağlantı bulunamadı",
+    "no_network": "Ağ verisi yok (DİA bağlantısı olmayan tarihçi)",
+    "view_detail": "Ayrıntı →",
+    "both_prompt": "Karşılaştırmak için iki tarihçi seçin.",
+    "compare_cta": "Karşılaştır",
+    "swap": "Yer değiştir",
+    "clear": "Kaldır"
   }
 }

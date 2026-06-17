@@ -34,7 +34,7 @@ const STATIC = [
   'periodization', 'historiography', 'scholars', 'sources', 'map', 'network',
   'silsile', 'timeline', 'compare', 'statistics', 'videolar', 'about',
   'hikaye', 'zaman-haritasi',
-  'network-insights', 'veri-sagligi', 'etki-kanon', 'muhitler', 'kesif',
+  'network-insights', 'veri-sagligi', 'etki-kanon', 'muhitler', 'kesif', 'tarihci-karsilastir',
 ];
 
 const today = new Date().toISOString().slice(0, 10);
