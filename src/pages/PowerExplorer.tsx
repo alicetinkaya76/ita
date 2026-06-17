@@ -123,23 +123,23 @@ export default function PowerExplorer() {
 
       {/* Filters */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', marginBottom: 18 }}>
-        <select value={havza} onChange={e => set('havza', e.target.value)} style={selStyle}>
+        <select value={havza} aria-label={t('scholar_detail.havza', { defaultValue: 'Havza' })} onChange={e => set('havza', e.target.value)} style={selStyle}>
           <option value="">{t('scholar_detail.havza', { defaultValue: 'Havza' })}: {t('common.all', { defaultValue: 'Tümü' })}</option>
           {HAVZA_ORDER.map(h => <option key={h} value={h}>{t(`havza_names.${h}`, { defaultValue: h })}</option>)}
         </select>
-        <select value={century} onChange={e => set('century', e.target.value)} style={selStyle}>
+        <select value={century} aria-label={t('scholar_detail.century', { defaultValue: 'Yüzyıl' })} onChange={e => set('century', e.target.value)} style={selStyle}>
           <option value="">{t('scholar_detail.century', { defaultValue: 'Yüzyıl' })}: {t('common.all', { defaultValue: 'Tümü' })}</option>
           {opts.centuries.map(c => <option key={c} value={String(c)}>{c}. {t('dashboard.century_suffix', { defaultValue: 'yy' })}</option>)}
         </select>
-        <select value={mezhep} onChange={e => set('mezhep', e.target.value)} style={selStyle}>
+        <select value={mezhep} aria-label={t('scholar_detail.madhhab', { defaultValue: 'Mezhep' })} onChange={e => set('mezhep', e.target.value)} style={selStyle}>
           <option value="">{t('scholar_detail.madhhab', { defaultValue: 'Mezhep' })}: {t('common.all', { defaultValue: 'Tümü' })}</option>
           {opts.mezheps.map(m => <option key={m} value={m}>{m}</option>)}
         </select>
-        <select value={genre} onChange={e => set('genre', e.target.value)} style={selStyle}>
+        <select value={genre} aria-label={t('explorer.genre', { defaultValue: 'Tür' })} onChange={e => set('genre', e.target.value)} style={selStyle}>
           <option value="">{t('explorer.genre', { defaultValue: 'Tür' })}: {t('common.all', { defaultValue: 'Tümü' })}</option>
           {opts.genres.map(g => <option key={g} value={g}>{t(`source_types.${g}`, { defaultValue: g })}</option>)}
         </select>
-        <select value={lang} onChange={e => set('lang', e.target.value)} style={selStyle}>
+        <select value={lang} aria-label={t('explorer.language', { defaultValue: 'Dil' })} onChange={e => set('lang', e.target.value)} style={selStyle}>
           <option value="">{t('explorer.language', { defaultValue: 'Dil' })}: {t('common.all', { defaultValue: 'Tümü' })}</option>
           {LANGS.map(l => <option key={l} value={l}>{l}</option>)}
         </select>

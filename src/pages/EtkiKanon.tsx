@@ -74,12 +74,12 @@ export default function EtkiKanon() {
           <table style={{ borderCollapse: 'collapse', width: '100%', maxWidth: 760 }}>
             <thead>
               <tr>
-                <th style={{ ...th, textAlign: 'right', width: 36 }}>#</th>
-                <th style={th}>{t('scholar_detail.full_name', { defaultValue: 'Tarihçi' })}</th>
-                <th style={th}>{t('scholar_detail.havza', { defaultValue: 'Havza' })}</th>
-                <th style={{ ...th, textAlign: 'right' }}>{t('scholar_detail.century', { defaultValue: 'Yüzyıl' })}</th>
-                <th style={{ ...th, textAlign: 'right' }}>{t('canon.score', { defaultValue: 'Önem' })}</th>
-                <th style={{ ...th, textAlign: 'right' }}>{t('scholar_detail.works', { defaultValue: 'Eser' })}</th>
+                <th scope="col" style={{ ...th, textAlign: 'right', width: 36 }}>#</th>
+                <th scope="col" style={th}>{t('scholar_detail.full_name', { defaultValue: 'Tarihçi' })}</th>
+                <th scope="col" style={th}>{t('scholar_detail.havza', { defaultValue: 'Havza' })}</th>
+                <th scope="col" style={{ ...th, textAlign: 'right' }}>{t('scholar_detail.century', { defaultValue: 'Yüzyıl' })}</th>
+                <th scope="col" style={{ ...th, textAlign: 'right' }}>{t('canon.score', { defaultValue: 'Önem' })}</th>
+                <th scope="col" style={{ ...th, textAlign: 'right' }}>{t('scholar_detail.works', { defaultValue: 'Eser' })}</th>
               </tr>
             </thead>
             <tbody>

@@ -133,12 +133,12 @@ export default function NetworkInsights() {
           <table style={{ borderCollapse: 'collapse', width: '100%', maxWidth: 760 }}>
             <thead>
               <tr>
-                <th style={{ ...th, textAlign: 'right', width: 36 }}>#</th>
-                <th style={th}>{t('scholar_detail.full_name', { defaultValue: 'Tarihçi' })}</th>
-                <th style={{ ...th, textAlign: 'right' }}>{t('insights.betweenness', { defaultValue: 'Aracılık' })}</th>
-                <th style={{ ...th, textAlign: 'right' }}>{t('insights.degree', { defaultValue: 'Bağlantı' })}</th>
-                <th style={{ ...th, textAlign: 'right' }}>{t('scholar_detail.teachers', { defaultValue: 'Hoca' })}</th>
-                <th style={{ ...th, textAlign: 'right' }}>{t('scholar_detail.students', { defaultValue: 'Talebe' })}</th>
+                <th scope="col" style={{ ...th, textAlign: 'right', width: 36 }}>#</th>
+                <th scope="col" style={th}>{t('scholar_detail.full_name', { defaultValue: 'Tarihçi' })}</th>
+                <th scope="col" style={{ ...th, textAlign: 'right' }}>{t('insights.betweenness', { defaultValue: 'Aracılık' })}</th>
+                <th scope="col" style={{ ...th, textAlign: 'right' }}>{t('insights.degree', { defaultValue: 'Bağlantı' })}</th>
+                <th scope="col" style={{ ...th, textAlign: 'right' }}>{t('scholar_detail.teachers', { defaultValue: 'Hoca' })}</th>
+                <th scope="col" style={{ ...th, textAlign: 'right' }}>{t('scholar_detail.students', { defaultValue: 'Talebe' })}</th>
               </tr>
             </thead>
             <tbody>
@@ -200,9 +200,9 @@ export default function NetworkInsights() {
           <table style={{ borderCollapse: 'collapse', fontSize: 12.5 }}>
             <thead>
               <tr>
-                <th style={{ padding: '4px 8px' }} />
+                <th scope="col" style={{ padding: '4px 8px' }} />
                 {HAVZA_ORDER.map(h => (
-                  <th key={h} title={t(`havza_names.${h}`, { defaultValue: h })} style={{ padding: '4px 6px' }}>
+                  <th scope="col" key={h} title={t(`havza_names.${h}`, { defaultValue: h })} style={{ padding: '4px 6px' }}>
                     <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: HAVZA_COLORS[h] || '#999' }} />
                   </th>
                 ))}
@@ -211,7 +211,7 @@ export default function NetworkInsights() {
             <tbody>
               {HAVZA_ORDER.map(rowH => (
                 <tr key={rowH}>
-                  <th style={{ padding: '4px 10px 4px 4px', textAlign: 'right', fontWeight: 600, color: '#8a8a8a', whiteSpace: 'nowrap' }}>
+                  <th scope="row" style={{ padding: '4px 10px 4px 4px', textAlign: 'right', fontWeight: 600, color: '#8a8a8a', whiteSpace: 'nowrap' }}>
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                       <span style={{ width: 9, height: 9, borderRadius: '50%', background: HAVZA_COLORS[rowH] || '#999' }} />
                       {t(`havza_names.${rowH}`, { defaultValue: rowH })}

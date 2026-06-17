@@ -152,10 +152,10 @@ export default function DataHealth() {
           <table style={{ borderCollapse: 'collapse', width: '100%', maxWidth: 620 }}>
             <thead>
               <tr>
-                <th style={th}>{t('scholar_detail.havza', { defaultValue: 'Havza' })}</th>
-                <th style={{ ...th, textAlign: 'right' }}>{t('common.scholar_count', { defaultValue: 'Tarihçi' })}</th>
-                <th style={{ ...th, textAlign: 'right' }}>{t('health.city_pct', { defaultValue: 'Şehir %' })}</th>
-                <th style={{ ...th, textAlign: 'right' }}>{t('health.death_pct', { defaultValue: 'Vefat yılı %' })}</th>
+                <th scope="col" style={th}>{t('scholar_detail.havza', { defaultValue: 'Havza' })}</th>
+                <th scope="col" style={{ ...th, textAlign: 'right' }}>{t('common.scholar_count', { defaultValue: 'Tarihçi' })}</th>
+                <th scope="col" style={{ ...th, textAlign: 'right' }}>{t('health.city_pct', { defaultValue: 'Şehir %' })}</th>
+                <th scope="col" style={{ ...th, textAlign: 'right' }}>{t('health.death_pct', { defaultValue: 'Vefat yılı %' })}</th>
               </tr>
             </thead>
             <tbody>
@@ -224,7 +224,7 @@ export default function DataHealth() {
         <h3 style={subhStyle}>{t('health.author_fields')} · <code style={codeStyle}>itta_authors.json</code></h3>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', maxWidth: 640 }}>
-            <thead><tr><th style={th}>{t('health.field')}</th><th style={th}>{t('health.desc')}</th></tr></thead>
+            <thead><tr><th scope="col" style={th}>{t('health.field')}</th><th scope="col" style={th}>{t('health.desc')}</th></tr></thead>
             <tbody>
               {AUTHOR_FIELDS.map((k) => (
                 <tr key={k}><td style={td}><code style={codeStyle}>{k}</code></td><td style={td}>{t(`health.dict.authors.${k}`)}</td></tr>
@@ -235,7 +235,7 @@ export default function DataHealth() {
         <h3 style={subhStyle}>{t('health.work_fields')} · <code style={codeStyle}>itta_works.json</code></h3>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ borderCollapse: 'collapse', width: '100%', maxWidth: 640 }}>
-            <thead><tr><th style={th}>{t('health.field')}</th><th style={th}>{t('health.desc')}</th></tr></thead>
+            <thead><tr><th scope="col" style={th}>{t('health.field')}</th><th scope="col" style={th}>{t('health.desc')}</th></tr></thead>
             <tbody>
               {WORK_FIELDS.map((k) => (
                 <tr key={k}><td style={td}><code style={codeStyle}>{k}</code></td><td style={td}>{t(`health.dict.works.${k}`)}</td></tr>

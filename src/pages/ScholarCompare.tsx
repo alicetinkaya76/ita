@@ -194,6 +194,7 @@ export default function ScholarCompare() {
         : <span style={{ fontSize: 13, color: '#8a8a8a' }}>—</span>}
       <input
         list="ita-scholar-names"
+        aria-label={label}
         placeholder={t('vs.search_ph', { defaultValue: 'Tarihçi ara…' })}
         style={inputStyle}
         onChange={(e) => {
@@ -236,9 +237,9 @@ export default function ScholarCompare() {
               <table style={{ borderCollapse: 'collapse', width: '100%', maxWidth: 760 }}>
                 <thead>
                   <tr>
-                    <th style={th}>{t('vs.attribute', { defaultValue: 'Özellik' })}</th>
-                    <th style={th}><Link to={`/scholars/${A.author_id}`} className="rel-link">{A.meshur_isim}</Link></th>
-                    <th style={th}><Link to={`/scholars/${B.author_id}`} className="rel-link">{B.meshur_isim}</Link></th>
+                    <th scope="col" style={th}>{t('vs.attribute', { defaultValue: 'Özellik' })}</th>
+                    <th scope="col" style={th}><Link to={`/scholars/${A.author_id}`} className="rel-link">{A.meshur_isim}</Link></th>
+                    <th scope="col" style={th}><Link to={`/scholars/${B.author_id}`} className="rel-link">{B.meshur_isim}</Link></th>
                   </tr>
                 </thead>
                 <tbody>
