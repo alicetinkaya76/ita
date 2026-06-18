@@ -115,7 +115,6 @@ export default function ScholarDetail() {
   };
   const seoDesc = `${scholar.meshur_isim}${sa.tam_isim && sa.tam_isim !== scholar.meshur_isim ? ` (${sa.tam_isim})` : ''} — ${t(`havza_names.${scholar.havza}`, { defaultValue: scholar.havza })}. ${scholarWorks.length} ${t('kunye.works')}.`;
 
-  const authQ = encodeURIComponent(scholar.meshur_isim);
   const pageUrl = `https://alicetinkaya76.github.io/ita/scholars/${scholar.author_id}`;
   const suggestHref = `mailto:ali.cetinkaya@selcuk.edu.tr?subject=${encodeURIComponent(`İTA düzeltme önerisi: ${scholar.meshur_isim} (${scholar.author_id})`)}&body=${encodeURIComponent(`Tarihçi: ${scholar.meshur_isim} (${scholar.author_id})\nSayfa: ${pageUrl}\n\nÖnerilen düzeltme / kaynak:\n`)}`;
   const extLinkStyle: CSSProperties = { fontSize: 12.5, textDecoration: 'none', color: 'inherit', border: '1px solid rgba(128,128,128,0.35)', borderRadius: 7, padding: '4px 10px' };
@@ -155,12 +154,6 @@ export default function ScholarDetail() {
           <CiteButton kind="scholar" id={scholar.author_id} title={scholar.meshur_isim} filename={`ita-${scholar.author_id}`} />
           <KunyeButton scholar={scholar} works={scholarWorks} relations={scholarRelations} />
           <Link to={`/tarihci-karsilastir?a=${scholar.author_id}`} style={extLinkStyle}>{t('vs.compare_cta', { defaultValue: 'Karşılaştır' })}</Link>
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginTop: 10 }}>
-          <span style={{ fontSize: 12.5, color: '#8a8a8a' }}>{t('scholar_detail.authorities', { defaultValue: 'Otorite kayıtları' })}:</span>
-          <a href={`https://www.wikidata.org/w/index.php?search=${authQ}`} target="_blank" rel="noopener noreferrer" style={extLinkStyle}>Wikidata ↗</a>
-          <a href={`https://viaf.org/viaf/search?query=local.personalNames+all+%22${authQ}%22`} target="_blank" rel="noopener noreferrer" style={extLinkStyle}>VIAF ↗</a>
-          {scholar.dia_slug && <a href={`https://islamansiklopedisi.org.tr/${scholar.dia_slug}`} target="_blank" rel="noopener noreferrer" style={extLinkStyle}>DİA ↗</a>}
           <a href={suggestHref} style={extLinkStyle}>{t('scholar_detail.suggest_correction', { defaultValue: 'Düzeltme öner' })}</a>
         </div>
       </header>
